@@ -17,7 +17,7 @@
 #include <vector>
 
 using namespace std;
-
+float err;
 void printMAT(vector<vector<float>> A, int N) {
   printf("PRINTING A NEW MAT\n");
   for (int i = 0; i < N; i++) {
@@ -47,7 +47,7 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
   return err / N;
 }
 
-float error(vector<float> &x1, vector<float> &x2, int N) {
+float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
     sum += pow(x1[i] - x2[i], 2);
@@ -60,6 +60,7 @@ chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
                                chrono::time_point<chrono::system_clock> end) {
   return end - start;
 }
+
 class barrier {
 private:
   int N_THREADS;
@@ -112,7 +113,13 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
       }
       (*c)[i] = (*c)[i] / (*A)[i][i];
     }
-    bar->await([&] { swap(*x, *c); });
+    bar->await([&] {
+      swap(*c, *x);
+      err = errorVEC(*c, *x, A->size());
+
+    });
+    if (err < epsilon)
+      break;
   }
 }
 
@@ -162,8 +169,8 @@ int main(int argc, char const *argv[]) {
   for (size_t i = 0; i < thread_num; i++) {
     size_t start = i * k;
     size_t end = (i != thread_num - 1 ? start + k : N) - 1;
-    printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
-           end - start + 1);
+    // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,end - start
+    // + 1);
     t.push_back(
         thread(iter, &A, &b, &x, &c, start, end, &bar, maxiter, epsilon));
   }
@@ -171,5 +178,5 @@ int main(int argc, char const *argv[]) {
     it.join();
 
   printf("Error:%f ", error(A, x, b, N));
-  printf("Conv:%f \n", error(c, x, N));
+  printf("Conv:%f \n", errorVEC(c, x, N));
 }

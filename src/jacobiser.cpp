@@ -47,7 +47,7 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
   return err / N;
 }
 
-float error(vector<float> &x1, vector<float> &x2, int N) {
+float errorVEC(vector<float> x1, vector<float> x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
     sum += pow(x1[i] - x2[i], 2);
@@ -64,6 +64,8 @@ chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
 int main(int argc, char const *argv[]) {
   int N = atoi(argv[1]);
   int maxiter = atoi(argv[2]);
+  float epsilon = atof(argv[3]);
+
   int i, j, k;
   float sum, err, conv;
   // INIT
@@ -118,7 +120,11 @@ int main(int argc, char const *argv[]) {
       c[i] = c[i] / A[i][i];
     }
     swap(c, x);
+    err = errorVEC(c, x, N);
     endFor = chrono::system_clock::now();
+    if (err < epsilon)
+      break;
+
     /*
     startError = chrono::system_clock::now();
     err = error(A, x, b, N);
@@ -141,5 +147,5 @@ int main(int argc, char const *argv[]) {
   }
 
   printf("Error:%f ", error(A, x, b, N));
-  printf("Conv:%f \n", error(c, x, N));
+  printf("Conv:%f \n", errorVEC(c, x, N));
 }

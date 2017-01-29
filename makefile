@@ -7,9 +7,9 @@ par: src/jacobipar.cpp
 ff: src/jacobiFor.cpp
 	g++ src/jacobiFor.cpp -o bin/jacobiFor -I ../mc-fastflow-code -std=c++11 -pthread
 
-phi: jacobiser.cpp
-	icc jacobiser.cpp -o bin/jacobiserICC -mmic -std=c++11 -pthread -O3
-	scp jacobiserICC mic0:
+phi:  src/jacobiser.cpp
+	icc  src/jacobiser.cpp -o bin/jacobiserICC -mmic -std=c++11 -pthread -O3
+	scp bin/jacobiserICC mic0:
 	scp test.sh mic0:
 
 

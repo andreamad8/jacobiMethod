@@ -49,7 +49,7 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
   return err / N;
 }
 
-float error(vector<float> &x1, vector<float> &x2, int N) {
+float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
     sum += pow(x1[i] - x2[i], 2);
@@ -116,9 +116,12 @@ int main(int argc, char const *argv[]) {
                     },
                     thread_num);
     swap(c, x);
+    err = errorVEC(c, x, N);
+    if (err < epsilon)
+      break;
     k++;
   }
 
   printf("Error:%f ", error(A, x, b, N));
-  printf("Conv:%f \n", error(c, x, N));
+  printf("Conv:%f \n", errorVEC(c, x, N));
 }
