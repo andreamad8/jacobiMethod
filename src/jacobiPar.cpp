@@ -1,3 +1,5 @@
+#include "bar.hpp"
+#include "helper.hpp"
 #include <algorithm>
 #include <cassert>
 #include <chrono>
@@ -17,89 +19,8 @@
 #include <vector>
 
 using namespace std;
+using namespace jac;
 float err;
-void printMAT(vector<vector<float>> A, int N) {
-  printf("PRINTING A NEW MAT\n");
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++)
-      printf("%f \t", A[i][j]);
-    printf("\n");
-  }
-}
-
-void printVEC(vector<float> x, int N) {
-  printf("PRINTING A NEW VEC\n");
-  for (int i = 0; i < N; i++)
-    printf("%f \t", x[i]);
-  printf("\n");
-}
-
-float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
-            int N) {
-  float err = 0;
-  float sum = 0;
-  for (int i = 0; i < N; i++) {
-    sum = 0;
-    for (int j = 0; j < N; j++)
-      sum += A[i][j] * x[j];
-    err += abs(b[i] - sum);
-  }
-  return err / N;
-}
-
-float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
-  float sum = 0;
-  for (int i = 0; i < N; i++) {
-    sum += pow(x1[i] - x2[i], 2);
-  }
-
-  return sqrt(sum);
-}
-
-chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
-                               chrono::time_point<chrono::system_clock> end) {
-  return end - start;
-}
-
-class barrier {
-private:
-  int N_THREADS;
-  int counts[2];
-  int current;
-  mutex lock;
-  condition_variable condition;
-
-public:
-  barrier(int n);
-  bool await(function<void()> cb);
-};
-
-barrier::barrier(int n) {
-  N_THREADS = n;
-  counts[0] = 0;
-  counts[1] = 0;
-  current = 0;
-  lock;
-  condition;
-  return;
-}
-
-bool barrier::await(function<void()> cb) {
-  unique_lock<mutex> _lock(lock);
-  int my = current;
-  counts[my]++;
-
-  if (counts[my] < N_THREADS) {
-    condition.wait(_lock, [&] { return counts[my] == N_THREADS; });
-    return false;
-  } else {
-    current ^= 1;
-    counts[current] = 0;
-    cb();
-    condition.notify_all();
-    return true;
-  }
-}
 
 void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
           vector<float> *c, int from, int to, barrier *bar, int maxiter,
