@@ -4,7 +4,7 @@ FF_SERVER = -I /home/spm1501/public/fastflow
 MIC = -mmic
 
 parPHI: src/jacobipar.cpp
-	$(CXX) src/jacobipar.cpp -o bin/jacobiparMIC $(CXXFLAGS) $(MIC)
+	$(CXX) src/jacobiPar.cpp -o bin/jacobiParMIC $(CXXFLAGS) $(MIC)
 	scp bin/jacobiparMIC mic0:
 
 ffPHI: src/jacobiFor.cpp

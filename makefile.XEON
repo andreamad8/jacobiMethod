@@ -6,7 +6,7 @@ serXEON: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiserXEON $(CXXFLAGS)
 
 parXEON: src/jacobipar.cpp
-	$(CXX) src/jacobipar.cpp -o bin/jacobiparXEON $(CXXFLAGS)
+	$(CXX) src/jacobiPar.cpp -o bin/jacobiParXEON $(CXXFLAGS)
 
 ffXEON: src/jacobiFor.cpp
 	$(CXX) src/jacobiFor.cpp -o bin/jacobiForXEON $(FF_SERVER) $(CXXFLAGS)

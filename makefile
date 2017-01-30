@@ -6,7 +6,7 @@ ser: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiser -std=c++11
 
 par: src/jacobipar.cpp
-	$(CXX) src/jacobipar.cpp  -o bin/jacobipar $(CXXFLAGS)
+	$(CXX) src/jacobiPar.cpp  -o bin/jacobiPar $(CXXFLAGS)
 
 ff: src/jacobiFor.cpp
 	$(CXX) src/jacobiFor.cpp -o bin/jacobiFor $(FF_LOCAL) $(CXXFLAGS)
