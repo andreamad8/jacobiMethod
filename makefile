@@ -5,7 +5,7 @@ FF_LOCAL = -I ../mc-fastflow-code
 ser: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiser -std=c++11
 
-par: src/jacobipar.cpp
+par: src/jacobiPar.cpp
 	$(CXX) src/jacobiPar.cpp  -o bin/jacobiPar $(CXXFLAGS)
 
 ff: src/jacobiFor.cpp

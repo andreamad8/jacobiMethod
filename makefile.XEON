@@ -5,11 +5,11 @@ FF_SERVER = -I /home/spm1501/public/fastflow
 serXEON: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiserXEON $(CXXFLAGS)
 
-parXEON: src/jacobipar.cpp
+parXEON: src/jacobiPar.cpp
 	$(CXX) src/jacobiPar.cpp -o bin/jacobiParXEON $(CXXFLAGS)
 
 ffXEON: src/jacobiFor.cpp
 	$(CXX) src/jacobiFor.cpp -o bin/jacobiForXEON $(FF_SERVER) $(CXXFLAGS)
 
 clean:
-	rm bin/jacobiserXEON bin/jacobiparXEON bin/jacobiForXEON
+	rm bin/jacobiserXEON bin/jacobiParXEON bin/jacobiForXEON
