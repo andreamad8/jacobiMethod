@@ -2,19 +2,14 @@ CXX = icc
 CXXFLAGS = -std=c++11 -pthread -O3
 FF_SERVER = -I /home/spm1501/public/fastflow
 
+serXEON: src/jacobiser.cpp
+	$(CXX) src/jacobiser.cpp -o bin/jacobiserXEON $(CXXFLAGS)
 
-serXEON: src/jacobiser.cpp bin/helper.o
-	$(CXX) src/jacobiser.cpp bin/helper.o -o bin/jacobiserXEON $(CXXFLAGS)
+parXEON: src/jacobipar.cpp
+	$(CXX) src/jacobipar.cpp -o bin/jacobiparXEON $(CXXFLAGS)
 
-parXEON: src/jacobipar.cpp bin/helper.o bin/bar.o
-	$(CXX) src/jacobipar.cpp bin/bar.o bin/helper.o -o bin/jacobiparXEON $(CXXFLAGS)
-
-ffXEON: src/jacobiFor.cpp bin/helper.o
-	$(CXX) src/jacobiFor.cpp bin/helper.o -o bin/jacobiForXEON $(FF_SERVER) $(CXXFLAGS)
-
-
-bin/%.o: src/%.hpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+ffXEON: src/jacobiFor.cpp
+	$(CXX) src/jacobiFor.cpp -o bin/jacobiForXEON $(FF_SERVER) $(CXXFLAGS)
 
 clean:
 	rm bin/jacobiserXEON bin/jacobiparXEON bin/jacobiForXEON

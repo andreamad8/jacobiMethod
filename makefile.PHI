@@ -1,20 +1,15 @@
-CXX = icc++
+CXX = icc
 CXXFLAGS = -std=c++11 -pthread -O3
-FF_LOCAL = -I ../mc-fastflow-code
 FF_SERVER = -I /home/spm1501/public/fastflow
 MIC = -mmic
 
-parPHI: src/jacobipar.cpp bin/helper.o bin/bar.o
-	$(CXX) src/jacobipar.cpp bin/bar.o bin/helper.o -o bin/jacobiparMIC $(CXXFLAGS) $(MIC)
+parPHI: src/jacobipar.cpp
+	$(CXX) src/jacobipar.cpp -o bin/jacobiparMIC $(CXXFLAGS) $(MIC)
 	scp bin/jacobiparMIC mic0:
 
-ffPHI: src/jacobiFor.cpp bin/helper.o
-	$(CXX) src/jacobiFor.cpp bin/helper.o -o bin/jacobiForMIC $(FF_SERVER) $(MIC) -DNO_DEFAULT_MAPPING $(CXXFLAGS)
+ffPHI: src/jacobiFor.cpp
+	$(CXX) src/jacobiFor.cpp -o bin/jacobiForMIC $(FF_SERVER) $(MIC) -DNO_DEFAULT_MAPPING $(CXXFLAGS)
 	scp bin/jacobiForMIC mic0:
-
-
-bin/%.o: src/%.hpp
-	$(CXX) $(CXXFLAGS) $(MIC)  -c -o $@ $<
 
 clean:
 	rm bin/jacobiparMIC bin/jacobiForMIC
