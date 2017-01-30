@@ -3,13 +3,20 @@ CXXFLAGS = -std=c++11 -pthread -O3
 FF_SERVER = -I /home/spm1501/public/fastflow
 MIC = -mmic
 
+all: parPHI ffPHI
+
+
 parPHI: src/jacobiPar.cpp
-	$(CXX) src/jacobiPar.cpp -o bin/jacobiParMIC $(CXXFLAGS) $(MIC)
-	scp bin/jacobiparMIC mic0:
+	$(CXX) src/jacobiPar.cpp -o bin/jacobiParPHI $(CXXFLAGS) $(MIC)
+	scp bin/jacobiParPHI mic0:
+	scp testPHI.sh mic0:
+
 
 ffPHI: src/jacobiFor.cpp
-	$(CXX) src/jacobiFor.cpp -o bin/jacobiForMIC $(FF_SERVER) $(MIC) -DNO_DEFAULT_MAPPING $(CXXFLAGS)
-	scp bin/jacobiForMIC mic0:
+	$(CXX) src/jacobiFor.cpp -o bin/jacobiForPHI $(FF_SERVER) $(MIC) -DNO_DEFAULT_MAPPING $(CXXFLAGS)
+	scp bin/jacobiForPHI mic0:
+	scp testPHI.sh mic0:
+
 
 clean:
-	rm bin/jacobiParMIC bin/jacobiForMIC
+	rm bin/jacobiParPHI bin/jacobiForPHI

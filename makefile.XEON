@@ -2,6 +2,8 @@ CXX = icc
 CXXFLAGS = -std=c++11 -pthread -O3
 FF_SERVER = -I /home/spm1501/public/fastflow
 
+all: serXEON parXEON ffXEON
+
 serXEON: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiserXEON $(CXXFLAGS)
 

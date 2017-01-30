@@ -2,6 +2,8 @@ CXX = g++
 CXXFLAGS = -std=c++11 -pthread -O3
 FF_LOCAL = -I ../mc-fastflow-code
 
+all: ser par ff
+
 ser: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiser -std=c++11
 
