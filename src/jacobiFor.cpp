@@ -67,61 +67,89 @@ int main(int argc, char const *argv[]) {
   size_t N = atoi(argv[1]);
   size_t maxiter = atoi(argv[2]);
   float epsilon = atof(argv[3]);
-  size_t thread_num = atoi(argv[4]);
-  size_t i, j, k;
+  size_t W = atoi(argv[4]);
+  size_t steps = atoi(argv[5]);
+  size_t i, j, k, thread_num;
   float sum, err, conv;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);
   vector<float> c(N);
+  chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
 
-  /* generate  matrix and vectors: */
-  srand(123);
-  for (i = 0; i < N; i++) {
-    b[i] = rand() % 10;
-    x[i] = 0;
-  }
-  for (i = 0; i < N; i++)
-    for (j = 0; j < N; j++)
-      A[i][j] = rand() % 10;
-
-  /* enforce diagonal dominance */
-  sum = 0.0;
-  for (i = 0; i < N; i++) {
-    for (j = 0; j < N; j++) {
-      if (i != j) {
-        sum += abs(A[i][j]);
+  for (size_t Worker = 1; Worker < W; Worker += steps) {
+    thread_num = Worker;
+    conv = 0;
+    printf("{'thread_num':%zu,'Tc':[", thread_num);
+    for (size_t iavg = 0; iavg < 10; iavg++) {
+      /* generate  matrix and vectors: */
+      srand(123);
+      for (i = 0; i < N; i++) {
+        b[i] = rand() % 10;
+        x[i] = 0;
+        c[i] = 0;
       }
+      for (i = 0; i < N; i++)
+        for (j = 0; j < N; j++)
+          A[i][j] = rand() % 10;
+
+      /* enforce diagonal dominance */
+      sum = 0.0;
+      for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+          if (i != j) {
+            sum += abs(A[i][j]);
+          }
+        }
+        A[i][i] = sum + 100;
+        sum = 0.0;
+      }
+      /* code */
+      // SPIN, no barrier
+      ParallelFor pf(thread_num, true, true);
+
+      // printMAT(A, N);
+      // printVEC(b, N);
+      // JACOBI METHOD
+
+      k = 0;
+      startFor = chrono::system_clock::now();
+      while (k <= maxiter) {
+        pf.parallel_for(0, N, 1, 0,
+                        [&](const long i) {
+                          c[i] = b[i];
+                          for (int j = 0; j < N; j++) {
+                            if (i != j)
+                              c[i] = c[i] - A[i][j] * x[j];
+                          }
+                          c[i] = c[i] / A[i][i];
+                        },
+                        thread_num);
+
+        startconv = chrono::system_clock::now();
+        swap(c, x);
+        err = errorVEC(c, x, N);
+        endconv = chrono::system_clock::now();
+
+        if (err < epsilon)
+          break;
+        k++;
+      }
+      endFor = chrono::system_clock::now();
+
+      // print the time for the post analysis
+      if (iavg != 9) {
+        printf("%f,", eTime(startFor, endFor).count());
+      } else {
+        printf("%f", eTime(startFor, endFor).count());
+      }
+
+      // for avg Tnorm time
+      conv += eTime(startconv, endconv).count();
     }
-    A[i][i] = sum + 100;
-    sum = 0.0;
+
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
+           errorVEC(c, x, N));
   }
-
-  ParallelFor pf;
-
-  // printMAT(A, N);
-  // printVEC(b, N);
-  // JACOBI METHOD
-  k = 0;
-  while (k <= maxiter) {
-    pf.parallel_for(0, N,
-                    [&](const long i) {
-                      c[i] = b[i];
-                      for (int j = 0; j < N; j++) {
-                        if (i != j)
-                          c[i] = c[i] - A[i][j] * x[j];
-                      }
-                      c[i] = c[i] / A[i][i];
-                    },
-                    thread_num);
-    swap(c, x);
-    err = errorVEC(c, x, N);
-    if (err < epsilon)
-      break;
-    k++;
-  }
-
-  printf("Error:%f ", error(A, x, b, N));
-  printf("Conv:%f \n", errorVEC(c, x, N));
 }

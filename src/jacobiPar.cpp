@@ -18,6 +18,7 @@
 
 using namespace std;
 float err;
+chrono::time_point<chrono::system_clock> startconv, endconv;
 
 void printMAT(vector<vector<float>> A, int N) {
   printf("PRINTING A NEW MAT\n");
@@ -112,9 +113,10 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
       (*c)[i] = (*c)[i] / (*A)[i][i];
     }
     bar->await([&] {
+      startconv = chrono::system_clock::now();
       swap(*c, *x);
       err = errorVEC(*c, *x, A->size());
-
+      endconv = chrono::system_clock::now();
     });
     if (err < epsilon)
       break;
@@ -126,55 +128,80 @@ int main(int argc, char const *argv[]) {
   size_t N = atoi(argv[1]);
   size_t maxiter = atoi(argv[2]);
   float epsilon = atof(argv[3]);
-  size_t thread_num = atoi(argv[4]);
-  size_t i, j, k;
+  size_t W = atoi(argv[4]);
+  size_t steps = atoi(argv[5]);
+
+  size_t i, j, k, thread_num;
   float sum, err, conv;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);
   vector<float> c(N);
+  chrono::time_point<chrono::system_clock> startFor, endFor;
 
-  /* generate  matrix and vectors: */
-  srand(123);
-  for (i = 0; i < N; i++) {
-    b[i] = rand() % 10;
-    x[i] = 0;
-  }
-  for (i = 0; i < N; i++)
-    for (j = 0; j < N; j++)
-      A[i][j] = rand() % 10;
-
-  /* enforce diagonal dominance */
-  sum = 0.0;
-  for (i = 0; i < N; i++) {
-    for (j = 0; j < N; j++) {
-      if (i != j) {
-        sum += abs(A[i][j]);
-      }
-    }
-    A[i][i] = sum + 100;
-    sum = 0.0;
-  }
-
-  // printMAT(A, N);
-  // printVEC(b, N);
   // JACOBI METHOD parallel
 
-  vector<thread> t;
-  barrier bar(thread_num);
-  k = (N / thread_num);
-  for (size_t i = 0; i < thread_num; i++) {
-    size_t start = i * k;
-    size_t end = (i != thread_num - 1 ? start + k : N) - 1;
-    // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,end - start
-    // + 1);
-    t.push_back(
-        thread(iter, &A, &b, &x, &c, start, end, &bar, maxiter, epsilon));
-  }
-  for (thread &it : t)
-    it.join();
+  for (size_t Worker = 1; Worker < W; Worker += steps) {
+    thread_num = Worker;
+    conv = 0;
+    printf("{'thread_num':%zu,'Tc':[", thread_num);
+    for (size_t iavg = 0; iavg < 10; iavg++) {
+      /* generate  matrix and vectors: */
+      srand(123);
+      for (i = 0; i < N; i++) {
+        b[i] = rand() % 10;
+        x[i] = 0;
+        c[i] = 0;
+      }
+      for (i = 0; i < N; i++)
+        for (j = 0; j < N; j++)
+          A[i][j] = rand() % 10;
 
-  printf("Error:%f ", error(A, x, b, N));
-  printf("Conv:%f \n", errorVEC(c, x, N));
+      /* enforce diagonal dominance */
+      sum = 0.0;
+      for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+          if (i != j) {
+            sum += abs(A[i][j]);
+          }
+        }
+        A[i][i] = sum + 100;
+        sum = 0.0;
+      }
+      /* code */
+      startFor = chrono::system_clock::now();
+
+      vector<thread> t;
+      barrier bar(thread_num);
+      k = (N / thread_num);
+
+      for (size_t i = 0; i < thread_num; i++) {
+        size_t start = i * k;
+        size_t end = (i != thread_num - 1 ? start + k : N) - 1;
+        // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,end -
+        // start
+        // + 1);
+        t.push_back(
+            thread(iter, &A, &b, &x, &c, start, end, &bar, maxiter, epsilon));
+      }
+      for (thread &it : t)
+        it.join();
+
+      endFor = chrono::system_clock::now();
+
+      // print the time for the post analysis
+      if (iavg != 9) {
+        printf("%f,", eTime(startFor, endFor).count());
+      } else {
+        printf("%f", eTime(startFor, endFor).count());
+      }
+
+      // for avg Tnorm time
+      conv += eTime(startconv, endconv).count();
+    }
+
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
+           errorVEC(c, x, N));
+  }
 }
