@@ -3,8 +3,12 @@ CXXFLAGS = -std=c++11 -pthread -O3
 FF_SERVER = -I /home/spm1501/public/fastflow
 MIC = -mmic
 
-all: parPHI ffPHI
+all: serPHI parPHI ffPHI
 
+serPHI: src/jacobiser.cpp
+	$(CXX) src/jacobiser.cpp -o bin/jacobiserPHI $(CXXFLAGS) $(MIC)
+	scp bin/jacobiserPHI mic0:bin/
+	scp testPHI.sh mic0:
 
 parPHI: src/jacobiPar.cpp
 	$(CXX) src/jacobiPar.cpp -o bin/jacobiParPHI $(CXXFLAGS) $(MIC)
@@ -19,4 +23,4 @@ ffPHI: src/jacobiFor.cpp
 
 
 clean:
-	rm bin/jacobiParPHI bin/jacobiForPHI
+	rm bin/jacobiParPHI bin/jacobiForPHI bin/jacobiserPHI

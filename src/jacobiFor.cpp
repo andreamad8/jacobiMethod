@@ -78,8 +78,9 @@ int main(int argc, char const *argv[]) {
   vector<float> c(N);
   chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
 
-  for (size_t Worker = 1; Worker < W; Worker += steps) {
+  for (size_t Worker = 0; Worker < W; Worker += steps) {
     thread_num = Worker;
+    if (Worker == 0): thread_num=1;
     conv = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
     for (size_t iavg = 0; iavg < 10; iavg++) {

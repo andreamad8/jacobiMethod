@@ -1,11 +1,24 @@
 #!/bin/bash
-./bin/jacobiParXEON 100 500 0.0001 17 1   > ris/ParXEON_100_500_0001
-./bin/jacobiserXEON 100 500 0.0001        > ris/serXEON_100_500_0001
-./bin/jacobiParXEON 500 500 0.0001 17 1   > ris/ParXEON_500_500_0001
-./bin/jacobiserXEON 500 500 0.0001        > ris/serXEON_500_500_0001
-./bin/jacobiParXEON 1000 500 0.0001 17 1  > ris/ParXEON_1000_500_0001
-./bin/jacobiserXEON 1000 500 0.0001       > ris/serXEON_1000_500_0001
-./bin/jacobiParXEON 5000 500 0.0001 17 1  > ris/ParXEON_5000_500_0001
-./bin/jacobiserXEON 5000 500 0.0001       > ris/serXEON_5000_500_0001
-./bin/jacobiParXEON 10000 500 0.0001 17 1 > ris/ParXEON_10000_500_0001
-./bin/jacobiserXEON 10000 500 0.0001      > ris/serXEON_10000_500_0001
+./bin/jacobiserXEON 100   500 0.0001 > ris/serXEON_0100_500_0001
+./bin/jacobiserXEON 500   500 0.0001 > ris/serXEON_0500_500_0001
+./bin/jacobiserXEON 1000  500 0.0001 > ris/serXEON_01000_500_0001
+./bin/jacobiserXEON 5000  500 0.0001 > ris/serXEON_05000_500_0001
+./bin/jacobiserXEON 7000  500 0.0001 > ris/serXEON_05000_500_0001
+./bin/jacobiserXEON 10000 500 0.0001 > ris/serXEON_010000_500_0001
+./bin/jacobiserXEON 15000 500 0.0001 > ris/serXEON_05000_500_0001
+
+./bin/jacobiParXEON 100   500 0.0001 17 1 > ris/ParXEON_0100_500_0001
+./bin/jacobiParXEON 500   500 0.0001 17 1 > ris/ParXEON_0500_500_0001
+./bin/jacobiParXEON 1000  500 0.0001 17 1 > ris/ParXEON_01000_500_0001
+./bin/jacobiParXEON 5000  500 0.0001 17 1 > ris/ParXEON_05000_500_0001
+./bin/jacobiParXEON 7000  500 0.0001 17 1 > ris/ParXEON_07000_500_0001
+./bin/jacobiParXEON 10000 500 0.0001 17 1 > ris/ParXEON_010000_500_0001
+./bin/jacobiParXEON 15000 500 0.0001 17 1 > ris/ParXEON_015000_500_0001
+
+./bin/jacobiForXEON 100   500 0.0001 17 1 > ris/ParXEON_0100_500_0001
+./bin/jacobiForXEON 500   500 0.0001 17 1 > ris/ParXEON_0500_500_0001
+./bin/jacobiForXEON 1000  500 0.0001 17 1 > ris/ParXEON_01000_500_0001
+./bin/jacobiForXEON 5000  500 0.0001 17 1 > ris/ParXEON_05000_500_0001
+./bin/jacobiForXEON 7000  500 0.0001 17 1 > ris/ParXEON_07000_500_0001
+./bin/jacobiForXEON 10000 500 0.0001 17 1 > ris/ParXEON_010000_500_0001
+./bin/jacobiForXEON 15000 500 0.0001 17 1 > ris/ParXEON_015000_500_0001
