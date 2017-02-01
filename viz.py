@@ -10,11 +10,13 @@ from mpl_toolkits.axes_grid.inset_locator import inset_axes
 import ast
 import re
 
-PROC=17
-SUBPLOT=6
+PROC=80 ## 17 for xeon and 90 mic
+SUBPLOT=30 ## 7 for xeon and 40 mic
 lw=1.2 #line weight
-ms=1.5 #markersize
-ty='forXEON' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ms=3.5 #markersize
+ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+selector_s='serXEON' ### serXEON,serPHI_
+
 def import_data(filename):
     fo = open(filename, "r")
     data=[]
@@ -29,7 +31,7 @@ for filename in os.listdir('ris/'):
     if(filename[:7] == ty):
         print filename
         data_array.append(import_data('ris/'+filename))
-    elif(filename[:7] == 'serXEON'):
+    elif(filename[:7] == selector_s):
         data_ser.append(import_data('ris/'+filename))
 
 
@@ -68,7 +70,7 @@ for val in data_array:
         y.append(avg)
     ax1.plot(x,y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     inset1.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
-    inset1.set_ylim([0, 5])
+    inset1.set_ylim([0, 1])
     inset1.set_xlim([0, SUBPLOT])
     inset1.yaxis.grid(True)
     # inset_axes.set_yscale('log')
@@ -79,7 +81,7 @@ for val in data_array:
     # ax1.xaxis.grid(True)
     ax1.yaxis.grid(True)
     i += 1
-plt.legend(loc='opt')
+
 '''
 Scalability Plot
 '''
@@ -97,13 +99,13 @@ for val in data_array:
     ax2.plot(x_ideal, x_ideal, label='Opt', linewidth=1.95, alpha=0.2, color='gray', linestyle='dashed')
     inset2.plot(x,y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
     inset2.plot(x_ideal, x_ideal, linewidth=1.95, alpha=0.4, color='gray', linestyle='dashed')
-    inset2.set_ylim([0, SUBPLOT])
+    inset2.set_ylim([0, 30])
     inset2.set_xlim([0, SUBPLOT])
     inset2.yaxis.grid(True)
     inset2.yaxis.tick_right()
-    plt.legend(loc='left center', bbox_to_anchor=(0.46, -0.08),
-                fancybox=True,
-                shadow=True, ncol=5)
+    #plt.legend(loc='left center', bbox_to_anchor=(0.46, -0.08),
+    #            fancybox=True,
+    #            shadow=True, ncol=5)
     #ax2.set_xticks(np.arange(min(x) - 1, max(x) + 1, 5.0))
     ax2.set_xlabel(r'$\textit{Threads}$')
     ax2.set_ylabel(r'$\textit{Scalability}$')
@@ -123,13 +125,14 @@ for val in data_array:
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y1.append(avg)
 
-    y=[(float(ser[i])/e)for e in y1]
+    #y=[(float(ser[i])/e)for e in y1]
+    y = [y1[0] / float(e) for e in y1]
 
     ax3.plot(x, y, label=str(label[i]), linewidth=lw,alpha=0.8, marker=marker[i], markersize=ms)
     ax3.plot(x_ideal, x_ideal, linewidth=1.95, alpha=0.2,color='gray', linestyle='dashed')
     inset3.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
     inset3.plot(x_ideal, x_ideal, linewidth=1.95, alpha=0.4,color='gray', linestyle='dashed')
-    inset3.set_ylim([0, SUBPLOT])
+    inset3.set_ylim([0, 30])
     inset3.set_xlim([0, SUBPLOT])
     inset3.yaxis.grid(True)
     inset3.yaxis.tick_right()
@@ -154,13 +157,15 @@ for val in data_array:
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y1.append(avg)
 
-    y2=[(float(ser[i])/e)for e in y1]
+    #y2=[(float(ser[i])/e)for e in y1]
+    y2=[y1[0] / float(e) for e in y1]
+
     thnume=[e['thread_num'] for e in val]
     y=[]
-    for j in range(1,len(y2)):
+    for j in range(0,len(y2)):
         y.append(y2[j]/float(thnume[j]))
 
-    ax4.plot(x[:-1], y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
+    ax4.plot(x, y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     x_new = np.linspace(0, PROC, 100)
     y_new = [1 for val in x_new]
     #plt.xticks(np.arange(min(x) - 1, max(x) + 1, 5.0))
@@ -173,10 +178,9 @@ for val in data_array:
 ax4.plot(x_new, y_new, label='ideal', linewidth=1.95,  alpha=0.5, color='gray', linestyle='dashed')
 
 plt.subplots_adjust(left=0.05, bottom=0.05, right=0.99, top=0.98, wspace=0.25, hspace=0.25)
-
+plt.legend(loc='lower center', bbox_to_anchor=(0.52, 0.43), bbox_transform=plt.gcf().transFigure)
 #if len(label) > 2:
-#    plt.legend(loc='lower center', bbox_to_anchor=(0.52, 0.43),
-#               bbox_transform=plt.gcf().transFigure)
+#
 #else:
 #    plt.legend(loc='lower center', bbox_to_anchor=(0.52, 0.459),
 #               bbox_transform=plt.gcf().transFigure)
