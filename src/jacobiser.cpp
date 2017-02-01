@@ -1,4 +1,3 @@
-#include "helper.hpp"
 #include <algorithm>
 #include <cassert>
 #include <chrono>
