@@ -99,12 +99,7 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
       (*c)[i] = (*b)[i];
 #pragma vector aligned
 #pragma simd
-      for (size_t j = 0; j < i; j++) {
-        (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
-      }
-#pragma vector aligned
-#pragma simd
-      for (size_t j = i + 1; j < A->size(); j++) {
+      for (size_t j = 0; j < A->size(); j++) {
         (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
       }
       (*c)[i] = (*c)[i] / (*A)[i][i];
@@ -120,7 +115,6 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
 
 /*** MAIN ***/
 int main(int argc, char const *argv[]) {
-#define VEC_ALIGN 32
   size_t N = atoi(argv[1]);
   size_t maxiter = atoi(argv[2]);
   float epsilon = atof(argv[3]);
