@@ -96,10 +96,9 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
           float epsilon) {
   for (size_t k = 0; k <= maxiter; k++) {
     for (size_t i = from; i <= to; i++) {
-      (*c)[i] = (*b)[i];
+      (*c)[i] = (*b)[i] + (*A)[i][i] * (*x)[i];
       for (size_t j = 0; j < A->size(); j++) {
-        if (i != j)
-          (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
+        (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
       }
       (*c)[i] = (*c)[i] / (*A)[i][i];
     }
