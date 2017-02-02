@@ -99,14 +99,16 @@ int main(int argc, char const *argv[]) {
     }
 
     startFor = chrono::system_clock::now();
+    float sum;
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        c[i] = b[i];
+        sum = A[i][i] * x[i];
+#pragma vector aligned
+#pragma ivdep
         for (int j = 0; j < N; j++) {
-          if (i != j)
-            c[i] = c[i] - A[i][j] * x[j];
+          sum += A[i][j] * x[j];
         }
-        c[i] = c[i] / A[i][i];
+        c[i] = (b[i] - sum) / A[i][i];
       }
 
       startconv = chrono::system_clock::now();

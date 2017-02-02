@@ -107,15 +107,17 @@ int main(int argc, char const *argv[]) {
 
       k = 0;
       startFor = chrono::system_clock::now();
+      float sum;
       while (k <= maxiter) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-                          c[i] = b[i];
+                          sum = A[i][i] * x[i];
+#pragma vector aligned
+#pragma ivdep
                           for (int j = 0; j < N; j++) {
-                            if (i != j)
-                              c[i] = c[i] - A[i][j] * x[j];
+                            sum += A[i][j] * x[j];
                           }
-                          c[i] = c[i] / A[i][i];
+                          c[i] = (b[i] - sum) / A[i][i];
                         },
                         thread_num);
 
