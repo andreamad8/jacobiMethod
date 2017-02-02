@@ -1,19 +1,9 @@
-#include <algorithm>
-#include <cassert>
 #include <chrono>
-#include <climits>
 #include <cmath>
 #include <condition_variable> // std::condition_variable
-#include <cstdio>
-#include <cstdlib>
 #include <iostream>
-#include <list>
-#include <math.h>
 #include <mutex>
-#include <queue>
 #include <thread>
-#include <tuple>
-#include <unistd.h>
 #include <vector>
 
 using namespace std;
