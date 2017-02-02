@@ -69,53 +69,64 @@ int main(int argc, char const *argv[]) {
   chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
 
   /* generate  matrix and vectors: */
-  srand(123);
-  for (i = 0; i < N; i++) {
-    b[i] = rand() % 10;
-    x[i] = 0;
-  }
-  for (i = 0; i < N; i++)
-    for (j = 0; j < N; j++)
-      A[i][j] = rand() % 10;
-
-  /* enforce diagonal dominance */
-  sum = 0.0;
-  for (i = 0; i < N; i++) {
-    for (j = 0; j < N; j++) {
-      if (i != j) {
-        sum += abs(A[i][j]);
-      }
-    }
-    A[i][i] = sum + 100;
-    sum = 0.0;
-  }
 
   // printMAT(A, N);
   // printVEC(b, N);
   // JACOBI METHOD
-  startFor = chrono::system_clock::now();
-  for (size_t k = 0; k <= maxiter; k++) {
-    for (int i = 0; i < N; i++) {
-      c[i] = b[i];
-      for (int j = 0; j < N; j++) {
-        if (i != j)
-          c[i] = c[i] - A[i][j] * x[j];
+  conv = 0;
+  printf("{'thread_num':%zu,'Tc':[", thread_num);
+  for (size_t iavg = 0; iavg < 10; iavg++) {
+    srand(123);
+    for (i = 0; i < N; i++) {
+      b[i] = rand() % 10;
+      x[i] = 0;
+      c[i] = 0;
+    }
+    for (i = 0; i < N; i++)
+      for (j = 0; j < N; j++)
+        A[i][j] = rand() % 10;
+
+    /* enforce diagonal dominance */
+    sum = 0.0;
+    for (i = 0; i < N; i++) {
+      for (j = 0; j < N; j++) {
+        if (i != j) {
+          sum += abs(A[i][j]);
+        }
       }
-      c[i] = c[i] / A[i][i];
+      A[i][i] = sum + 100;
+      sum = 0.0;
     }
 
-    startconv = chrono::system_clock::now();
-    swap(c, x);
-    err = errorVEC(c, x, N);
-    endconv = chrono::system_clock::now();
-    if (err < epsilon)
-      break;
-  }
-  endFor = chrono::system_clock::now();
+    startFor = chrono::system_clock::now();
+    for (size_t k = 0; k <= maxiter; k++) {
+      for (int i = 0; i < N; i++) {
+        c[i] = b[i];
+        for (int j = 0; j < N; j++) {
+          if (i != j)
+            c[i] = c[i] - A[i][j] * x[j];
+        }
+        c[i] = c[i] / A[i][i];
+      }
 
-  printf("{'thread_num':%zu,'Tc':[%f],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n",
-         thread_num, eTime(startFor, endFor).count(),
-         eTime(startconv, endconv).count(), error(A, x, b, N),
+      startconv = chrono::system_clock::now();
+      swap(c, x);
+      err = errorVEC(c, x, N);
+      endconv = chrono::system_clock::now();
+      if (err < epsilon)
+        break;
+    }
+    endFor = chrono::system_clock::now();
+    // print the time for the post analysis
+    if (iavg != 9) {
+      printf("%f,", eTime(startFor, endFor).count());
+    } else {
+      printf("%f", eTime(startFor, endFor).count());
+    }
+    // for avg Tnorm time
+    conv += eTime(startconv, endconv).count();
+  }
+  printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
          errorVEC(c, x, N));
 
   return 0;
