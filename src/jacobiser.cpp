@@ -67,7 +67,7 @@ int main(int argc, char const *argv[]) {
   float epsilon = atof(argv[3]);
   size_t thread_num = 1;
 
-  int i, j, k;
+  int i, j;
   float sum, err, conv;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
@@ -104,8 +104,7 @@ int main(int argc, char const *argv[]) {
   // printVEC(b, N);
   // JACOBI METHOD
   startFor = chrono::system_clock::now();
-  k = 0;
-  while (k <= maxiter) {
+  for (size_t k = 0; k <= maxiter; k++) {
     for (int i = 0; i < N; i++) {
       c[i] = b[i];
       for (int j = 0; j < N; j++) {
@@ -121,7 +120,6 @@ int main(int argc, char const *argv[]) {
     endconv = chrono::system_clock::now();
     if (err < epsilon)
       break;
-    k++;
   }
   endFor = chrono::system_clock::now();
 

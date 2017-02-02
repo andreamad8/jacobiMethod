@@ -3,7 +3,7 @@
 ./bin/jacobiserXEON 500   50 0.000001 > ris/serXEON_0500
 ./bin/jacobiserXEON 1000  50 0.000001 > ris/serXEON_01000
 ./bin/jacobiserXEON 5000  50 0.000001 > ris/serXEON_05000
-./bin/jacobiserXEON 7000  50 0.000001 > ris/serXEON_05000
+./bin/jacobiserXEON 7000  50 0.000001 > ris/serXEON_07000
 ./bin/jacobiserXEON 10000 50 0.000001 > ris/serXEON_010000
 ./bin/jacobiserXEON 15000 50 0.000001 > ris/serXEON_015000
 ./bin/jacobiParXEON 100   50 0.000001 17 1 > ris/ParXEON_0100

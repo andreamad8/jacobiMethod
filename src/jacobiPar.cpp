@@ -181,9 +181,8 @@ int main(int argc, char const *argv[]) {
       for (size_t i = 0; i < thread_num; i++) {
         size_t start = i * k;
         size_t end = (i != thread_num - 1 ? start + k : N) - 1;
-        // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,end -
-        // start
-        // + 1);
+        // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
+        //       end - start + 1);
         t.push_back(
             thread(iter, &A, &b, &x, &c, start, end, &bar, maxiter, epsilon));
       }
