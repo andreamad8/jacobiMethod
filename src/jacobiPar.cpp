@@ -9,7 +9,6 @@
 using namespace std;
 
 float err = 1;
-float sum = 0;
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
 void printMAT(vector<vector<float>> A, int N) {
@@ -95,12 +94,14 @@ bool barrier::await(function<void()> cb) {
 void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
           vector<float> *c, int from, int to, barrier *bar, int maxiter,
           float epsilon) {
+  float sum;
   for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      sum = 0;
+      sum = -(*A)[i][i] * (*x)[i];
+#pragma vector aligned
+#pragma ivdep
       for (size_t j = 0; j < A->size(); j++) {
-        if (i != j)
-          sum += (*A)[i][j] * (*x)[j];
+        sum += (*A)[i][j] * (*x)[j];
       }
       (*c)[i] = ((*b)[i] - sum) / (*A)[i][i];
     }
