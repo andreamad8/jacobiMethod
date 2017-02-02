@@ -102,7 +102,7 @@ int main(int argc, char const *argv[]) {
     float sum;
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        sum = A[i][i] * x[i];
+        sum = -A[i][i] * x[i];
 #pragma vector aligned
 #pragma ivdep
         for (int j = 0; j < N; j++) {

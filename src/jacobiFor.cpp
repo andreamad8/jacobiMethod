@@ -111,7 +111,7 @@ int main(int argc, char const *argv[]) {
       while (k <= maxiter) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-                          sum = A[i][i] * x[i];
+                          sum = -A[i][i] * x[i];
 #pragma vector aligned
 #pragma ivdep
                           for (int j = 0; j < N; j++) {
