@@ -99,7 +99,7 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
       (*c)[i] = (*b)[i];
       for (size_t j = 0; j < A->size(); j++) {
         if (i != j)
-          (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
+          (*c)[i] -= (*A)[i][j] * (*x)[j];
       }
       (*c)[i] = (*c)[i] / (*A)[i][i];
     }

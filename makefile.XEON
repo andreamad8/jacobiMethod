@@ -3,7 +3,7 @@ CXXFLAGS = -O3 -std=c++11
 FF_SERVER = -I /home/spm1501/public/fastflow
 HOST = -march=core-avx-i
 CXXFLAGTH = -pthread
-REPORT =-vec-report=2
+REPORT =-qopt-report=2
 
 all: serXEON parXEON ffXEON
 
