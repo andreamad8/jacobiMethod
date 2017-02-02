@@ -8,7 +8,7 @@
 
 using namespace std;
 
-float err;
+float err = 1;
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
 void printMAT(vector<vector<float>> A, int N) {
@@ -94,10 +94,13 @@ bool barrier::await(function<void()> cb) {
 void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
           vector<float> *c, int from, int to, barrier *bar, int maxiter,
           float epsilon) {
-  for (size_t k = 0; k <= maxiter; k++) {
+  for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      (*c)[i] = (*b)[i] + (*A)[i][i] * (*x)[i];
-      for (size_t j = 0; j < A->size(); j++) {
+      (*c)[i] = (*b)[i];
+      for (size_t j = 0; j < i; j++) {
+        (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
+      }
+      for (size_t j = i + 1; j < A->size(); j++) {
         (*c)[i] = (*c)[i] - (*A)[i][j] * (*x)[j];
       }
       (*c)[i] = (*c)[i] / (*A)[i][i];
@@ -108,8 +111,6 @@ void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
       err = errorVEC(*c, *x, A->size());
       endconv = chrono::system_clock::now();
     });
-    if (err < epsilon)
-      break;
   }
 }
 
