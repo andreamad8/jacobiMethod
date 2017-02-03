@@ -102,7 +102,7 @@ int main(int argc, char const *argv[]) {
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
         sum = -A[i][i] * x[i];
-        for (size_t j = 0; j < A->size(); j++) {
+        for (size_t j = 0; j < N; j++) {
           sum += A[i][j] * x[j];
         }
         c[i] = (b[i] - sum) / A[i][i];
