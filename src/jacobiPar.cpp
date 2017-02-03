@@ -91,22 +91,22 @@ bool barrier::await(function<void()> cb) {
   }
 }
 
-void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
-          vector<float> *c, const int from, const int to, barrier *bar,
+void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
+          vector<float> &c, const int from, const int to, barrier &bar,
           int maxiter, float epsilon) {
   float sum;
   for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      sum = -(*A)[i][i] * (*x)[i];
+      sum = -A[i][i] * x[i];
       for (size_t j = 0; j < A->size(); j++) {
-        sum += (*A)[i][j] * (*x)[j];
+        sum += A[i][j] * x[j];
       }
-      (*c)[i] = ((*b)[i] - sum) / (*A)[i][i];
+      c[i] = (b[i] - sum) / A[i][i];
     }
     bar->await([&] {
       startconv = chrono::system_clock::now();
-      swap(*c, *x);
-      err = errorVEC(*c, *x, A->size());
+      swap(c, x);
+      err = errorVEC(c, x, A->size());
       endconv = chrono::system_clock::now();
     });
   }
@@ -172,8 +172,8 @@ int main(int argc, char const *argv[]) {
         const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
         //       end - start + 1);
-        t.push_back(
-            thread(iter, &A, &b, &x, &c, start, end, &bar, maxiter, epsilon));
+        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
+                           ref(bar), maxiter, epsilon));
       }
       for (thread &it : t)
         it.join();
