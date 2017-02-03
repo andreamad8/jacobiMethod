@@ -100,6 +100,7 @@ int main(int argc, char const *argv[]) {
     sum = 0.0;
     startFor = chrono::system_clock::now();
     for (size_t k = 0; k <= maxiter; k++) {
+#pragma simd
       for (int i = 0; i < N; i++) {
         sum = -A[i][i] * x[i];
         for (size_t j = 0; j < N; j++) {
