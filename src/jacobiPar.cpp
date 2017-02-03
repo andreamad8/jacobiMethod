@@ -92,8 +92,8 @@ bool barrier::await(function<void()> cb) {
 }
 
 void iter(vector<vector<float>> *A, vector<float> *b, vector<float> *x,
-          vector<float> *c, int from, int to, barrier *bar, int maxiter,
-          float epsilon) {
+          vector<float> *c, const int from, const int to, barrier *bar,
+          int maxiter, float epsilon) {
   float sum;
   for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
@@ -168,8 +168,8 @@ int main(int argc, char const *argv[]) {
       k = (N / thread_num);
 
       for (size_t i = 0; i < thread_num; i++) {
-        size_t start = i * k;
-        size_t end = (i != thread_num - 1 ? start + k : N) - 1;
+        const size_t start = i * k;
+        const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
         //       end - start + 1);
         t.push_back(

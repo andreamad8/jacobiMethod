@@ -124,19 +124,18 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
   -> INLINE (MANUAL): (97,8) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
   -> INLINE (MANUAL): (97,11) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
   -> EXTERN: (101,16) std::chrono::system_clock::now()
-  -> INLINE (MANUAL): (104,10) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (104,17) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (107,14) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (107,21) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (107,28) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (107,31) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (107,38) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (109,10) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (109,17) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (109,24) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE (MANUAL): (109,27) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> EXTERN: (111,19) std::chrono::system_clock::now()
-  -> INLINE (MANUAL): (112,7) std::swap<float, std::allocator<float>>(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &) (isz = 74) (sz = 81)
+  -> INLINE (MANUAL): (104,17) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (104,20) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (104,27) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (106,19) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (106,22) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (106,29) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (108,10) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (108,18) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (108,32) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+  -> INLINE (MANUAL): (108,35) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+  -> EXTERN: (110,19) std::chrono::system_clock::now()
+  -> INLINE (MANUAL): (111,7) std::swap<float, std::allocator<float>>(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &) (isz = 74) (sz = 81)
     -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_vector.h:(1217,11) std::vector<float, std::allocator<float>>::swap(std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>> &&) (isz = 74) (sz = 81)
       -> INLINE (MANUAL): (932,2) std::swap<std::allocator<float>::pointer>(std::allocator<float>::pointer &, std::allocator<float>::pointer &) (isz = 15) (sz = 22)
         -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/move.h:(81,19) std::move<std::allocator<float>::pointer &>(std::allocator<float>::pointer &) (isz = 0) (sz = 5)
@@ -153,16 +152,16 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
       -> DELETED: (939,2) std::__alloc_swap<std::vector<float, std::allocator<float>>::_Tp_alloc_type, true>::_S_do_it(std::vector<float, std::allocator<float>>::_Tp_alloc_type &, std::vector<float, std::allocator<float>>::_Tp_alloc_type &) (isz = 0) (sz = 4)
       -> INLINE (MANUAL): (939,46) std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator(std::_Vector_base<float, std::allocator<float>> *) (isz = 1) (sz = 7)
       -> INLINE (MANUAL): (940,15) std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator(std::_Vector_base<float, std::allocator<float>> *) (isz = 1) (sz = 7)
-  -> INLINE: (113,13) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 37) (sz = 48)
+  -> INLINE: (112,13) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 37) (sz = 48)
     -> INLINE (MANUAL): (42,12) std::pow<float, int>(float, int) (isz = 3) (sz = 12)
       -> EXTERN: /usr/include/c++/4.4.7/cmath:(390,14) pow(double, double)
     -> INLINE (MANUAL): (42,18) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (42,26) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (45,10) std::sqrt(float) (isz = 0) (sz = 7)
-  -> EXTERN: (114,17) std::chrono::system_clock::now()
-  -> EXTERN: (118,14) std::chrono::system_clock::now()
-  -> EXTERN: (121,7) printf(const char *, ...)
-  -> INLINE: (121,37) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+  -> EXTERN: (113,17) std::chrono::system_clock::now()
+  -> EXTERN: (117,14) std::chrono::system_clock::now()
+  -> EXTERN: (120,7) printf(const char *, ...)
+  -> INLINE: (120,37) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
     -> INLINE (MANUAL): (50,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
@@ -175,9 +174,9 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
           -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
           -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (121,45) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> EXTERN: (123,7) printf(const char *, ...)
-  -> INLINE: (123,36) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+  -> INLINE (MANUAL): (120,45) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> EXTERN: (122,7) printf(const char *, ...)
+  -> INLINE: (122,36) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
     -> INLINE (MANUAL): (50,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
@@ -190,8 +189,8 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
           -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
           -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (123,44) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE: (126,30) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+  -> INLINE (MANUAL): (122,44) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> INLINE: (125,30) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
     -> INLINE (MANUAL): (50,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
@@ -204,21 +203,21 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
           -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
           -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (126,39) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> EXTERN: (128,3) printf(const char *, ...)
-  -> INLINE: (128,60) error(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> &, std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 58) (sz = 71)
+  -> INLINE (MANUAL): (125,39) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> EXTERN: (127,3) printf(const char *, ...)
+  -> INLINE: (127,60) error(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> &, std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 58) (sz = 71)
     -> INLINE (MANUAL): (33,15) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (33,18) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (33,25) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (34,12) std::abs(float) (isz = 0) (sz = 7)
     -> INLINE (MANUAL): (34,17) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE: (129,10) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 37) (sz = 48)
+  -> INLINE: (128,10) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 37) (sz = 48)
     -> INLINE (MANUAL): (42,12) std::pow<float, int>(float, int) (isz = 3) (sz = 12)
       -> EXTERN: /usr/include/c++/4.4.7/cmath:(390,14) pow(double, double)
     -> INLINE (MANUAL): (42,18) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (42,26) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (45,10) std::sqrt(float) (isz = 0) (sz = 7)
-  -> INLINE (MANUAL): (131,3) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~vector(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *) (isz = 89) (sz = 94)
+  -> INLINE (MANUAL): (130,3) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~vector(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *) (isz = 89) (sz = 94)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~_Vector_base(std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *const) (isz = 13) (sz = 18)
        [[ Callee not marked with inlining pragma  <1>]]
     -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::vector<float, std::allocator<float>>>(std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::allocator<std::vector<float, std::allocator<float>>> &) (isz = 57) (sz = 66)
@@ -245,7 +244,7 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
         -> INLINE (MANUAL): (132,9) std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::_M_deallocate(std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::allocator<std::vector<float, std::allocator<float>>>::pointer, size_t) (isz = 4) (sz = 13)
           -> INLINE (MANUAL): (146,12) __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::deallocate(__gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>> *, __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::pointer, __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::size_type) (isz = 0) (sz = 7)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
-  -> INLINE (MANUAL): (131,3) std::vector<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>>::~vector(std::vector<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>> *) (isz = 31) (sz = 36)
+  -> INLINE (MANUAL): (130,3) std::vector<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>>::~vector(std::vector<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>> *) (isz = 31) (sz = 36)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>>::~_Vector_base(std::_Vector_base<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>> *const) (isz = 13) (sz = 18)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::pointer, std::chrono::duration<double, std::ratio<1L, 1L>>>(std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::pointer, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::pointer, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>> &) (isz = 0) (sz = 8)
@@ -255,7 +254,7 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
         -> INLINE (MANUAL): (132,9) std::_Vector_base<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>>::_M_deallocate(std::_Vector_base<std::chrono::duration<double, std::ratio<1L, 1L>>, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>> *, std::allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::pointer, size_t) (isz = 4) (sz = 13)
           -> INLINE (MANUAL): (146,12) __gnu_cxx::new_allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::deallocate(__gnu_cxx::new_allocator<std::chrono::duration<double, std::ratio<1L, 1L>>> *, __gnu_cxx::new_allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::pointer, __gnu_cxx::new_allocator<std::chrono::duration<double, std::ratio<1L, 1L>>>::size_type) (isz = 0) (sz = 7)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
-  -> INLINE (MANUAL): (131,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (130,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -269,7 +268,7 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
         -> INLINE (MANUAL): (133,36) std::_Vector_base<float, std::allocator<float>>::_Vector_impl::~_Vector_impl(std::_Vector_base<float, std::allocator<float>>::_Vector_impl *) (isz = 2) (sz = 7)
           -> DELETED: (73,14) std::allocator<float>::~allocator(std::allocator<float> *const) (isz = 0) (sz = 5)
-  -> INLINE (MANUAL): (131,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (130,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -283,7 +282,7 @@ INLINE REPORT: (main(int, const char **)) [1/145=0.7%] src/jacobiser.cpp(54,40)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
         -> INLINE (MANUAL): (133,36) std::_Vector_base<float, std::allocator<float>>::_Vector_impl::~_Vector_impl(std::_Vector_base<float, std::allocator<float>>::_Vector_impl *) (isz = 2) (sz = 7)
           -> DELETED: (73,14) std::allocator<float>::~allocator(std::allocator<float> *const) (isz = 0) (sz = 5)
-  -> INLINE (MANUAL): (131,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (130,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -325,7 +324,7 @@ LOOP BEGIN at src/jacobiser.cpp(78,3)
 
    LOOP BEGIN at src/jacobiser.cpp(91,5)
       remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
-      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 )
+      remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 ) 
       remark #15542: loop was not vectorized: inner loop was already vectorized
 
       LOOP BEGIN at src/jacobiser.cpp(92,7)
@@ -340,11 +339,11 @@ LOOP BEGIN at src/jacobiser.cpp(78,3)
          remark #15309: vectorization support: normalized vectorization overhead 9.667
          remark #15300: LOOP WAS VECTORIZED
          remark #15442: entire loop may be executed in remainder
-         remark #15448: unmasked aligned unit stride loads: 1
+         remark #15448: unmasked aligned unit stride loads: 1 
          remark #15475: --- begin vector loop cost summary ---
-         remark #15476: scalar loop cost: 13
-         remark #15477: vector loop cost: 0.750
-         remark #15478: estimated potential speedup: 7.990
+         remark #15476: scalar loop cost: 13 
+         remark #15477: vector loop cost: 0.750 
+         remark #15478: estimated potential speedup: 7.990 
          remark #15488: --- end vector loop cost summary ---
       LOOP END
 
@@ -363,11 +362,11 @@ LOOP BEGIN at src/jacobiser.cpp(78,3)
          remark #15309: vectorization support: normalized vectorization overhead 9.667
          remark #15300: LOOP WAS VECTORIZED
          remark #15442: entire loop may be executed in remainder
-         remark #15448: unmasked aligned unit stride loads: 1
+         remark #15448: unmasked aligned unit stride loads: 1 
          remark #15475: --- begin vector loop cost summary ---
-         remark #15476: scalar loop cost: 13
-         remark #15477: vector loop cost: 0.750
-         remark #15478: estimated potential speedup: 7.990
+         remark #15476: scalar loop cost: 13 
+         remark #15477: vector loop cost: 0.750 
+         remark #15478: estimated potential speedup: 7.990 
          remark #15488: --- end vector loop cost summary ---
       LOOP END
 
@@ -381,42 +380,97 @@ LOOP BEGIN at src/jacobiser.cpp(78,3)
 
       LOOP BEGIN at src/jacobiser.cpp(103,7)
          remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
-         remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 )
-         remark #15344: loop was not vectorized: vector dependence prevents vectorization
-         remark #15346: vector dependence: assumed OUTPUT dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 107 and c.__b_St12_Vector_baseIfSaIfEE._ line 109
-         remark #15346: vector dependence: assumed OUTPUT dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 109 and c.__b_St12_Vector_baseIfSaIfEE._ line 107
+         remark #25451: Advice: Loop Interchange, if possible, might help loopnest. Suggested Permutation : ( 1 2 ) --> ( 2 1 ) 
+         remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector) 
+         remark #15542: loop was not vectorized: inner loop was already vectorized
 
          LOOP BEGIN at src/jacobiser.cpp(105,9)
-         <Predicate Optimized v1>
-            remark #25423: Condition at line 106 hoisted out of this loop
-            remark #15344: loop was not vectorized: vector dependence prevents vectorization
-            remark #15346: vector dependence: assumed FLOW dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 107 and c.__b_St12_Vector_baseIfSaIfEE._ line 107
-            remark #15346: vector dependence: assumed ANTI dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 107 and c.__b_St12_Vector_baseIfSaIfEE._ line 107
-            remark #25439: unrolled with remainder by 2
+         <Peeled loop for vectorization>
          LOOP END
 
          LOOP BEGIN at src/jacobiser.cpp(105,9)
-         <Remainder, Predicate Optimized v1>
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15399: vectorization support: unroll factor set to 2
+            remark #15309: vectorization support: normalized vectorization overhead 2.423
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 1 
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 25 
+            remark #15477: vector loop cost: 3.250 
+            remark #15478: estimated potential speedup: 5.500 
+            remark #15488: --- end vector loop cost summary ---
          LOOP END
 
          LOOP BEGIN at src/jacobiser.cpp(105,9)
-         <Predicate Optimized v2>
-            remark #15344: loop was not vectorized: vector dependence prevents vectorization
-            remark #15346: vector dependence: assumed FLOW dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 107 and c.__b_St12_Vector_baseIfSaIfEE._ line 107
-            remark #15346: vector dependence: assumed ANTI dependence between c.__b_St12_Vector_baseIfSaIfEE._ line 107 and c.__b_St12_Vector_baseIfSaIfEE._ line 107
-            remark #25439: unrolled with remainder by 2
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 4.846
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
          LOOP END
 
          LOOP BEGIN at src/jacobiser.cpp(105,9)
-         <Remainder, Predicate Optimized v2>
+         <Remainder loop for vectorization>
          LOOP END
       LOOP END
 
-      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(113,13)
+      LOOP BEGIN at src/jacobiser.cpp(103,7)
+      <Remainder>
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at src/jacobiser.cpp(105,9)
+         <Peeled loop for vectorization>
+         LOOP END
+
+         LOOP BEGIN at src/jacobiser.cpp(105,9)
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15399: vectorization support: unroll factor set to 2
+            remark #15309: vectorization support: normalized vectorization overhead 2.615
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 1 
+            remark #15450: unmasked unaligned unit stride loads: 1 
+            remark #15475: --- begin vector loop cost summary ---
+            remark #15476: scalar loop cost: 13 
+            remark #15477: vector loop cost: 1.620 
+            remark #15478: estimated potential speedup: 5.630 
+            remark #15488: --- end vector loop cost summary ---
+         LOOP END
+
+         LOOP BEGIN at src/jacobiser.cpp(105,9)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(106,11) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 8
+            remark #15309: vectorization support: normalized vectorization overhead 5.231
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+         LOOP END
+
+         LOOP BEGIN at src/jacobiser.cpp(105,9)
+         <Remainder loop for vectorization>
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(112,13)
       <Peeled loop for vectorization>
       LOOP END
 
-      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(113,13)
+      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(112,13)
          remark #15389: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has unaligned access   [ /usr/include/c++/4.4.7/cmath(390,14) ]
          remark #15388: vectorization support: reference __tmp has aligned access   [ /usr/include/c++/4.4.7/cmath(390,14) ]
          remark #15381: vectorization support: unaligned access used inside loop body
@@ -428,33 +482,33 @@ LOOP BEGIN at src/jacobiser.cpp(78,3)
          remark #15418: vectorization support: number of FP down converts: double precision to single precision 1   [ src/jacobiser.cpp(40,13) ]
          remark #15300: LOOP WAS VECTORIZED
          remark #15442: entire loop may be executed in remainder
-         remark #15448: unmasked aligned unit stride loads: 1
-         remark #15450: unmasked unaligned unit stride loads: 1
+         remark #15448: unmasked aligned unit stride loads: 1 
+         remark #15450: unmasked unaligned unit stride loads: 1 
          remark #15475: --- begin vector loop cost summary ---
-         remark #15476: scalar loop cost: 18
-         remark #15477: vector loop cost: 4.250
-         remark #15478: estimated potential speedup: 3.920
-         remark #15487: type converts: 3
+         remark #15476: scalar loop cost: 18 
+         remark #15477: vector loop cost: 4.250 
+         remark #15478: estimated potential speedup: 3.920 
+         remark #15487: type converts: 3 
          remark #15488: --- end vector loop cost summary ---
       LOOP END
 
-      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(113,13)
+      LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(112,13)
       <Remainder loop for vectorization>
       LOOP END
    LOOP END
 LOOP END
 
-LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
+LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(127,60)
    remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
    remark #25452: Original Order found to be proper, but by a close margin
-   remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector)
+   remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector) 
    remark #15542: loop was not vectorized: inner loop was already vectorized
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Peeled loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
       remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(33,7) ]
@@ -465,16 +519,16 @@ LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
       remark #15309: vectorization support: normalized vectorization overhead 2.423
       remark #15300: LOOP WAS VECTORIZED
       remark #15442: entire loop may be executed in remainder
-      remark #15448: unmasked aligned unit stride loads: 1
-      remark #15450: unmasked unaligned unit stride loads: 2
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15450: unmasked unaligned unit stride loads: 2 
       remark #15475: --- begin vector loop cost summary ---
-      remark #15476: scalar loop cost: 25
-      remark #15477: vector loop cost: 3.250
-      remark #15478: estimated potential speedup: 5.500
+      remark #15476: scalar loop cost: 25 
+      remark #15477: vector loop cost: 3.250 
+      remark #15478: estimated potential speedup: 5.500 
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Remainder loop for vectorization>
       remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(33,7) ]
@@ -486,20 +540,20 @@ LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
       remark #15301: REMAINDER LOOP WAS VECTORIZED
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Remainder loop for vectorization>
    LOOP END
 LOOP END
 
-LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
+LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(127,60)
 <Remainder>
    remark #15542: loop was not vectorized: inner loop was already vectorized
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Peeled loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
       remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15381: vectorization support: unaligned access used inside loop body
@@ -508,16 +562,16 @@ LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
       remark #15309: vectorization support: normalized vectorization overhead 2.615
       remark #15300: LOOP WAS VECTORIZED
       remark #15442: entire loop may be executed in remainder
-      remark #15448: unmasked aligned unit stride loads: 1
-      remark #15450: unmasked unaligned unit stride loads: 1
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
       remark #15475: --- begin vector loop cost summary ---
-      remark #15476: scalar loop cost: 13
-      remark #15477: vector loop cost: 1.620
-      remark #15478: estimated potential speedup: 5.630
+      remark #15476: scalar loop cost: 13 
+      remark #15477: vector loop cost: 1.620 
+      remark #15478: estimated potential speedup: 5.630 
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Remainder loop for vectorization>
       remark #15389: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has unaligned access   [ src/jacobiser.cpp(33,7) ]
       remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(33,7) ]
@@ -527,16 +581,16 @@ LOOP BEGIN at src/jacobiser.cpp(30,3) inlined into src/jacobiser.cpp(128,60)
       remark #15301: REMAINDER LOOP WAS VECTORIZED
    LOOP END
 
-   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(128,60)
+   LOOP BEGIN at src/jacobiser.cpp(32,5) inlined into src/jacobiser.cpp(127,60)
    <Remainder loop for vectorization>
    LOOP END
 LOOP END
 
-LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(129,10)
+LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(128,10)
 <Peeled loop for vectorization>
 LOOP END
 
-LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(129,10)
+LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(128,10)
    remark #15389: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has unaligned access   [ /usr/include/c++/4.4.7/cmath(390,14) ]
    remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ /usr/include/c++/4.4.7/cmath(390,14) ]
    remark #15381: vectorization support: unaligned access used inside loop body
@@ -548,21 +602,21 @@ LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(129,10)
    remark #15418: vectorization support: number of FP down converts: double precision to single precision 1   [ src/jacobiser.cpp(40,13) ]
    remark #15300: LOOP WAS VECTORIZED
    remark #15442: entire loop may be executed in remainder
-   remark #15448: unmasked aligned unit stride loads: 1
-   remark #15450: unmasked unaligned unit stride loads: 1
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
    remark #15475: --- begin vector loop cost summary ---
-   remark #15476: scalar loop cost: 18
-   remark #15477: vector loop cost: 4.250
-   remark #15478: estimated potential speedup: 3.920
-   remark #15487: type converts: 3
+   remark #15476: scalar loop cost: 18 
+   remark #15477: vector loop cost: 4.250 
+   remark #15478: estimated potential speedup: 3.920 
+   remark #15487: type converts: 3 
    remark #15488: --- end vector loop cost summary ---
 LOOP END
 
-LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(129,10)
+LOOP BEGIN at src/jacobiser.cpp(41,3) inlined into src/jacobiser.cpp(128,10)
 <Remainder loop for vectorization>
 LOOP END
 
-LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_construct.h(99,4) inlined into src/jacobiser.cpp(131,3)
+LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_construct.h(99,4) inlined into src/jacobiser.cpp(130,3)
    remark #15382: vectorization support: call to function operator delete(void *) cannot be vectorized   [ /usr/include/c++/4.4.7/ext/new_allocator.h(95,9) ]
    remark #15344: loop was not vectorized: vector dependence prevents vectorization
 LOOP END
@@ -624,23 +678,23 @@ LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_algobase.h(757,7) inlined into /us
 LOOP END
 
 LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_algobase.h(757,7) inlined into /usr/include/c++/4.4.7/bits/stl_vector.h(231,9)
-   remark #15388: vectorization support: reference __first_15719 has aligned access   [ /usr/include/c++/4.4.7/bits/stl_algobase.h(758,3) ]
+   remark #15388: vectorization support: reference __first_15718 has aligned access   [ /usr/include/c++/4.4.7/bits/stl_algobase.h(758,3) ]
    remark #15305: vectorization support: vector length 8
    remark #15399: vectorization support: unroll factor set to 2
    remark #15309: vectorization support: normalized vectorization overhead 2.333
    remark #15300: LOOP WAS VECTORIZED
    remark #15442: entire loop may be executed in remainder
-   remark #15449: unmasked aligned unit stride stores: 1
+   remark #15449: unmasked aligned unit stride stores: 1 
    remark #15475: --- begin vector loop cost summary ---
-   remark #15476: scalar loop cost: 3
-   remark #15477: vector loop cost: 0.370
-   remark #15478: estimated potential speedup: 5.690
+   remark #15476: scalar loop cost: 3 
+   remark #15477: vector loop cost: 0.370 
+   remark #15478: estimated potential speedup: 5.690 
    remark #15488: --- end vector loop cost summary ---
 LOOP END
 
 LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_algobase.h(757,7) inlined into /usr/include/c++/4.4.7/bits/stl_vector.h(231,9)
 <Remainder loop for vectorization>
-   remark #15388: vectorization support: reference __first_15719 has aligned access   [ /usr/include/c++/4.4.7/bits/stl_algobase.h(758,3) ]
+   remark #15388: vectorization support: reference __first_15718 has aligned access   [ /usr/include/c++/4.4.7/bits/stl_algobase.h(758,3) ]
    remark #15305: vectorization support: vector length 4
    remark #15309: vectorization support: normalized vectorization overhead 4.333
    remark #15301: REMAINDER LOOP WAS VECTORIZED
@@ -830,8 +884,8 @@ INLINE REPORT: (std::vector<std::vector<float, std::allocator<float>>, std::allo
 LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_construct.h(99,4) inlined into /usr/include/c++/4.4.7/bits/stl_vector.h(314,9)
    remark #15382: vectorization support: call to function operator delete(void *) cannot be vectorized   [ /usr/include/c++/4.4.7/ext/new_allocator.h(95,9) ]
    remark #15344: loop was not vectorized: vector dependence prevents vectorization
-   remark #15346: vector dependence: assumed ANTI dependence between __first_15622 line 132 and call:operator delete(void *) line 95
-   remark #15346: vector dependence: assumed FLOW dependence between  line 95 and __first_15622 line 132
+   remark #15346: vector dependence: assumed ANTI dependence between __first_15621 line 132 and call:operator delete(void *) line 95
+   remark #15346: vector dependence: assumed FLOW dependence between  line 95 and __first_15621 line 132
 LOOP END
 ===========================================================================
 
@@ -910,7 +964,7 @@ LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_uninitialized.h(185,8) inlined int
    remark #15344: loop was not vectorized: vector dependence prevents vectorization
    remark #15346: vector dependence: assumed FLOW dependence between __cur line 73 and __value line 73
    remark #15346: vector dependence: assumed ANTI dependence between __value line 73 and __cur line 73
-   remark #25439: unrolled with remainder by 2
+   remark #25439: unrolled with remainder by 2  
 LOOP END
 
 LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_uninitialized.h(185,8) inlined into /usr/include/c++/4.4.7/bits/stl_vector.h(231,9)
@@ -2039,13 +2093,13 @@ LOOP BEGIN at src/jacobiser.cpp(41,3)
    remark #15418: vectorization support: number of FP down converts: double precision to single precision 1   [ src/jacobiser.cpp(40,13) ]
    remark #15300: LOOP WAS VECTORIZED
    remark #15442: entire loop may be executed in remainder
-   remark #15448: unmasked aligned unit stride loads: 1
-   remark #15450: unmasked unaligned unit stride loads: 1
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15450: unmasked unaligned unit stride loads: 1 
    remark #15475: --- begin vector loop cost summary ---
-   remark #15476: scalar loop cost: 18
-   remark #15477: vector loop cost: 4.250
-   remark #15478: estimated potential speedup: 3.920
-   remark #15487: type converts: 3
+   remark #15476: scalar loop cost: 18 
+   remark #15477: vector loop cost: 4.250 
+   remark #15478: estimated potential speedup: 3.920 
+   remark #15487: type converts: 3 
    remark #15488: --- end vector loop cost summary ---
 LOOP END
 
@@ -2072,7 +2126,7 @@ INLINE REPORT: (error(std::vector<std::vector<float, std::allocator<float>>, std
 LOOP BEGIN at src/jacobiser.cpp(30,3)
    remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
    remark #25452: Original Order found to be proper, but by a close margin
-   remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector)
+   remark #25461: Imperfect Loop Unroll-Jammed by 2   (pre-vector) 
    remark #15542: loop was not vectorized: inner loop was already vectorized
 
    LOOP BEGIN at src/jacobiser.cpp(32,5)
@@ -2090,12 +2144,12 @@ LOOP BEGIN at src/jacobiser.cpp(30,3)
       remark #15309: vectorization support: normalized vectorization overhead 2.423
       remark #15300: LOOP WAS VECTORIZED
       remark #15442: entire loop may be executed in remainder
-      remark #15448: unmasked aligned unit stride loads: 1
-      remark #15450: unmasked unaligned unit stride loads: 2
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15450: unmasked unaligned unit stride loads: 2 
       remark #15475: --- begin vector loop cost summary ---
-      remark #15476: scalar loop cost: 25
-      remark #15477: vector loop cost: 3.250
-      remark #15478: estimated potential speedup: 5.500
+      remark #15476: scalar loop cost: 25 
+      remark #15477: vector loop cost: 3.250 
+      remark #15478: estimated potential speedup: 5.500 
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
@@ -2133,12 +2187,12 @@ LOOP BEGIN at src/jacobiser.cpp(30,3)
       remark #15309: vectorization support: normalized vectorization overhead 2.615
       remark #15300: LOOP WAS VECTORIZED
       remark #15442: entire loop may be executed in remainder
-      remark #15448: unmasked aligned unit stride loads: 1
-      remark #15450: unmasked unaligned unit stride loads: 1
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15450: unmasked unaligned unit stride loads: 1 
       remark #15475: --- begin vector loop cost summary ---
-      remark #15476: scalar loop cost: 13
-      remark #15477: vector loop cost: 1.620
-      remark #15478: estimated potential speedup: 5.630
+      remark #15476: scalar loop cost: 13 
+      remark #15477: vector loop cost: 1.620 
+      remark #15478: estimated potential speedup: 5.630 
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
@@ -2162,10 +2216,11 @@ LOOP END
 
 INLINING FOOTNOTES:
 
-<1> The compiler's heuristics indicate that the function is not profitable to
-    inline.  Override this decision by adding "inline
-    __attribute__((always_inline))" to the declaration of the called function,
+<1> The compiler's heuristics indicate that the function is not profitable to 
+    inline.  Override this decision by adding "inline 
+    __attribute__((always_inline))" to the declaration of the called function, 
     or add "#pragma forceinline" before the call site.
 
-<2> The routine declaration is annotated with "__attribute__((noinline))".
+<2> The routine declaration is annotated with "__attribute__((noinline))".  
     Remove this annotation to permit the compiler to inline this routine.
+
