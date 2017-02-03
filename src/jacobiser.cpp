@@ -106,6 +106,7 @@ int main(int argc, char const *argv[]) {
           if (i != j)
             c[i] = c[i] - A[i][j] * x[j];
         }
+        c[i] = c[i] / A[i][i];
       }
       startconv = chrono::system_clock::now();
       swap(c, x);
