@@ -98,15 +98,15 @@ void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
   for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
       sum = -A[i][i] * x[i];
-      for (size_t j = 0; j < A->size(); j++) {
+      for (size_t j = 0; j < A.size(); j++) {
         sum += A[i][j] * x[j];
       }
       c[i] = (b[i] - sum) / A[i][i];
     }
-    bar->await([&] {
+    bar.await([&] {
       startconv = chrono::system_clock::now();
       swap(c, x);
-      err = errorVEC(c, x, A->size());
+      err = errorVEC(c, x, A.size());
       endconv = chrono::system_clock::now();
     });
   }
