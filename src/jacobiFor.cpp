@@ -112,7 +112,8 @@ int main(int argc, char const *argv[]) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
                           sum = -A[i][i] * x[i];
-                          for (int j = 0; j < N; j++) {
+#pragma simd
+                          for (size_t j = 0; j < A.size(); j++) {
                             sum += A[i][j] * x[j];
                           }
                           c[i] = (b[i] - sum) / A[i][i];
