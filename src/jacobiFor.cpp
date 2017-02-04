@@ -107,13 +107,14 @@ int main(int argc, char const *argv[]) {
 
       k = 0;
       startFor = chrono::system_clock::now();
-      float sum;
-      while (k <= maxiter) {
+
+      for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
+                          float sum;
                           sum = -A[i][i] * x[i];
 #pragma simd
-                          for (size_t j = 0; j < A.size(); j++) {
+                          for (size_t j = 0; j < N; j++) {
                             sum += A[i][j] * x[j];
                           }
                           c[i] = (b[i] - sum) / A[i][i];
@@ -124,10 +125,6 @@ int main(int argc, char const *argv[]) {
         swap(c, x);
         err = errorVEC(c, x, N);
         endconv = chrono::system_clock::now();
-
-        if (err < epsilon)
-          break;
-        k++;
       }
       endFor = chrono::system_clock::now();
 
