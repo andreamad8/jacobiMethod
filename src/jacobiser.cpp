@@ -39,7 +39,7 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
 float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
-    sum += pow(x1[i] - x2[i], 2);
+    sum += x1[i] - x2[i];
   }
 
   return sqrt(sum);
@@ -56,14 +56,16 @@ int main(int argc, char const *argv[]) {
   int maxiter = atoi(argv[2]);
   float epsilon = atof(argv[3]);
   size_t thread_num = 1;
-
+  size_t iter;
   int i, j;
   float sum, err, conv;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);
-  vector<float> c(N);
+  vector<float> d(N);
+  vector<float> y(N);
+
   vector<chrono::duration<double>> innerDuration(N);
 
   chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
@@ -80,7 +82,8 @@ int main(int argc, char const *argv[]) {
     for (i = 0; i < N; i++) {
       b[i] = rand() % 10;
       x[i] = 0;
-      c[i] = 0;
+      d[i] = 0;
+      y[i] = 0;
     }
     for (i = 0; i < N; i++)
       for (j = 0; j < N; j++)
@@ -91,7 +94,7 @@ int main(int argc, char const *argv[]) {
     for (i = 0; i < N; i++) {
       for (j = 0; j < N; j++) {
         if (i != j) {
-          sum += abs(A[i][j]);
+          sum += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
         }
       }
       A[i][i] = sum + 100;
@@ -99,21 +102,24 @@ int main(int argc, char const *argv[]) {
     }
     sum = 0.0;
     startFor = chrono::system_clock::now();
-    for (size_t k = 0; k <= maxiter; k++) {
+    err = 1;
+    iter = 0;
+    for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
+      err = 0;
       for (int i = 0; i < N; i++) {
-        sum = -A[i][i] * x[i];
-#pragma simd
+        d[i] = b[i];
         for (size_t j = 0; j < N; j++) {
-          sum += A[i][j] * x[j];
+          d[i] -= A[i][j] * x[j];
         }
-        c[i] = (b[i] - sum) / A[i][i];
+        d[i] /= A[i][i];
+        y[i] += d[i];
+        err += ((d[i] >= 0.0) ? d[i] : -d[i]);
       }
       startconv = chrono::system_clock::now();
-      swap(c, x);
-      err = errorVEC(c, x, N);
+      for (i = 0; i < N; i++)
+        x[i] = y[i];
       endconv = chrono::system_clock::now();
-      if (err < epsilon)
-        break;
+      iter++;
     }
     endFor = chrono::system_clock::now();
     // print the time for the post analysis
@@ -125,8 +131,8 @@ int main(int argc, char const *argv[]) {
     // for avg Tnorm time
     conv += eTime(startconv, endconv).count();
   }
-  printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
-         errorVEC(c, x, N));
+  printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f,'Iteration':%zu}\n", conv / 10,
+         error(A, x, b, N), err, iter);
 
   return 0;
 }

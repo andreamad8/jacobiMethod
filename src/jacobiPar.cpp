@@ -8,7 +8,8 @@
 
 using namespace std;
 
-float err = 1;
+float err;
+vector<float> sum(255);
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
 void printMAT(vector<vector<float>> A, int N) {
@@ -92,24 +93,30 @@ bool barrier::await(function<void()> cb) {
 }
 
 void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
-          vector<float> &c, const int from, const int to, barrier &bar,
-          const int maxiter, const float epsilon) {
-  float sum;
-  for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
+          vector<float> &d, vector<float> &y, int from, int to, barrier &bar,
+          int maxiter, float epsilon, size_t thid, size_t worker) {
+
+  for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      sum = -A[i][i] * x[i];
-#pragma ivdep
-#pragma vector always
-#pragma simd
+      d[i] = b[i];
       for (size_t j = 0; j < A.size(); j++) {
-        sum = sum + A[i][j] * x[j];
+        d[i] -= A[i][j] * x[j];
       }
-      c[i] = (b[i] - sum) / A[i][i];
+      d[i] /= A[i][i];
+      y[i] += d[i];
+      sum[thid] += ((d[i] >= 0.0) ? d[i] : -d[i]);
     }
+
     bar.await([&] {
+      for (size_t i = 0; i <= A.size(); i++) {
+        x[i] = y[i];
+      }
       startconv = chrono::system_clock::now();
-      swap(c, x);
-      err = errorVEC(c, x, A.size());
+      err = 0;
+      for (size_t i = 0; i < worker; i++) {
+        err += sum[i];
+        sum[i] = 0;
+      }
       endconv = chrono::system_clock::now();
     });
   }
@@ -124,12 +131,18 @@ int main(int argc, char const *argv[]) {
   size_t steps = atoi(argv[5]);
 
   size_t i, j, k, thread_num;
-  float sum, err, conv;
+  float temp, conv;
   // INIT
-  __declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
-  __declspec(align(16, 0)) vector<float> x(N);
-  __declspec(align(16, 0)) vector<float> b(N);
-  __declspec(align(16, 0)) vector<float> c(N);
+  //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
+  //__declspec(align(16, 0)) vector<float> x(N);
+  //__declspec(align(16, 0)) vector<float> b(N);
+  //__declspec(align(16, 0)) vector<float> c(N);
+  vector<vector<float>> A(N, vector<float>(N));
+  vector<float> x(N);
+  vector<float> b(N);
+  vector<float> d(N);
+  vector<float> y(N);
+
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
   // JACOBI METHOD parallel
@@ -146,22 +159,26 @@ int main(int argc, char const *argv[]) {
       for (i = 0; i < N; i++) {
         b[i] = rand() % 10;
         x[i] = 0;
-        c[i] = 0;
+        d[i] = 0;
+        y[i] = 0;
       }
       for (i = 0; i < N; i++)
         for (j = 0; j < N; j++)
           A[i][j] = rand() % 10;
 
       /* enforce diagonal dominance */
-      sum = 0.0;
+      temp = 0.0;
       for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
           if (i != j) {
-            sum += abs(A[i][j]);
+            temp += abs(A[i][j]);
           }
         }
-        A[i][i] = sum + 100;
-        sum = 0.0;
+        A[i][i] = temp + 100;
+        temp = 0.0;
+      }
+      for (size_t i = 0; i < W; i++) {
+        sum[i] = 0;
       }
       /* code */
       startFor = chrono::system_clock::now();
@@ -169,14 +186,14 @@ int main(int argc, char const *argv[]) {
       vector<thread> t;
       barrier bar(thread_num);
       k = (N / thread_num);
-
+      err = 1;
       for (size_t i = 0; i < thread_num; i++) {
         const size_t start = i * k;
         const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
-        //       end - start + 1);
-        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
-                           ref(bar), maxiter, epsilon));
+        // end - start + 1);
+        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(d), ref(y), start,
+                           end, ref(bar), maxiter, epsilon, i, thread_num));
       }
       for (thread &it : t)
         it.join();
@@ -195,6 +212,6 @@ int main(int argc, char const *argv[]) {
     }
 
     printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
-           errorVEC(c, x, N));
+           err);
   }
 }
