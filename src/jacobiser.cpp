@@ -116,8 +116,8 @@ int main(int argc, char const *argv[]) {
         err += ((d[i] >= 0.0) ? d[i] : -d[i]);
       }
       startconv = chrono::system_clock::now();
-      for (i = 0; i < N; i++)
-        x[i] = y[i];
+      for (z = 0; z < N; z++)
+        x[z] = y[z];
       endconv = chrono::system_clock::now();
       iter++;
     }
