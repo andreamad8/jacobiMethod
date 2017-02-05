@@ -10,12 +10,12 @@ from mpl_toolkits.axes_grid.inset_locator import inset_axes
 import ast
 
 sns.palplot(sns.color_palette("Set1", n_colors=8, desat=.5))
-PROC=90 ## 17 for xeon and 90 mic
-SUBPLOT_x=SUBPLOT_y=30 ## 5 for xeon and 30 mic
+PROC=250 ## 17 for xeon and 90 mic
+SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 30 mic
 
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
 selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):
@@ -37,10 +37,10 @@ for filename in os.listdir('ris/'):
         data_ser.append(import_data('ris/'+filename))
 
 
-ser =[e[0]['Tc'][0] for e in data_ser]
+ser =[sum(e[0]['Tc'])/float(len(e[0]['Tc'])) for e in data_ser]
 print len(data_array),len(data_ser)
 
-label=[100,1000,10000,15000,500,5000,7000]
+label=[100,1000,10000,15000,3000,500,5000,700,7000]
 
 
 plt.rc('text', usetex=True)
@@ -48,7 +48,7 @@ plt.rc('font', family='Times-Roman')
 sns.set_style(style='white')
 fig = plt.figure()
 
-marker = ['*','o', 'v', 's', 'D', '8', '^']
+marker = ['*','o', 'v', 's', 'D', '8', '^','*','o', 'v', 's', 'D', '8', '^']
 ax1 = fig.add_subplot(2, 2, 1)
 ax2 = fig.add_subplot(2, 2, 2)
 ax3 = fig.add_subplot(2, 2, 3)

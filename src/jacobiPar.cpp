@@ -124,10 +124,10 @@ int main(int argc, char const *argv[]) {
   size_t i, j, k, thread_num;
   float sum, err, conv;
   // INIT
-  vector<vector<float>> A(N, vector<float>(N));
-  vector<float> x(N);
-  vector<float> b(N);
-  vector<float> c(N);
+  __declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
+  __declspec(align(16, 0)) vector<float> x(N);
+  __declspec(align(16, 0)) vector<float> b(N);
+  __declspec(align(16, 0)) vector<float> c(N);
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
   // JACOBI METHOD parallel
