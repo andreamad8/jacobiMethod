@@ -91,16 +91,18 @@ bool barrier::await(function<void()> cb) {
   }
 }
 
-void iter(const vector<vector<float>> &A, const vector<float> &b,
-          vector<float> &x, vector<float> &c, const int from, const int to,
-          barrier &bar, const int maxiter, const float epsilon) {
+void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
+          vector<float> &c, const int from, const int to, barrier &bar,
+          const int maxiter, const float epsilon) {
   float sum;
   for (size_t k = 0; k <= maxiter or err < epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
       sum = -A[i][i] * x[i];
+#pragma ivdep
+#pragma vector always
 #pragma simd
       for (size_t j = 0; j < A.size(); j++) {
-        sum += A[i][j] * x[j];
+        sum = sum + A[i][j] * x[j];
       }
       c[i] = (b[i] - sum) / A[i][i];
     }
