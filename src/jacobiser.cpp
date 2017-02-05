@@ -77,7 +77,7 @@ int main(int argc, char const *argv[]) {
   // JACOBI METHOD
   conv = 0;
   printf("{'thread_num':%zu,'Tc':[", thread_num);
-  for (size_t iavg = 0; iavg < 10; iavg++) {
+  for (size_t iavg = 0; iavg < 1; iavg++) {
     srand(123);
     for (i = 0; i < N; i++) {
       b[i] = rand() % 10;
