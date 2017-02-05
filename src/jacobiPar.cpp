@@ -9,6 +9,7 @@
 using namespace std;
 
 float err;
+size_t N;
 vector<float> sum(255);
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
@@ -107,8 +108,8 @@ void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
       sum[thid] += ((d[i] >= 0.0) ? d[i] : -d[i]);
     }
 
-    bar.await([&] {
-      for (size_t i = 0; i <= A.size(); i++) {
+    bar.await([worker, &x, &y] {
+      for (size_t i = 0; i <= N; i++) {
         x[i] = y[i];
       }
       startconv = chrono::system_clock::now();
@@ -124,7 +125,7 @@ void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
 
 /*** MAIN ***/
 int main(int argc, char const *argv[]) {
-  size_t N = atoi(argv[1]);
+  N = atoi(argv[1]);
   size_t maxiter = atoi(argv[2]);
   float epsilon = atof(argv[3]);
   size_t W = atoi(argv[4]);
@@ -138,10 +139,10 @@ int main(int argc, char const *argv[]) {
   //__declspec(align(16, 0)) vector<float> b(N);
   //__declspec(align(16, 0)) vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
-  vector<float> x(N);
+  __declspec(align(16, 0)) vector<float> x(N);
   vector<float> b(N);
   vector<float> d(N);
-  vector<float> y(N);
+  __declspec(align(16, 0)) vector<float> y(N);
 
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
