@@ -41,10 +41,9 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
 float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
-    sum += abs(x1[i] - x2[i]);
+    sum += (x1[i] - x2[i]) * (x1[i] - x2[i]);
   }
-
-  return sum;
+  return sqrt(sum);
 }
 
 chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
@@ -91,7 +90,7 @@ int main(int argc, char const *argv[]) {
       for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
           if (i != j) {
-            sum += abs(A[i][j]);
+            sum += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
           }
         }
         A[i][i] = sum + 100;
@@ -105,18 +104,17 @@ int main(int argc, char const *argv[]) {
       // printVEC(b, N);
       // JACOBI METHOD
 
-      k = 0;
-      startFor = chrono::system_clock::now();
       err = 1;
+      startFor = chrono::system_clock::now();
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-                          float sum;
-                          sum = -A[i][i] * x[i];
-                          for (size_t j = 0; j < N; j++) {
-                            sum += A[i][j] * x[j];
+                          c[i] = b[i];
+                          for (int j = 0; j < N; j++) {
+                            if (i != j)
+                              c[i] = c[i] - A[i][j] * x[j];
                           }
-                          c[i] = (b[i] - sum) / A[i][i];
+                          c[i] = c[i] / A[i][i];
                         },
                         thread_num);
 

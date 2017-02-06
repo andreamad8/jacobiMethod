@@ -9,7 +9,7 @@
 using namespace std;
 
 float err;
-vector<float> sum(255);
+
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
 void printMAT(vector<vector<float>> A, int N) {
@@ -57,7 +57,7 @@ chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
 
 class barrier {
 private:
-  int N_THREADS;
+  const int N_THREADS;
   int counts[2];
   int current;
   mutex lock;
@@ -68,12 +68,8 @@ public:
   bool await(function<void()> cb);
 };
 
-barrier::barrier(int n) {
-  N_THREADS = n;
-  counts[0] = 0;
-  counts[1] = 0;
-  current = 0;
-}
+barrier::barrier(int n)
+    : N_THREADS(n), counts{0, 0}, current(0), lock(), condition() {}
 
 bool barrier::await(function<void()> cb) {
   unique_lock<mutex> _lock(lock);
@@ -93,30 +89,22 @@ bool barrier::await(function<void()> cb) {
 }
 
 void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
-          vector<float> &d, vector<float> &y, int from, int to, barrier &bar,
-          int maxiter, float epsilon, size_t thid, size_t worker) {
+          vector<float> &c, int from, int to, barrier &bar, int maxiter,
+          float epsilon) {
 
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      d[i] = b[i];
-      for (size_t j = 0; j < A.size(); j++) {
-        d[i] -= A[i][j] * x[j];
+      c[i] = b[i];
+      for (int j = 0; j < A.size(); j++) {
+        if (i != j)
+          c[i] = c[i] - A[i][j] * x[j];
       }
-      d[i] /= A[i][i];
-      y[i] += d[i];
-      sum[thid] += ((d[i] >= 0.0) ? d[i] : -d[i]);
+      c[i] = c[i] / A[i][i];
     }
-    bar.await([] { ; });
-    for (size_t i = from; i <= to; i++) {
-      x[i] = y[i];
-    }
-    bar.await([worker, &x, &y] {
+    bar.await([&] {
       startconv = chrono::system_clock::now();
-      err = 0;
-      for (size_t i = 0; i < worker; i++) {
-        err += sum[i];
-        sum[i] = 0;
-      }
+      swap(c, x);
+      err = errorVEC(c, x, A.size());
       endconv = chrono::system_clock::now();
     });
   }
@@ -140,8 +128,7 @@ int main(int argc, char const *argv[]) {
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);
-  vector<float> d(N);
-  vector<float> y(N);
+  vector<float> c(N);
 
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
@@ -159,8 +146,7 @@ int main(int argc, char const *argv[]) {
       for (i = 0; i < N; i++) {
         b[i] = rand() % 10;
         x[i] = 0;
-        d[i] = 0;
-        y[i] = 0;
+        c[i] = 0;
       }
       for (i = 0; i < N; i++)
         for (j = 0; j < N; j++)
@@ -171,18 +157,15 @@ int main(int argc, char const *argv[]) {
       for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
           if (i != j) {
-            temp += abs(A[i][j]);
+            temp += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
           }
         }
         A[i][i] = temp + 100;
         temp = 0.0;
       }
-      for (size_t i = 0; i < W; i++) {
-        sum[i] = 0;
-      }
+
       /* code */
       startFor = chrono::system_clock::now();
-
       vector<thread> t;
       barrier bar(thread_num);
       k = (N / thread_num);
@@ -192,8 +175,8 @@ int main(int argc, char const *argv[]) {
         const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
         // end - start + 1);
-        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(d), ref(y), start,
-                           end, ref(bar), maxiter, epsilon, i, thread_num));
+        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
+                           ref(bar), maxiter, epsilon));
       }
       for (thread &it : t)
         it.join();

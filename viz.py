@@ -10,12 +10,12 @@ from mpl_toolkits.axes_grid.inset_locator import inset_axes
 import ast
 
 sns.palplot(sns.color_palette("Set1", n_colors=8, desat=.5))
-PROC=250 ## 17 for xeon and 90 mic
-SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 30 mic
+PROC=255 ## 17 for xeon and 90 mic
+SUBPLOT_x=SUBPLOT_y=30 ## 5 for xeon and 30 mic
 
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
 selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):
@@ -65,6 +65,7 @@ i = 0
 for val in data_array:
     x=[]
     y=[]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
@@ -90,11 +91,11 @@ i = 0
 for val in data_array:
     x=[]
     y1=[]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y1.append(avg)
-
     y = [y1[0] / float(e) for e in y1]
     ax2.plot(x,y, label=str(label[i]), linewidth=lw,alpha=0.8, marker=marker[i], markersize=ms)
     ax2.plot(x_ideal, x_ideal, label='Opt', linewidth=1.95, alpha=0.2, color='gray', linestyle='dashed')
@@ -119,6 +120,7 @@ for val in data_array:
 
     x=[]
     y1=[]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
@@ -151,6 +153,7 @@ i = 0
 for val in data_array:
     x=[]
     y1=[]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))

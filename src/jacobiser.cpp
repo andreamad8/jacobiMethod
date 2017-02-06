@@ -39,9 +39,8 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
 float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
-    sum += x1[i] - x2[i];
+    sum += pow(x1[i] - x2[i], 2);
   }
-
   return sqrt(sum);
 }
 
@@ -63,8 +62,7 @@ int main(int argc, char const *argv[]) {
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);
-  vector<float> d(N);
-  vector<float> y(N);
+  vector<float> c(N);
 
   vector<chrono::duration<double>> innerDuration(N);
 
@@ -77,13 +75,12 @@ int main(int argc, char const *argv[]) {
   // JACOBI METHOD
   conv = 0;
   printf("{'thread_num':%zu,'Tc':[", thread_num);
-  for (size_t iavg = 0; iavg < 1; iavg++) {
+  for (size_t iavg = 0; iavg < 10; iavg++) {
     srand(123);
     for (i = 0; i < N; i++) {
       b[i] = rand() % 10;
       x[i] = 0;
-      d[i] = 0;
-      y[i] = 0;
+      c[i] = 0;
     }
     for (i = 0; i < N; i++)
       for (j = 0; j < N; j++)
@@ -100,24 +97,21 @@ int main(int argc, char const *argv[]) {
       A[i][i] = sum + 100;
       sum = 0.0;
     }
-    sum = 0.0;
     startFor = chrono::system_clock::now();
     err = 1;
     iter = 0;
-    for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
-      err = 0;
+    for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        d[i] = b[i];
-        for (size_t j = 0; j < N; j++) {
-          d[i] -= A[i][j] * x[j];
+        c[i] = b[i];
+        for (int j = 0; j < N; j++) {
+          if (i != j)
+            c[i] = c[i] - A[i][j] * x[j];
         }
-        d[i] /= A[i][i];
-        y[i] += d[i];
-        err += ((d[i] >= 0.0) ? d[i] : -d[i]);
+        c[i] = c[i] / A[i][i];
       }
       startconv = chrono::system_clock::now();
-      for (size_t z = 0; z < N; z++)
-        x[z] = y[z];
+      swap(c, x);
+      err = errorVEC(c, x, N);
       endconv = chrono::system_clock::now();
       iter++;
     }

@@ -1,0 +1,51 @@
+/* BUSINESS LOGIC TRY
+In all of this version we have tried different PRAGMA to enforce proper
+vectorization.
+The folling PRAGMAs have been tried:
+- #pragma ivdep
+- #pragma vector aligned
+- #pragma simd
+- __declspec(align(16, 0))
+*/
+
+// original version, the one suggested by Wiki
+c[i] = b[i];
+for (int j = 0; j < N; j++) {
+  if (i != j)
+    c[i] = c[i] - A[i][j] * x[j];
+}
+c[i] = c[i] / A[i][i];
+
+/* using a variable sum init by -A[i][i] * x[i], to avoid if inside the cycle.
+We have also tried to split the cycle in two parts. Still no way.*/
+float sum;
+sum = -A[i][i] * x[i];
+for (size_t j = 0; j < N; j++) {
+  sum += A[i][j] * x[j];
+}
+c[i] = (b[i] - sum) / A[i][i];
+
+/* using A=LDU decomposition, which it calculate directly the \delta_x and
+writes it in an array (sum) , two barrier, using the reducer*/
+for (size_t i = from; i <= to; i++) {
+  d[i] = b[i];
+  for (size_t j = 0; j < A.size(); j++) {
+    d[i] -= A[i][j] * x[j];
+  }
+  d[i] /= A[i][i];
+  y[i] += d[i];
+  sum[thid] += ((d[i] >= 0.0) ? d[i] : -d[i]);
+}
+bar.await([] { ; });
+for (size_t i = from; i <= to; i++) {
+  x[i] = y[i];
+}
+bar.await([worker, &x, &y] {
+  startconv = chrono::system_clock::now();
+  err = 0;
+  for (size_t i = 0; i < worker; i++) {
+    err += sum[i];
+    sum[i] = 0;
+  }
+  endconv = chrono::system_clock::now();
+});
