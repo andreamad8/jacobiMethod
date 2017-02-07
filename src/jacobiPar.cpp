@@ -132,9 +132,7 @@ int main(int argc, char const *argv[]) {
   //__declspec(align(16, 0)) vector<float> b(N);
   __declspec(align(32, 0)) vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
-  vector<float> x(N);
   vector<float> b(N);
-  vector<float> c(N);
 
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
