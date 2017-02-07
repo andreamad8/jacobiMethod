@@ -106,11 +106,8 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
     bar.await([&] {
       startconv = chrono::system_clock::now();
       swap(x2, x1);
-      err = 0;
-      for (int i = 0; i < N; i++) {
-        err += (x1[i] - x2[i]) * (x1[i] - x2[i]);
-      }
-      err = sqrt(err);
+      // err = errorVEC(c, x, N);
+
       endconv = chrono::system_clock::now();
     });
   }
@@ -128,9 +125,9 @@ int main(int argc, char const *argv[]) {
   float temp, conv;
   // INIT
   //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
-  __declspec(align(32, 0)) vector<float> x(N);
+  vector<float> x(N);
   //__declspec(align(16, 0)) vector<float> b(N);
-  __declspec(align(32, 0)) vector<float> c(N);
+  vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> b(N);
 

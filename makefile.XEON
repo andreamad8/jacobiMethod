@@ -11,7 +11,7 @@ serXEON: src/jacobiser.cpp
 	$(CXX) $(CXXFLAGS)  $(REPORT) src/jacobiser.cpp -o bin/jacobiserXEON
 
 parXEON: src/jacobiPar.cpp
-	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(HOST) $(REPORT) src/jacobiPar.cpp -o bin/jacobiParXEON
+	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(REPORT) src/jacobiPar.cpp -o bin/jacobiParXEON
 
 ffXEON: src/jacobiFor.cpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(FF_SERVER) $(REPORT) src/jacobiFor.cpp -o bin/jacobiForXEON

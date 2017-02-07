@@ -123,7 +123,7 @@ int main(int argc, char const *argv[]) {
 
         startconv = chrono::system_clock::now();
         swap(c, x);
-        err = errorVEC(c, x, N);
+        // err = errorVEC(c, x, N);
         endconv = chrono::system_clock::now();
       }
       endFor = chrono::system_clock::now();
