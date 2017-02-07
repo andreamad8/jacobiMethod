@@ -92,9 +92,11 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
           barrier &bar, const int maxiter, const float epsilon,
           const size_t N) {
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
-#pragma ivdep
+
     for (size_t i = from; i <= to; i++) {
       x2[i] = b[i];
+#pragma ivdep
+#pragma simd
       for (int j = 0; j < N; j++) {
         if (i != j)
           x2[i] = x2[i] - A[i][j] * x1[j];

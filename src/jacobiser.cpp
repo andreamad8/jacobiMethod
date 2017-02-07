@@ -104,6 +104,7 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < N; i++) {
         c[i] = b[i];
 #pragma ivdep
+#pragma simd
         for (int j = 0; j < N; j++) {
           if (i != j)
             c[i] = c[i] - A[i][j] * x[j];
