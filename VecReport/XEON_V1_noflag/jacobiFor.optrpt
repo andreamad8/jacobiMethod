@@ -127,9 +127,9 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
   -> INLINE (MANUAL): (101,40) ff::ParallelFor::ParallelFor(ff::ParallelFor *, long, bool, bool) (isz = 1830) (sz = 1841)
     -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(135,67) ff::ff_forall_farm<ff::forallreduce_W<int>>::ff_forall_farm(ff::ff_forall_farm<ff::forallreduce_W<int>> *const, ssize_t, const bool, const bool, const bool) (isz = 1825) (sz = 1838)
       -> /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp:(893,5) ff::ff_forall_farm<ff::forallreduce_W<int>>::ff_forall_farm(ff::ff_forall_farm<ff::forallreduce_W<int>> *, ssize_t, bool, bool, bool) (isz = 1825) (sz = 1838)
-         [[ Inlining would exceed -inline-max-total-size value (3047>2000) <4>]]
+         [[ Inlining would exceed -inline-max-total-size value (3049>2000) <4>]]
   -> EXTERN: (108,18) std::chrono::system_clock::now()
-  -> INLINE (MANUAL): (110,12) ff::ParallelFor::parallel_for<struct lambda [] type at line 118236, col. 25>(ff::ParallelFor *, long, long, long, long, const struct lambda [] type at line 118236, col. 25 &, long) (isz = 824) (sz = 841)
+  -> INLINE (MANUAL): (110,12) ff::ParallelFor::parallel_for<struct lambda [] type at line 118236, col. 25>(ff::ParallelFor *, long, long, long, long, const struct lambda [] type at line 118236, col. 25 &, long) (isz = 826) (sz = 843)
     -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(237,9) ff::ff_forall_farm<ff::forallreduce_W<int>>::setloop(ff::ff_forall_farm<ff::forallreduce_W<int>> *, long, long, long, long, long) (isz = 95) (sz = 110)
       -> EXTERN: /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp:(1100,9) __assert_fail(const char *, const char *, unsigned int, const char *)
       -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp:(1100,9) ff::ff_farm<ff::foralllb_t, ff::ff_gatherer>::getNWorkers(const ff::ff_farm<ff::foralllb_t, ff::ff_gatherer> *) const (isz = 3) (sz = 10)
@@ -168,17 +168,17 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
          [[ Unable to inline indirect callsite  <5>]]
       -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp:(1112,77) ff::forall_Scheduler::stopIdx(const ff::forall_Scheduler *) const (isz = 0) (sz = 6)
     -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(239,11) lambda [] type at line 117000, col. 9::operator()(const struct lambda [] type at line 117000, col. 9 *, long, long, int, int)->void (isz = 14) (sz = 27)
-      -> INLINE (MANUAL): (238,14) lambda [] type at line 118236, col. 25::operator()(const struct lambda [] type at line 118236, col. 25 *, long)->void (isz = 109) (sz = 116)
+      -> INLINE (MANUAL): (238,14) lambda [] type at line 118236, col. 25::operator()(const struct lambda [] type at line 118236, col. 25 *, long)->void (isz = 111) (sz = 118)
         -> INLINE (MANUAL): src/jacobiFor.cpp:(113,40) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(115,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(115,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(115,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(118,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(118,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(118,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,28) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,41) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,44) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(116,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(116,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(116,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(118,38) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(118,41) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(120,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+        -> INLINE (MANUAL): src/jacobiFor.cpp:(122,28) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INDIRECT-: /home/spm1501/public/fastflow/ff/parallel_for.hpp:(239,11) 
        [[ Unable to inline indirect callsite  <5>]]
     -> /home/spm1501/public/fastflow/ff/parallel_for.hpp:(239,11) ff::error(const char *, ...) (isz = 55) (sz = 60)
@@ -198,8 +198,8 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
        [[ Inlining inhibited by overrideable criterion  <6>]]
     -> /home/spm1501/public/fastflow/ff/parallel_for.hpp:(239,11) std::function<void (long, long, int, int &)>::~function(std::function<void (long, long, int, int &)> *) (isz = 11) (sz = 16)
        [[ Unable to inline callsite  <3>]]
-  -> EXTERN: (124,21) std::chrono::system_clock::now()
-  -> INLINE (MANUAL): (125,9) std::swap<float, std::allocator<float>>(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &) (isz = 74) (sz = 81)
+  -> EXTERN: (126,21) std::chrono::system_clock::now()
+  -> INLINE (MANUAL): (127,9) std::swap<float, std::allocator<float>>(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &) (isz = 74) (sz = 81)
     -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_vector.h:(1217,11) std::vector<float, std::allocator<float>>::swap(std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>> &&) (isz = 74) (sz = 81)
       -> INLINE (MANUAL): (932,2) std::swap<std::allocator<float>::pointer>(std::allocator<float>::pointer &, std::allocator<float>::pointer &) (isz = 15) (sz = 22)
         -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/move.h:(81,19) std::move<std::allocator<float>::pointer &>(std::allocator<float>::pointer &) (isz = 0) (sz = 5)
@@ -216,31 +216,16 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
       -> DELETED: (939,2) std::__alloc_swap<std::vector<float, std::allocator<float>>::_Tp_alloc_type, true>::_S_do_it(std::vector<float, std::allocator<float>>::_Tp_alloc_type &, std::vector<float, std::allocator<float>>::_Tp_alloc_type &) (isz = 0) (sz = 4)
       -> INLINE (MANUAL): (939,46) std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator(std::_Vector_base<float, std::allocator<float>> *) (isz = 1) (sz = 7)
       -> INLINE (MANUAL): (940,15) std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator(std::_Vector_base<float, std::allocator<float>> *) (isz = 1) (sz = 7)
-  -> INLINE: (126,15) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 42) (sz = 53)
+  -> INLINE: (128,15) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 42) (sz = 53)
     -> INLINE (MANUAL): (44,15) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,23) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,33) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,41) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (46,10) std::sqrt(float) (isz = 0) (sz = 7)
-  -> EXTERN: (127,19) std::chrono::system_clock::now()
-  -> EXTERN: (129,16) std::chrono::system_clock::now()
-  -> EXTERN: (133,9) printf(const char *, ...)
-  -> INLINE: (133,39) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
-    -> INLINE (MANUAL): (51,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
-      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
-      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
-      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::operator-<int64_t, std::micro, int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &, const std::chrono::duration<int64_t, std::micro> &) (isz = 11) (sz = 20)
-        -> INLINE (MANUAL): (339,28) std::chrono::duration<int64_t, std::micro>::operator-=(std::chrono::duration<int64_t, std::micro> *, const std::chrono::duration<int64_t, std::micro> &) (isz = 5) (sz = 14)
-          -> INLINE (MANUAL): (282,22) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
-    -> INLINE (MANUAL): (51,16) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<int64_t, std::micro>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<int64_t, std::micro> &) (isz = 16) (sz = 23)
-      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,41) std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1L, 1L>>, int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &) (isz = 10) (sz = 17)
-        -> INLINE (MANUAL): (152,51) std::chrono::__duration_cast_impl<std::chrono::duration<double, std::ratio<1L, 1L>>, std::ratio_divide<std::micro, std::chrono::duration<int64_t, std::ratio<1L, 1L>>::period>::type, std::common_type<std::chrono::duration<double, std::ratio<1L, 1L>>::rep, int64_t, intmax_t>::type, true, false>::__cast<int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &) (isz = 9) (sz = 16)
-          -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
-          -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
-      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (133,47) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> EXTERN: (129,19) std::chrono::system_clock::now()
+  -> EXTERN: (131,16) std::chrono::system_clock::now()
   -> EXTERN: (135,9) printf(const char *, ...)
-  -> INLINE: (135,38) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+  -> INLINE: (135,39) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
     -> INLINE (MANUAL): (51,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
@@ -253,8 +238,9 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
           -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
           -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (135,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE: (139,32) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+  -> INLINE (MANUAL): (135,47) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> EXTERN: (137,9) printf(const char *, ...)
+  -> INLINE: (137,38) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
     -> INLINE (MANUAL): (51,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
@@ -267,8 +253,22 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
           -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
           -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (139,41) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
-  -> INLINE (MANUAL): (140,5) ff::ParallelFor::~ParallelFor(ff::ParallelFor *) (isz = 1663) (sz = 1668)
+  -> INLINE (MANUAL): (137,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> INLINE: (141,32) eTime(std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>, std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>) (isz = 48) (sz = 57)
+    -> INLINE (MANUAL): (51,16) std::chrono::operator-<std::chrono::system_clock, std::chrono::system_clock::duration, std::chrono::system_clock::duration>(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &, const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> &) (isz = 24) (sz = 33)
+      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,16) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
+      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration>::time_since_epoch(const std::chrono::time_point<std::chrono::system_clock, std::chrono::system_clock::duration> *) const (isz = 2) (sz = 8)
+      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(561,43) std::chrono::operator-<int64_t, std::micro, int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &, const std::chrono::duration<int64_t, std::micro> &) (isz = 11) (sz = 20)
+        -> INLINE (MANUAL): (339,28) std::chrono::duration<int64_t, std::micro>::operator-=(std::chrono::duration<int64_t, std::micro> *, const std::chrono::duration<int64_t, std::micro> &) (isz = 5) (sz = 14)
+          -> INLINE (MANUAL): (282,22) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
+    -> INLINE (MANUAL): (51,16) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<int64_t, std::micro>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<int64_t, std::micro> &) (isz = 16) (sz = 23)
+      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,41) std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1L, 1L>>, int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &) (isz = 10) (sz = 17)
+        -> INLINE (MANUAL): (152,51) std::chrono::__duration_cast_impl<std::chrono::duration<double, std::ratio<1L, 1L>>, std::ratio_divide<std::micro, std::chrono::duration<int64_t, std::ratio<1L, 1L>>::period>::type, std::common_type<std::chrono::duration<double, std::ratio<1L, 1L>>::rep, int64_t, intmax_t>::type, true, false>::__cast<int64_t, std::micro>(const std::chrono::duration<int64_t, std::micro> &) (isz = 9) (sz = 16)
+          -> INLINE (MANUAL): (125,32) std::chrono::duration<double, std::ratio<1L, 1L>>::duration<std::chrono::duration<double, std::ratio<1L, 1L>>::rep>(std::chrono::duration<double, std::ratio<1L, 1L>> *, const std::chrono::duration<double, std::ratio<1L, 1L>>::rep &) (isz = 0) (sz = 7)
+          -> INLINE (MANUAL): (126,36) std::chrono::duration<int64_t, std::micro>::count(const std::chrono::duration<int64_t, std::micro> *) const (isz = 0) (sz = 6)
+      -> INLINE (MANUAL): /usr/include/c++/4.4.7/chrono:(225,46) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> INLINE (MANUAL): (141,41) std::chrono::duration<double, std::ratio<1L, 1L>>::count(const std::chrono::duration<double, std::ratio<1L, 1L>> *) const (isz = 0) (sz = 6)
+  -> INLINE (MANUAL): (142,5) ff::ParallelFor::~ParallelFor(ff::ParallelFor *) (isz = 1663) (sz = 1668)
     -> /home/spm1501/public/fastflow/ff/parallel_for.hpp:(142,35) ff::ff_forall_farm<ff::forallreduce_W<int>>::~ff_forall_farm(ff::ff_forall_farm<ff::forallreduce_W<int>> *const) (isz = 1544) (sz = 1549)
        [[ Unable to inline callsite  <3>]]
     -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(143,9) ff::ff_farm<ff::foralllb_t, ff::ff_gatherer>::stop(ff::ff_farm<ff::foralllb_t, ff::ff_gatherer> *) (isz = 23) (sz = 28)
@@ -296,21 +296,21 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
            [[ Unable to inline indirect callsite  <5>]]
         -> INLINE (MANUAL): (938,5) ff::ff_farm<ff::foralllb_t, ff::ff_gatherer>::~ff_farm(ff::ff_farm<ff::foralllb_t, ff::ff_gatherer> *const) (isz = 1517) (sz = 1522)
           -> /home/spm1501/public/fastflow/ff/farm.hpp:(416,13) ff::ff_farm<ff::foralllb_t, ff::ff_gatherer>::~ff_farm(ff::ff_farm<ff::foralllb_t, ff::ff_gatherer> *) (isz = 1517) (sz = 1522)
-             [[ Inlining would exceed -inline-max-total-size value (2739>2000) <4>]]
-  -> EXTERN: (142,5) printf(const char *, ...)
-  -> INLINE: (142,62) error(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> &, std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 58) (sz = 71)
+             [[ Inlining would exceed -inline-max-total-size value (2741>2000) <4>]]
+  -> EXTERN: (144,5) printf(const char *, ...)
+  -> INLINE: (144,62) error(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> &, std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 58) (sz = 71)
     -> INLINE (MANUAL): (35,15) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (35,18) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (35,25) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (36,12) std::abs(float) (isz = 0) (sz = 7)
     -> INLINE (MANUAL): (36,17) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-  -> INLINE: (143,12) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 42) (sz = 53)
+  -> INLINE: (145,12) errorVEC(std::vector<float, std::allocator<float>> &, std::vector<float, std::allocator<float>> &, int) (isz = 42) (sz = 53)
     -> INLINE (MANUAL): (44,15) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,23) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,33) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (44,41) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
     -> INLINE (MANUAL): (46,10) std::sqrt(float) (isz = 0) (sz = 7)
-  -> INLINE (MANUAL): (144,3) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~vector(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *) (isz = 89) (sz = 94)
+  -> INLINE (MANUAL): (146,3) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~vector(std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *) (isz = 89) (sz = 94)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::~_Vector_base(std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *const) (isz = 13) (sz = 18)
        [[ Callee not marked with inlining pragma  <1>]]
     -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::vector<float, std::allocator<float>>>(std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::allocator<std::vector<float, std::allocator<float>>>::pointer, std::allocator<std::vector<float, std::allocator<float>>> &) (isz = 57) (sz = 66)
@@ -337,7 +337,7 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
         -> INLINE (MANUAL): (132,9) std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::_M_deallocate(std::_Vector_base<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::allocator<std::vector<float, std::allocator<float>>>::pointer, size_t) (isz = 4) (sz = 13)
           -> INLINE (MANUAL): (146,12) __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::deallocate(__gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>> *, __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::pointer, __gnu_cxx::new_allocator<std::vector<float, std::allocator<float>>>::size_type) (isz = 0) (sz = 7)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
-  -> INLINE (MANUAL): (144,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (146,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -351,7 +351,7 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
         -> INLINE (MANUAL): (133,36) std::_Vector_base<float, std::allocator<float>>::_Vector_impl::~_Vector_impl(std::_Vector_base<float, std::allocator<float>>::_Vector_impl *) (isz = 2) (sz = 7)
           -> DELETED: (73,14) std::allocator<float>::~allocator(std::allocator<float> *const) (isz = 0) (sz = 5)
-  -> INLINE (MANUAL): (144,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (146,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -365,7 +365,7 @@ INLINE REPORT: (main(int, const char **)) [1/1208=0.1%] src/jacobiFor.cpp(55,40)
             -> EXTERN: /usr/include/c++/4.4.7/ext/new_allocator.h:(95,9) operator delete(void *)
         -> INLINE (MANUAL): (133,36) std::_Vector_base<float, std::allocator<float>>::_Vector_impl::~_Vector_impl(std::_Vector_base<float, std::allocator<float>>::_Vector_impl *) (isz = 2) (sz = 7)
           -> DELETED: (73,14) std::allocator<float>::~allocator(std::allocator<float> *const) (isz = 0) (sz = 5)
-  -> INLINE (MANUAL): (144,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
+  -> INLINE (MANUAL): (146,3) std::vector<float, std::allocator<float>>::~vector(std::vector<float, std::allocator<float>> *) (isz = 47) (sz = 52)
     -> /usr/include/c++/4.4.7/bits/stl_vector.h:(313,7) std::_Vector_base<float, std::allocator<float>>::~_Vector_base(std::_Vector_base<float, std::allocator<float>> *const) (isz = 29) (sz = 34)
        [[ Callee not marked with inlining pragma  <1>]]
     -> DELETED: /usr/include/c++/4.4.7/bits/stl_vector.h:(313,9) std::_Destroy<std::allocator<float>::pointer, float>(std::allocator<float>::pointer, std::allocator<float>::pointer, std::allocator<float> &) (isz = 0) (sz = 8)
@@ -430,13 +430,13 @@ LOOP BEGIN at src/jacobiFor.cpp(76,5)
       LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for.hpp(237,9) inlined into src/jacobiFor.cpp(110,12)
          remark #15542: loop was not vectorized: inner loop was already vectorized
 
-         LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into src/jacobiFor.cpp(110,12)
          <Peeled loop for vectorization>
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into src/jacobiFor.cpp(110,12)
-            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(115,29) ]
-            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(115,29) ]
+         LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into src/jacobiFor.cpp(110,12)
+            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(116,29) ]
+            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(116,29) ]
             remark #15305: vectorization support: vector length 4
             remark #15399: vectorization support: unroll factor set to 2
             remark #15309: vectorization support: normalized vectorization overhead 3.000
@@ -450,21 +450,21 @@ LOOP BEGIN at src/jacobiFor.cpp(76,5)
             remark #15488: --- end vector loop cost summary ---
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into src/jacobiFor.cpp(110,12)
          <Alternate Alignment Vectorized Loop>
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into src/jacobiFor.cpp(110,12)
          <Remainder loop for vectorization>
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into src/jacobiFor.cpp(110,12)
          <Peeled loop for vectorization>
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into src/jacobiFor.cpp(110,12)
-            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(118,29) ]
-            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(118,29) ]
+         LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into src/jacobiFor.cpp(110,12)
+            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(120,29) ]
+            remark #15388: vectorization support: reference U208_V has aligned access   [ src/jacobiFor.cpp(120,29) ]
             remark #15305: vectorization support: vector length 4
             remark #15399: vectorization support: unroll factor set to 2
             remark #15309: vectorization support: normalized vectorization overhead 3.000
@@ -478,20 +478,20 @@ LOOP BEGIN at src/jacobiFor.cpp(76,5)
             remark #15488: --- end vector loop cost summary ---
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into src/jacobiFor.cpp(110,12)
          <Alternate Alignment Vectorized Loop>
          LOOP END
 
-         LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into src/jacobiFor.cpp(110,12)
+         LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into src/jacobiFor.cpp(110,12)
          <Remainder loop for vectorization>
          LOOP END
       LOOP END
 
-      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(126,15)
+      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(128,15)
       <Peeled loop for vectorization>
       LOOP END
 
-      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(126,15)
+      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(128,15)
          remark #15388: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
          remark #15388: vectorization support: reference __tmp has aligned access   [ src/jacobiFor.cpp(44,5) ]
          remark #15388: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
@@ -509,11 +509,11 @@ LOOP BEGIN at src/jacobiFor.cpp(76,5)
          remark #15488: --- end vector loop cost summary ---
       LOOP END
 
-      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(126,15)
+      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(128,15)
       <Alternate Alignment Vectorized Loop>
       LOOP END
 
-      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(126,15)
+      LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(128,15)
       <Remainder loop for vectorization>
          remark #15389: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has unaligned access   [ src/jacobiFor.cpp(44,5) ]
          remark #15388: vectorization support: reference __tmp has aligned access   [ src/jacobiFor.cpp(44,5) ]
@@ -526,21 +526,21 @@ LOOP BEGIN at src/jacobiFor.cpp(76,5)
       LOOP END
    LOOP END
 
-   LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp(1057,36) inlined into src/jacobiFor.cpp(140,5)
+   LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for_internals.hpp(1057,36) inlined into src/jacobiFor.cpp(142,5)
       remark #15523: loop was not vectorized: loop control variable i was found, but loop iteration count cannot be computed before executing the loop
    LOOP END
 LOOP END
 
-LOOP BEGIN at src/jacobiFor.cpp(32,3) inlined into src/jacobiFor.cpp(142,62)
+LOOP BEGIN at src/jacobiFor.cpp(32,3) inlined into src/jacobiFor.cpp(144,62)
    remark #25096: Loop Interchange not done due to: Imperfect Loop Nest (Either at Source or due to other Compiler Transformations)
    remark #25452: Original Order found to be proper, but by a close margin
    remark #15542: loop was not vectorized: inner loop was already vectorized
 
-   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(142,62)
+   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(144,62)
    <Peeled loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(142,62)
+   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(144,62)
       remark #15388: vectorization support: reference A.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(35,7) ]
       remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(35,7) ]
       remark #15305: vectorization support: vector length 4
@@ -556,20 +556,20 @@ LOOP BEGIN at src/jacobiFor.cpp(32,3) inlined into src/jacobiFor.cpp(142,62)
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(142,62)
+   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(144,62)
    <Alternate Alignment Vectorized Loop>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(142,62)
+   LOOP BEGIN at src/jacobiFor.cpp(34,5) inlined into src/jacobiFor.cpp(144,62)
    <Remainder loop for vectorization>
    LOOP END
 LOOP END
 
-LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
+LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(145,12)
 <Peeled loop for vectorization>
 LOOP END
 
-LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
+LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(145,12)
    remark #15388: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
    remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
    remark #15388: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
@@ -587,11 +587,11 @@ LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
    remark #15488: --- end vector loop cost summary ---
 LOOP END
 
-LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
+LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(145,12)
 <Alternate Alignment Vectorized Loop>
 LOOP END
 
-LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
+LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(145,12)
 <Remainder loop for vectorization>
    remark #15389: vectorization support: reference c.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has unaligned access   [ src/jacobiFor.cpp(44,5) ]
    remark #15388: vectorization support: reference x.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiFor.cpp(44,5) ]
@@ -603,7 +603,7 @@ LOOP BEGIN at src/jacobiFor.cpp(43,3) inlined into src/jacobiFor.cpp(143,12)
    remark #15309: vectorization support: normalized vectorization overhead 2.136
 LOOP END
 
-LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_construct.h(99,4) inlined into src/jacobiFor.cpp(144,3)
+LOOP BEGIN at /usr/include/c++/4.4.7/bits/stl_construct.h(99,4) inlined into src/jacobiFor.cpp(146,3)
    remark #15382: vectorization support: call to function operator delete(void *) cannot be vectorized   [ /usr/include/c++/4.4.7/ext/new_allocator.h(95,9) ]
    remark #15344: loop was not vectorized: vector dependence prevents vectorization
 LOOP END
@@ -8307,17 +8307,17 @@ INLINE REPORT: (std::_Function_handler<std::function<void (long, long, int, int 
     -> INLINE (MANUAL): (1490,45) std::_Any_data::_M_access<struct lambda [] type at line 117000, col. 9 *>(const std::_Any_data *) const (isz = 3) (sz = 10)
       -> INLINE (MANUAL): (1415,41) std::_Any_data::_M_access(const std::_Any_data *) const (isz = 2) (sz = 8)
   -> INLINE (MANUAL): (1668,44) lambda [] type at line 117000, col. 9::operator()(const struct lambda [] type at line 117000, col. 9 *, long, long, int, int)->void (isz = 14) (sz = 27)
-    -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(238,14) lambda [] type at line 118236, col. 25::operator()(const struct lambda [] type at line 118236, col. 25 *, long)->void (isz = 109) (sz = 116)
+    -> INLINE (MANUAL): /home/spm1501/public/fastflow/ff/parallel_for.hpp:(238,14) lambda [] type at line 118236, col. 25::operator()(const struct lambda [] type at line 118236, col. 25 *, long)->void (isz = 111) (sz = 118)
       -> INLINE (MANUAL): src/jacobiFor.cpp:(113,40) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(115,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(115,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(115,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(118,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(118,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(118,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,28) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,41) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
-      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,44) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(116,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(116,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(116,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(118,38) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(118,41) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,42) std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::operator[](std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>> *, std::vector<std::vector<float, std::allocator<float>>, std::allocator<std::vector<float, std::allocator<float>>>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,45) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(120,52) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
+      -> INLINE (MANUAL): src/jacobiFor.cpp:(122,28) std::vector<float, std::allocator<float>>::operator[](std::vector<float, std::allocator<float>> *, std::vector<float, std::allocator<float>>::size_type) (isz = 1) (sz = 9)
 
 
     Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
@@ -8327,13 +8327,13 @@ LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for.hpp(237,9) inlined i
    remark #15542: loop was not vectorized: inner loop was already vectorized
    remark #25015: Estimate of max trip count of loop=16
 
-   LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Peeled loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
-      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(115,29) ]
-      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(115,29) ]
+   LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(116,29) ]
+      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(116,29) ]
       remark #15305: vectorization support: vector length 4
       remark #15399: vectorization support: unroll factor set to 2
       remark #15309: vectorization support: normalized vectorization overhead 3.000
@@ -8347,21 +8347,21 @@ LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for.hpp(237,9) inlined i
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Alternate Alignment Vectorized Loop>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(114,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(115,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Remainder loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Peeled loop for vectorization>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
-      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(118,29) ]
-      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(118,29) ]
+   LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(120,29) ]
+      remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiFor.cpp(120,29) ]
       remark #15305: vectorization support: vector length 4
       remark #15399: vectorization support: unroll factor set to 2
       remark #15309: vectorization support: normalized vectorization overhead 3.000
@@ -8375,11 +8375,11 @@ LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for.hpp(237,9) inlined i
       remark #15488: --- end vector loop cost summary ---
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Alternate Alignment Vectorized Loop>
    LOOP END
 
-   LOOP BEGIN at src/jacobiFor.cpp(117,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
+   LOOP BEGIN at src/jacobiFor.cpp(119,27) inlined into /usr/include/c++/4.4.7/tr1_impl/functional(1669,44)
    <Remainder loop for vectorization>
    LOOP END
 LOOP END
@@ -21273,10 +21273,10 @@ Begin optimization report for: __sti__$E()
     Report from: Interprocedural optimizations [ipo]
 
 INLINE REPORT: (__sti__$E()) [1097/1208=90.8%] <compiler generated>
-  -> INLINE: /home/spm1501/public/fastflow/ff/fftree.hpp:(47,19) __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467dSt8__ioinitE() (isz = 9) (sz = 12)
+  -> INLINE: /home/spm1501/public/fastflow/ff/fftree.hpp:(47,19) __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14bSt8__ioinitE() (isz = 9) (sz = 12)
     -> EXTERN: /usr/include/c++/4.4.7/iostream:(72,25) std::ios_base::Init::Init(std::ios_base::Init *)
     -> EXTERN: /usr/include/c++/4.4.7/iostream:(72,25) __cxa_atexit()
-  -> INLINE: /home/spm1501/public/fastflow/ff/fftree.hpp:(47,19) __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467d2ff5rootsE() (isz = 34) (sz = 37)
+  -> INLINE: /home/spm1501/public/fastflow/ff/fftree.hpp:(47,19) __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14b2ff5rootsE() (isz = 34) (sz = 37)
     -> INLINE (MANUAL): (48,27) std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::set(std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>> *) (isz = 25) (sz = 30)
       -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_set.h:(136,7) std::_Rb_tree<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_type, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type, std::_Identity<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type>, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::_Key_alloc_type>::_Rb_tree(std::_Rb_tree<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_type, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type, std::_Identity<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type>, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::_Key_alloc_type> *) (isz = 23) (sz = 28)
         -> INLINE (MANUAL): /usr/include/c++/4.4.7/bits/stl_tree.h:(591,7) std::_Rb_tree<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_type, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type, std::_Identity<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type>, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::_Key_alloc_type>::_Rb_tree_impl<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, false>::_Rb_tree_impl(std::_Rb_tree<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_type, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type, std::_Identity<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::value_type>, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::_Key_alloc_type>::_Rb_tree_impl<std::set<ff::fftree *, std::less<ff::fftree *>, std::allocator<ff::fftree *>>::key_compare, false> *) (isz = 21) (sz = 26)
@@ -21302,11 +21302,11 @@ DEAD STATIC FUNCTION: (std::allocator<std::_Rb_tree_node<std::set<ff::fftree *, 
 
 ===========================================================================
 
-Begin optimization report for: __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467d2ff5rootsE()
+Begin optimization report for: __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14b2ff5rootsE()
 
     Report from: Interprocedural optimizations [ipo]
 
-DEAD STATIC FUNCTION: (__sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467d2ff5rootsE()) <compiler generated>
+DEAD STATIC FUNCTION: (__sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14b2ff5rootsE()) <compiler generated>
 
 ===========================================================================
 
@@ -22383,11 +22383,11 @@ DEAD STATIC FUNCTION: (std::_Destroy<std::allocator<ff::forall_task_t>::pointer,
 
 ===========================================================================
 
-Begin optimization report for: __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467dSt8__ioinitE()
+Begin optimization report for: __sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14bSt8__ioinitE()
 
     Report from: Interprocedural optimizations [ipo]
 
-DEAD STATIC FUNCTION: (__sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_bb2e467dSt8__ioinitE()) <compiler generated>
+DEAD STATIC FUNCTION: (__sti___ZN39_INTERNAL_17_src_jacobiFor_cpp_e21fb14bSt8__ioinitE()) <compiler generated>
 
 ===========================================================================
 

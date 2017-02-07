@@ -91,14 +91,130 @@ LOOP END
 /* using a variable sum, to avoid if inside the cycle, we have splitted the for
 cycle. We have also used (x1[i] - x2[i]) * (x1[i] - x2[i]) instead of pow in
 errorVEC function, beacuse it seams the vectorization acts in different ways*/
-float sum = b[i];
+sum = b[i];
 for (int j = 0; j < i; j++) {
-  sum = sum - A[i][j] * x[j];
+  sum = sum - A[i][j] * x1[j];
 }
+divisor = A[i][i];
 for (int j = i + 1; j < N; j++) {
-  sum = sum - A[i][j] * x[j];
+  sum = sum - A[i][j] * x1[j];
 }
-c[i] = sum / A[i][i];
+x2[i] = sum / divisor;
+
+/* USING ser ON mic and XEON
+MIC
+remark #15309: vectorization support: normalized vectorization overhead 0.857
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 14
+remark #15477: vector loop cost: 0.430
+remark #15478: estimated potential speedup: 20.790
+remark #15488: --- end vector loop cost summary ---
+
+errorVEC
+remark #15309: vectorization support: normalized vectorization overhead 2.045
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 0.680
+remark #15478: estimated potential speedup: 18.810
+remark #15488: --- end vector loop cost summary ---
+
+XEON
+remark #15309: vectorization support: normalized vectorization overhead 3.000
+remark #15300: LOOP WAS VECTORIZED
+remark #15442: entire loop may be executed in remainder
+remark #15448: unmasked aligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 14
+remark #15477: vector loop cost: 2.000
+remark #15478: estimated potential speedup: 6.030
+remark #15488: --- end vector loop cost summary ---
+
+errorVEC
+remark #15300: LOOP WAS VECTORIZED
+remark #15442: entire loop may be executed in remainder
+remark #15448: unmasked aligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 3.000
+remark #15478: estimated potential speedup: 5.370
+remark #15488: --- end vector loop cost summary ---
+*/
+
+/* USING THREAD ON mic and XEON
+MIC
+remark #15309: vectorization support: normalized vectorization overhead 0.857
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 13
+remark #15477: vector loop cost: 0.430
+remark #15478: estimated potential speedup: 19.300
+remark #15488: --- end vector loop cost summary ---
+
+errorVEC
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 0.680
+remark #15478: estimated potential speedup: 18.810
+remark #15488: --- end vector loop cost summary ---
+
+
+XEON
+remark #15300: LOOP WAS VECTORIZED
+remark #15442: entire loop may be executed in remainder
+remark #15448: unmasked aligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 13
+remark #15477: vector loop cost: 2.000
+remark #15478: estimated potential speedup: 5.630
+remark #15488: --- end vector loop cost summary ---
+errroVec
+remark #15300: LOOP WAS VECTORIZED
+remark #15450: unmasked unaligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 3.500
+remark #15478: estimated potential speedup: 3.090
+remark #15488: --- end vector loop cost summary ---
+*/
+
+/* USING FASTFLOW ON mic and XEON
+MIC
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 13
+remark #15477: vector loop cost: 0.430
+remark #15478: estimated potential speedup: 19.300
+remark #15488: --- end vector loop cost summary ---
+
+errorVEC
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 0.680
+remark #15478: estimated potential speedup: 18.810
+remark #15488: --- end vector loop cost summary ---
+
+XEON
+remark #15300: LOOP WAS VECTORIZED
+remark #15442: entire loop may be executed in remainder
+remark #15448: unmasked aligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 13
+remark #15477: vector loop cost: 2.000
+remark #15478: estimated potential speedup: 5.630
+remark #15488: --- end vector loop cost summary ---
+errorVEC
+remark #15300: LOOP WAS VECTORIZED
+remark #15442: entire loop may be executed in remainder
+remark #15448: unmasked aligned unit stride loads: 2
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 3.000
+remark #15478: estimated potential speedup: 5.370
+*/
 
 /* using A=LDU decomposition, which it calculate directly the \delta_x and
 writes it in an array (sum) , two barrier, using the reducer*/

@@ -91,19 +91,15 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
           vector<float> &x1, vector<float> &x2, const int from, const int to,
           barrier &bar, const int maxiter, const float epsilon,
           const size_t N) {
-  float sum;
-  float divisor;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
+#pragma ivdep
     for (size_t i = from; i <= to; i++) {
-      sum = b[i];
-      for (int j = 0; j < i; j++) {
-        sum = sum - A[i][j] * x1[j];
+      x2[i] = b[i];
+      for (int j = 0; j < N; j++) {
+        if (i != j)
+          x2[i] = x2[i] - A[i][j] * x1[j];
       }
-      divisor = A[i][i];
-      for (int j = i + 1; j < N; j++) {
-        sum = sum - A[i][j] * x1[j];
-      }
-      x2[i] = sum / divisor;
+      x2[i] = x2[i] / A[i][i];
     }
     bar.await([&] {
       startconv = chrono::system_clock::now();
