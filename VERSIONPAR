@@ -216,6 +216,15 @@ remark #15477: vector loop cost: 3.000
 remark #15478: estimated potential speedup: 5.370
 */
 
+// ORIGINAL VERSION WITH #pragma ivdep
+c[i] = b[i];
+#pragma ivdep
+for (int j = 0; j < N; j++) {
+  if (i != j)
+    c[i] = c[i] - A[i][j] * x[j];
+}
+c[i] = c[i] / A[i][i];
+
 /* using A=LDU decomposition, which it calculate directly the \delta_x and
 writes it in an array (sum) , two barrier, using the reducer*/
 for (size_t i = from; i <= to; i++) {

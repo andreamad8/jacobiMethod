@@ -109,17 +109,13 @@ int main(int argc, char const *argv[]) {
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-
-                          float sum = b[i];
-                          float divisor = 0;
-                          for (int j = 0; j < i; j++) {
-                            sum = sum - A[i][j] * x[j];
+                          c[i] = b[i];
+#pragma ivdep
+                          for (int j = 0; j < N; j++) {
+                            if (i != j)
+                              c[i] = c[i] - A[i][j] * x[j];
                           }
-                          divisor = A[i][i];
-                          for (int j = i + 1; j < N; j++) {
-                            sum = sum - A[i][j] * x[j];
-                          }
-                          c[i] = sum / divisor;
+                          c[i] = c[i] / A[i][i];
                         },
                         thread_num);
 
