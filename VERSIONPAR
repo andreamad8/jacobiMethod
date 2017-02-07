@@ -16,14 +16,89 @@ for (int j = 0; j < N; j++) {
 }
 c[i] = c[i] / A[i][i];
 
-/* using a variable sum init by -A[i][i] * x[i], to avoid if inside the cycle.
-We have also tried to split the cycle in two parts. Still no way.*/
-float sum;
-sum = -A[i][i] * x[i];
-for (size_t j = 0; j < N; j++) {
-  sum += A[i][j] * x[j];
+/* USING ser ON mic and XEON
+LOOP BEGIN at src/jacobiser.cpp(106,9)
+<Predicate Optimized v1>
+   remark #25423: Condition at line 107 hoisted out of this loop
+   remark #15344: loop was not vectorized: vector dependence prevents
+vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between
+c.__b_St12_Vector_baseIfSaIfEE._ line 108 and c.__b_St12_Vector_baseIfSaIfEE._
+line 108
+   remark #15346: vector dependence: assumed ANTI dependence between
+c.__b_St12_Vector_baseIfSaIfEE._ line 108 and c.__b_St12_Vector_baseIfSaIfEE._
+line 108
+   remark #25439: unrolled with remainder by 2
+   remark #25018: Total number of lines prefetched=4
+   remark #25019: Number of spatial prefetches=2, dist=64
+   remark #25021: Number of initial-value prefetches=2
+   remark #25035: Number of pointer data prefetches=2, dist=64
+   remark #25139: Using second-level distance 8 for prefetching spatial memory
+reference   [ src/jacobiser.cpp(108,31) ]
+   remark #25141: Using second-level distance 8 for prefetching pointer data
+reference   [ src/jacobiser.cpp(108,38) ]
+LOOP END
+LOOP BEGIN at src/jacobiser.cpp(106,9)
+<Predicate Optimized v1>
+   remark #25423: Condition at line 107 hoisted out of this loop
+   remark #15344: loop was not vectorized: vector dependence prevents
+vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between
+c.__b_St12_Vector_baseIfSaIfEE._ line 108 and c.__b_St12_Vector_baseIfSaIfEE._
+line 108
+   remark #15346: vector dependence: assumed ANTI dependence between
+c.__b_St12_Vector_baseIfSaIfEE._ line 108 and c.__b_St12_Vector_baseIfSaIfEE._
+line 108
+   remark #25439: unrolled with remainder by 2
+LOOP END
+*/
+
+/* USING FASTFLOW ON mic and XEON
+LOOP BEGIN at src/jacobiFor.cpp(113,27) inlined into src/jacobiFor.cpp(110,12)
+   remark #15523: loop was not vectorized: loop control variable j was found,
+but loop iteration count cannot be computed before executing the loop
+   remark #25478: While Loop Unrolled by 8
+LOOP END
+*/
+
+/* USING THREAD ON mic and XEON respectively
+LOOP BEGIN at src/jacobiPar.cpp(98,29)
+   remark #15344: loop was not vectorized: vector dependence prevents
+vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between  line 100
+and  line 100
+   remark #15346: vector dependence: assumed ANTI dependence between  line 100
+and  line 100
+   remark #25439: unrolled with remainder by 2
+   remark #25018: Total number of lines prefetched=2
+   remark #25021: Number of initial-value prefetches=1
+   remark #25035: Number of pointer data prefetches=2, dist=64
+   remark #25141: Using second-level distance 8 for prefetching pointer data
+reference   [ src/jacobiPar.cpp(100,36) ]
+LOOP END
+LOOP END
+LOOP BEGIN at src/jacobiPar.cpp(98,29)
+   remark #15344: loop was not vectorized: vector dependence prevents
+vectorization
+   remark #15346: vector dependence: assumed FLOW dependence between  line 100
+and  line 100
+   remark #15346: vector dependence: assumed ANTI dependence between  line 100
+and  line 100
+   remark #25439: unrolled with remainder by 2
+LOOP END
+*/
+
+/* using a variable sum, to avoid if inside the cycle, we have splitted the for
+cycle. We have also used (x1[i] - x2[i]) * (x1[i] - x2[i]) instead of pow in
+errorVEC function, beacuse it seams the vectorization acts in different ways*/
+float sum = b[i];
+for (int j = 0; j < i; j++) {
+  sum = sum - A[i][j] * x[j];
 }
-c[i] = (b[i] - sum) / A[i][i];
+for (int j = i + 1; j < N; j++) {
+  sum = sum - A[i][j] * x[j];
+}
+c[i] = sum / A[i][i];
 
 /* using A=LDU decomposition, which it calculate directly the \delta_x and
 writes it in an array (sum) , two barrier, using the reducer*/

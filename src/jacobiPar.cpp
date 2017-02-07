@@ -44,9 +44,8 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
 float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
-    sum += pow(x1[i] - x2[i], 2);
+    sum += (x1[i] - x2[i]) * (x1[i] - x2[i]);
   }
-
   return sqrt(sum);
 }
 
@@ -88,23 +87,26 @@ bool barrier::await(function<void()> cb) {
   }
 }
 
-void iter(vector<vector<float>> &A, vector<float> &b, vector<float> &x,
-          vector<float> &c, int from, int to, barrier &bar, int maxiter,
-          float epsilon) {
-
+void iter(const vector<vector<float>> &A, const vector<float> &b,
+          vector<float> &x, vector<float> &c, const int from, const int to,
+          barrier &bar, const int maxiter, const float epsilon,
+          const size_t N) {
+  float sum;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      c[i] = b[i];
-      for (int j = 0; j < A.size(); j++) {
-        if (i != j)
-          c[i] = c[i] - A[i][j] * x[j];
+      sum = b[i];
+      for (int j = 0; j < i; j++) {
+        sum = sum - A[i][j] * x[j];
       }
-      c[i] = c[i] / A[i][i];
+      for (int j = i + 1; j < N; j++) {
+        sum = sum - A[i][j] * x[j];
+      }
+      c[i] = sum / A[i][i];
     }
     bar.await([&] {
       startconv = chrono::system_clock::now();
       swap(c, x);
-      err = errorVEC(c, x, A.size());
+      err = errorVEC(c, x, N);
       endconv = chrono::system_clock::now();
     });
   }
@@ -176,7 +178,7 @@ int main(int argc, char const *argv[]) {
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
         // end - start + 1);
         t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
-                           ref(bar), maxiter, epsilon));
+                           ref(bar), maxiter, epsilon, N));
       }
       for (thread &it : t)
         it.join();

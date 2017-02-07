@@ -39,7 +39,7 @@ float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
 float errorVEC(vector<float> &x1, vector<float> &x2, int N) {
   float sum = 0;
   for (int i = 0; i < N; i++) {
-    sum += pow(x1[i] - x2[i], 2);
+    sum += (x1[i] - x2[i]) * (x1[i] - x2[i]);
   }
   return sqrt(sum);
 }
@@ -102,12 +102,14 @@ int main(int argc, char const *argv[]) {
     iter = 0;
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        c[i] = b[i];
-        for (int j = 0; j < N; j++) {
-          if (i != j)
-            c[i] = c[i] - A[i][j] * x[j];
+        sum = b[i];
+        for (int j = 0; j < i; j++) {
+          sum = sum - A[i][j] * x[j];
         }
-        c[i] = c[i] / A[i][i];
+        for (int j = i + 1; j < N; j++) {
+          sum = sum - A[i][j] * x[j];
+        }
+        c[i] = sum / A[i][i];
       }
       startconv = chrono::system_clock::now();
       swap(c, x);
