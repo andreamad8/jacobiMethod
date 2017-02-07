@@ -88,7 +88,7 @@ bool barrier::await(function<void()> cb) {
 }
 
 void iter(const vector<vector<float>> &A, const vector<float> &b,
-          vector<float> &x, vector<float> &c, const int from, const int to,
+          vector<float> &x1, vector<float> &x2, const int from, const int to,
           barrier &bar, const int maxiter, const float epsilon,
           const size_t N) {
   float sum;
@@ -96,17 +96,21 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
     for (size_t i = from; i <= to; i++) {
       sum = b[i];
       for (int j = 0; j < i; j++) {
-        sum = sum - A[i][j] * x[j];
+        sum = sum - A[i][j] * x1[j];
       }
       for (int j = i + 1; j < N; j++) {
-        sum = sum - A[i][j] * x[j];
+        sum = sum - A[i][j] * x1[j];
       }
-      c[i] = sum / A[i][i];
+      x2[i] = sum / A[i][i];
     }
     bar.await([&] {
       startconv = chrono::system_clock::now();
-      swap(c, x);
-      err = errorVEC(c, x, N);
+      swap(x2, x1);
+      err = 0;
+      for (int i = 0; i < N; i++) {
+        err += (x1[i] - x2[i]) * (x1[i] - x2[i]);
+      }
+      err = sqrt(err);
       endconv = chrono::system_clock::now();
     });
   }
@@ -124,9 +128,9 @@ int main(int argc, char const *argv[]) {
   float temp, conv;
   // INIT
   //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
-  //__declspec(align(16, 0)) vector<float> x(N);
+  __declspec(align(32, 0)) vector<float> x(N);
   //__declspec(align(16, 0)) vector<float> b(N);
-  //__declspec(align(16, 0)) vector<float> c(N);
+  __declspec(align(32, 0)) vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
   vector<float> b(N);

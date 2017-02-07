@@ -1,20 +1,20 @@
 CXX = icc
 CXXFLAGS = -O3 -std=c++11
 FF_SERVER = -I /home/spm1501/public/fastflow
-HOST = 
+HOST = -core-avx-i
 CXXFLAGTH = -pthread
 REPORT =-qopt-report=5
 
 all: serXEON parXEON ffXEON
 
 serXEON: src/jacobiser.cpp
-	$(CXX) $(CXXFLAGS) $(HOST)  $(REPORT) src/jacobiser.cpp -o bin/jacobiserXEON
+	$(CXX) $(CXXFLAGS)  $(REPORT) src/jacobiser.cpp -o bin/jacobiserXEON
 
 parXEON: src/jacobiPar.cpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(HOST) $(REPORT) src/jacobiPar.cpp -o bin/jacobiParXEON
 
 ffXEON: src/jacobiFor.cpp
-	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(HOST) $(FF_SERVER) $(REPORT) src/jacobiFor.cpp -o bin/jacobiForXEON
+	$(CXX) $(CXXFLAGS) $(CXXFLAGTH) $(FF_SERVER) $(REPORT) src/jacobiFor.cpp -o bin/jacobiForXEON
 
 clean:
 	rm bin/jacobiserXEON bin/jacobiParXEON bin/jacobiForXEON
