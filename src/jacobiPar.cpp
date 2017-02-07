@@ -92,21 +92,23 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
           barrier &bar, const int maxiter, const float epsilon,
           const size_t N) {
   float sum;
+  float divisor;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
       sum = b[i];
       for (int j = 0; j < i; j++) {
         sum = sum - A[i][j] * x1[j];
       }
+      divisor = A[i][i];
       for (int j = i + 1; j < N; j++) {
         sum = sum - A[i][j] * x1[j];
       }
-      x2[i] = sum / A[i][i];
+      x2[i] = sum / divisor;
     }
     bar.await([&] {
       startconv = chrono::system_clock::now();
       swap(x2, x1);
-      // err = errorVEC(c, x, N);
+      err = errorVEC(x2, x1, N);
 
       endconv = chrono::system_clock::now();
     });

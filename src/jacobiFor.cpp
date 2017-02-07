@@ -111,19 +111,21 @@ int main(int argc, char const *argv[]) {
                         [&](const long i) {
 
                           float sum = b[i];
+                          float divisor = 0;
                           for (int j = 0; j < i; j++) {
                             sum = sum - A[i][j] * x[j];
                           }
+                          divisor = A[i][i];
                           for (int j = i + 1; j < N; j++) {
                             sum = sum - A[i][j] * x[j];
                           }
-                          c[i] = sum / A[i][i];
+                          c[i] = sum / divisor;
                         },
                         thread_num);
 
         startconv = chrono::system_clock::now();
         swap(c, x);
-        // err = errorVEC(c, x, N);
+        err = errorVEC(c, x, N);
         endconv = chrono::system_clock::now();
       }
       endFor = chrono::system_clock::now();
