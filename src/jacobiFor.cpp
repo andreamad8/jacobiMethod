@@ -62,9 +62,9 @@ int main(int argc, char const *argv[]) {
   float sum, err, conv;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
-  vector<float> x(N);
+  vector<float> x1(N);
   vector<float> b(N);
-  vector<float> c(N);
+  vector<float> x2(N);
   chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
 
   for (size_t Worker = 0; Worker < W; Worker += steps) {
@@ -78,8 +78,8 @@ int main(int argc, char const *argv[]) {
       srand(123);
       for (i = 0; i < N; i++) {
         b[i] = rand() % 10;
-        x[i] = 0;
-        c[i] = 0;
+        x1[i] = 0;
+        x2[i] = 0;
       }
       for (i = 0; i < N; i++)
         for (j = 0; j < N; j++)
@@ -98,7 +98,7 @@ int main(int argc, char const *argv[]) {
       }
       /* code */
       // SPIN, no barrier
-      ParallelFor pf(thread_num, true, true);
+      ParallelForReduce<float> pf(thread_num, true, true);
 
       // printMAT(A, N);
       // printVEC(b, N);
@@ -109,18 +109,27 @@ int main(int argc, char const *argv[]) {
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-                          c[i] = b[i];
-                          for (int j = 0; j < N; j++) {
-                            if (i != j)
-                              c[i] = c[i] - A[i][j] * x[j];
+                          float sum;
+                          sum = b[i];
+                          for (int j = 0; j < i; j++) {
+                            sum = sum - A[i][j] * x1[j];
                           }
-                          c[i] = c[i] / A[i][i];
+                          for (int j = i + 1; j < N; j++) {
+                            sum = sum - A[i][j] * x1[j];
+                          }
+                          x2[i] = sum / A[i][i];
                         },
                         thread_num);
 
         startconv = chrono::system_clock::now();
-        swap(c, x);
-        err = errorVEC(c, x, N);
+        swap(x2, x1);
+        float sumR = 0.0;
+        pf.parallel_reduce(
+            sumR, 0.0, 0, N, 1, 0,
+            [&](const long i, float &mysum) { mysum += pow(x1[i] - x2[i], 2); },
+            [](float &s, const float &e) { s += e; }, thread_num);
+        err = sqrt(sumR);
+        // err = errorVEC(x2, x1, N);
         endconv = chrono::system_clock::now();
       }
       endFor = chrono::system_clock::now();
@@ -136,7 +145,7 @@ int main(int argc, char const *argv[]) {
       conv += eTime(startconv, endconv).count();
     }
 
-    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
-           errorVEC(c, x, N));
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x1, b, N),
+           errorVEC(x2, x1, N));
   }
 }

@@ -10,14 +10,14 @@ from mpl_toolkits.axes_grid.inset_locator import inset_axes
 import ast
 
 sns.palplot(sns.color_palette("Set1", n_colors=8, desat=.5))
-PROC=17 ## 17 for xeon and 255 mic
-SUBPLOT_x=SUBPLOT_y=6 ## 5 for xeon and 60 mic
-label=[100,1000,10000,15000,3000,500,5000,700,7000]
-#label=[10000,1000,100,15000,5000,500,7000]
+PROC=255 ## 17 for xeon and 255 mic
+SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 60 mic
+#label=[100,1000,10000,15000,3000,500,5000,700,7000]
+label=[10000,1000,100,15000,5000,500,7000]
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ForXEON' ### ParXEON,ForXEON,ParPHI_,ForPHI_
-selector_s='serXEON' ### serXEON,serPHI_
+ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):
     fo = open(filename, "r")
@@ -65,7 +65,7 @@ i = 0
 for val in data_array:
     x=[]
     y=[]
-    del val[0]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
@@ -73,7 +73,7 @@ for val in data_array:
     #print str(label[i])
     ax1.plot(x,y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     inset1.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
-    inset1.set_ylim([0, SUBPLOT_x])
+    inset1.set_ylim([0, 1])
     inset1.set_xlim([0, SUBPLOT_y])
     inset1.yaxis.grid(True)
     # inset_axes.set_yscale('log')

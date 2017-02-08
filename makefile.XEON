@@ -1,7 +1,7 @@
 CXX = icc
-CXXFLAGS = -O2 -std=c++11
+CXXFLAGS = -O3 -std=c++11
 FF_SERVER = -I /home/spm1501/public/fastflow
-HOST = -core-avx-i
+HOST = #-core-avx-i
 CXXFLAGTH = -pthread
 REPORT =-qopt-report=5
 

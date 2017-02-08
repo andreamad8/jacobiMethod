@@ -1,0 +1,40 @@
+/* BUSINESS LOGIC TRY
+In all of this version we have tried different PRAGMA to enforce proper
+vectorization.
+The folling PRAGMAs have been tried:
+- #pragma ivdep
+- #pragma vector aligned
+- #pragma simd
+- __declspec(align(16, 0))
+*/
+
+ParallelForReduce<float> pf(thread_num, true, true);
+err = 1;
+startFor = chrono::system_clock::now();
+for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
+  pf.parallel_for(0, N, 1, 0,
+                  [&](const long i) {
+                    float sum;
+                    sum = b[i];
+                    for (int j = 0; j < i; j++) {
+                      sum = sum - A[i][j] * x1[j];
+                    }
+                    for (int j = i + 1; j < N; j++) {
+                      sum = sum - A[i][j] * x1[j];
+                    }
+                    x2[i] = sum / A[i][i];
+                  },
+                  thread_num);
+
+  startconv = chrono::system_clock::now();
+  swap(x2, x1);
+  float sumR = 0.0;
+  pf.parallel_reduce(
+      sumR, 0.0, 0, N, 1, 0,
+      [&](const long i, float &mysum) { mysum += pow(x1[i] - x2[i], 2); },
+      [](float &s, const float &e) { s += e; }, thread_num);
+  err = sqrt(sumR);
+  // err = errorVEC(x2, x1, N);
+  endconv = chrono::system_clock::now();
+}
+endFor = chrono::system_clock::now();

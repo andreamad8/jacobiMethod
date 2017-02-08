@@ -30,11 +30,10 @@ sum = b[i];
 for (int j = 0; j < i; j++) {
   sum = sum - A[i][j] * x1[j];
 }
-divisor = A[i][i];
 for (int j = i + 1; j < N; j++) {
   sum = sum - A[i][j] * x1[j];
 }
-x2[i] = sum / divisor;
+x2[i] = sum / A[i][i];
 
 /* USING ser ON mic and XEON
 MIC
