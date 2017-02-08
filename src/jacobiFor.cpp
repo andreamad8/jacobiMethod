@@ -110,8 +110,6 @@ int main(int argc, char const *argv[]) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
                           c[i] = b[i];
-#pragma ivdep
-#pragma simd
                           for (int j = 0; j < N; j++) {
                             if (i != j)
                               c[i] = c[i] - A[i][j] * x[j];

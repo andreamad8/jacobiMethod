@@ -1,5 +1,5 @@
 CXX = icc
-CXXFLAGS = -std=c++11 -pthread -O3
+CXXFLAGS = -std=c++11 -pthread -O2
 FF_SERVER = -I /home/spm1501/public/fastflow
 MIC = -mmic
 REPORT =-qopt-report=5
