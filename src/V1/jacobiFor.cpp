@@ -100,7 +100,12 @@ int main(int argc, char const *argv[]) {
       /* code */
       // SPIN, no barrier
       // ParallelForReduce<float> pf(thread_num, true, true);
-      ParallelForReduce<float> pf(thread_num, true, true);
+      ParallelFor pf(thread_num, true, true);
+
+      // printMAT(A, N);
+      // printVEC(b, N);
+      // JACOBI METHOD
+
       err = 1;
       startFor = chrono::system_clock::now();
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
@@ -120,13 +125,7 @@ int main(int argc, char const *argv[]) {
 
         startconv = chrono::system_clock::now();
         swap(x2, x1);
-        float sumR = 0.0;
-        pf.parallel_reduce(
-            sumR, 0.0, 0, N,
-            [&](const long i, float &mysum) { mysum += pow(x1[i] - x2[i], 2); },
-            [](float &s, const float &e) { s += e; }, thread_num);
-        err = sqrt(sumR);
-        // err = errorVEC(x2, x1, N);
+        err = errorVEC(x2, x1, N);
         endconv = chrono::system_clock::now();
       }
       endFor = chrono::system_clock::now();

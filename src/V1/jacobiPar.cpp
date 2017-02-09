@@ -1,14 +1,18 @@
 #include <chrono>
 #include <cmath>
 #include <condition_variable> // std::condition_variable
-#include <ff/parallel_for.hpp>
 #include <iostream>
 #include <mutex>
 #include <thread>
 #include <vector>
 
 using namespace std;
-using namespace ff;
+
+float err;
+// vector<float> sumR(270);
+
+chrono::time_point<chrono::system_clock> startconv, endconv;
+
 void printMAT(vector<vector<float>> A, int N) {
   printf("PRINTING A NEW MAT\n");
   for (int i = 0; i < N; i++) {
@@ -51,6 +55,65 @@ chrono::duration<double> eTime(chrono::time_point<chrono::system_clock> start,
   return end - start;
 }
 
+class barrier {
+private:
+  const int N_THREADS;
+  int counts[2];
+  int current;
+  mutex lock;
+  condition_variable condition;
+
+public:
+  barrier(int n);
+  bool await(function<void()> cb);
+};
+
+barrier::barrier(int n)
+    : N_THREADS(n), counts{0, 0}, current(0), lock(), condition() {}
+
+bool barrier::await(function<void()> cb) {
+  unique_lock<mutex> _lock(lock);
+  int my = current;
+  counts[my]++;
+
+  if (counts[my] < N_THREADS) {
+    condition.wait(_lock, [&] { return counts[my] == N_THREADS; });
+    return false;
+  } else {
+    current ^= 1;
+    counts[current] = 0;
+    cb();
+    condition.notify_all();
+    return true;
+  }
+}
+
+void iter(const vector<vector<float>> &A, const vector<float> &b,
+          vector<float> &x1, vector<float> &x2, const int from, const int to,
+          barrier &bar, const int maxiter, const float epsilon, const size_t N,
+          const size_t id, const size_t thread_num) {
+  float sum;
+  for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
+
+    for (size_t i = from; i <= to; i++) {
+      sum = b[i];
+      for (int j = 0; j < i; j++) {
+        sum = sum - A[i][j] * x1[j];
+      }
+      for (int j = i + 1; j < N; j++) {
+        sum = sum - A[i][j] * x1[j];
+      }
+      x2[i] = sum / A[i][i];
+    }
+    startconv = chrono::system_clock::now();
+    bar.await([&] {
+      swap(x2, x1);
+      err = errorVEC(x2, x1, N);
+    });
+    endconv = chrono::system_clock::now();
+  }
+}
+
 /*** MAIN ***/
 int main(int argc, char const *argv[]) {
   size_t N = atoi(argv[1]);
@@ -58,15 +121,21 @@ int main(int argc, char const *argv[]) {
   float epsilon = atof(argv[3]);
   size_t W = atoi(argv[4]);
   size_t steps = atoi(argv[5]);
+
   size_t i, j, k, thread_num;
-  float sum, err, conv;
+  float temp, conv;
   size_t avgTime = 3;
   // INIT
+  //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
+  vector<float> x(N);
+  //__declspec(align(16, 0)) vector<float> b(N);
+  vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
-  vector<float> x1(N);
   vector<float> b(N);
-  vector<float> x2(N);
-  chrono::time_point<chrono::system_clock> startFor, endFor, startconv, endconv;
+
+  chrono::time_point<chrono::system_clock> startFor, endFor;
+
+  // JACOBI METHOD parallel
 
   for (size_t Worker = 0; Worker < W; Worker += steps) {
     thread_num = Worker;
@@ -79,56 +148,42 @@ int main(int argc, char const *argv[]) {
       srand(123);
       for (i = 0; i < N; i++) {
         b[i] = rand() % 10;
-        x1[i] = 0;
-        x2[i] = 0;
+        x[i] = 0;
+        c[i] = 0;
       }
       for (i = 0; i < N; i++)
         for (j = 0; j < N; j++)
           A[i][j] = rand() % 10;
 
       /* enforce diagonal dominance */
-      sum = 0.0;
+      temp = 0.0;
       for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
           if (i != j) {
-            sum += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
+            temp += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
           }
         }
-        A[i][i] = sum + 100;
-        sum = 0.0;
+        A[i][i] = temp + 100;
+        temp = 0.0;
       }
-      /* code */
-      // SPIN, no barrier
-      // ParallelForReduce<float> pf(thread_num, true, true);
-      ParallelForReduce<float> pf(thread_num, true, true);
-      err = 1;
-      startFor = chrono::system_clock::now();
-      for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
-        pf.parallel_for(0, N,
-                        [&](const long i) {
-                          float sum;
-                          sum = b[i];
-                          for (int j = 0; j < i; j++) {
-                            sum = sum - A[i][j] * x1[j];
-                          }
-                          for (int j = i + 1; j < N; j++) {
-                            sum = sum - A[i][j] * x1[j];
-                          }
-                          x2[i] = sum / A[i][i];
-                        },
-                        thread_num);
 
-        startconv = chrono::system_clock::now();
-        swap(x2, x1);
-        float sumR = 0.0;
-        pf.parallel_reduce(
-            sumR, 0.0, 0, N,
-            [&](const long i, float &mysum) { mysum += pow(x1[i] - x2[i], 2); },
-            [](float &s, const float &e) { s += e; }, thread_num);
-        err = sqrt(sumR);
-        // err = errorVEC(x2, x1, N);
-        endconv = chrono::system_clock::now();
+      /* code */
+      startFor = chrono::system_clock::now();
+      vector<thread> t;
+      barrier bar(thread_num);
+      k = (N / thread_num);
+      err = 1;
+      for (size_t i = 0; i < thread_num; i++) {
+        const size_t start = i * k;
+        const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
+        // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
+        // end - start + 1);
+        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
+                           ref(bar), maxiter, epsilon, N, i, thread_num));
       }
+      for (thread &it : t)
+        it.join();
+
       endFor = chrono::system_clock::now();
 
       // print the time for the post analysis
@@ -143,6 +198,6 @@ int main(int argc, char const *argv[]) {
     }
 
     printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / avgTime,
-           error(A, x1, b, N), errorVEC(x2, x1, N));
+           error(A, x, b, N), err);
   }
 }
