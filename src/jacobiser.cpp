@@ -23,17 +23,14 @@ void printVEC(vector<float> x, int N) {
   printf("\n");
 }
 
-float error(vector<vector<float>> &R, vector<float> &D, vector<float> &x,
-            vector<float> &b, int N) {
+float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
+            int N) {
   float err = 0;
   float sum = 0;
   for (int i = 0; i < N; i++) {
     sum = 0;
     for (int j = 0; j < N; j++)
-      if (i != j)
-        sum += R[i][j] * x[j];
-      else
-        sum += D[i] * x[j];
+      sum += A[i][j] * x[j];
     err += abs(b[i] - sum);
   }
   return err / N;
@@ -62,11 +59,10 @@ int main(int argc, char const *argv[]) {
   int i, j;
   float sum, err, conv;
   // INIT
-  vector<vector<float>> R(N, vector<float>(N));
-  vector<float> D(N);
+  vector<vector<float>> A(N, vector<float>(N));
+  vector<float> x(N);
   vector<float> b(N);
-  vector<float> x1(N);
-  vector<float> x2(N);
+  vector<float> c(N);
 
   vector<chrono::duration<double>> innerDuration(N);
 
@@ -83,27 +79,22 @@ int main(int argc, char const *argv[]) {
     srand(123);
     for (i = 0; i < N; i++) {
       b[i] = rand() % 10;
-      x1[i] = 0;
-      x2[i] = 0;
+      x[i] = 0;
+      c[i] = 0;
     }
     for (i = 0; i < N; i++)
       for (j = 0; j < N; j++)
-        if (i != j)
-          R[i][j] = rand() % 10;
-        else {
-          R[i][j] = 0;
-          D[i] = rand() % 10;
-        }
+        A[i][j] = rand() % 10;
 
     /* enforce diagonal dominance */
     sum = 0.0;
     for (i = 0; i < N; i++) {
       for (j = 0; j < N; j++) {
         if (i != j) {
-          sum += ((R[i][j] >= 0.0) ? R[i][j] : -R[i][j]);
+          sum += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
         }
       }
-      D[i] = sum + 100;
+      A[i][i] = sum + 100;
       sum = 0.0;
     }
     startFor = chrono::system_clock::now();
@@ -111,15 +102,18 @@ int main(int argc, char const *argv[]) {
     iter = 0;
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        sum = 0.0;
-        for (size_t j = 0; j < N; j++) {
-          sum = sum + R[i][j] * x1[j];
+        sum = b[i];
+        for (int j = 0; j < i; j++) {
+          sum = sum - A[i][j] * x[j];
         }
-        x2[i] = (b[i] - sum) / D[i];
+        for (int j = i + 1; j < N; j++) {
+          sum = sum - A[i][j] * x[j];
+        }
+        c[i] = sum / A[i][i];
       }
       startconv = chrono::system_clock::now();
-      swap(x2, x1);
-      err = errorVEC(x1, x2, N);
+      swap(c, x);
+      err = errorVEC(c, x, N);
       endconv = chrono::system_clock::now();
       iter++;
     }
@@ -133,9 +127,8 @@ int main(int argc, char const *argv[]) {
     // for avg Tnorm time
     conv += eTime(startconv, endconv).count();
   }
-
   printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f,'Iteration':%zu}\n", conv / 10,
-         error(R, D, x1, b, N), err, iter);
+         error(A, x, b, N), err, iter);
 
   return 0;
 }

@@ -9,7 +9,7 @@
 using namespace std;
 
 float err;
-vector<float> sumR(270);
+// vector<float> sumR(270);
 
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
@@ -29,17 +29,14 @@ void printVEC(vector<float> x, int N) {
   printf("\n");
 }
 
-float error(vector<vector<float>> &R, vector<float> &D, vector<float> &x,
-            vector<float> &b, int N) {
+float error(vector<vector<float>> &A, vector<float> &x, vector<float> &b,
+            int N) {
   float err = 0;
   float sum = 0;
   for (int i = 0; i < N; i++) {
     sum = 0;
     for (int j = 0; j < N; j++)
-      if (i != j)
-        sum += R[i][j] * x[j];
-      else
-        sum += D[i] * x[j];
+      sum += A[i][j] * x[j];
     err += abs(b[i] - sum);
   }
   return err / N;
@@ -91,35 +88,27 @@ bool barrier::await(function<void()> cb) {
   }
 }
 
-void iter(const vector<vector<float>> &R, const vector<float> &D,
-          const vector<float> &b, vector<float> &x1, vector<float> &x2,
-          const int from, const int to, barrier &bar, const int maxiter,
-          const float epsilon, const size_t N, const size_t id,
-          const size_t thread_num) {
+void iter(const vector<vector<float>> &A, const vector<float> &b,
+          vector<float> &x1, vector<float> &x2, const int from, const int to,
+          barrier &bar, const int maxiter, const float epsilon, const size_t N,
+          const size_t id, const size_t thread_num) {
   float sum;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
+
     for (size_t i = from; i <= to; i++) {
-      sum = 0.0;
-      for (size_t j = 0; j < N; j++) {
-        sum = sum + R[i][j] * x1[j];
+      sum = b[i];
+      for (int j = 0; j < i; j++) {
+        sum = sum - A[i][j] * x1[j];
       }
-      x2[i] = (b[i] - sum) / D[i];
+      for (int j = i + 1; j < N; j++) {
+        sum = sum - A[i][j] * x1[j];
+      }
+      x2[i] = sum / A[i][i];
     }
-    bar.await([&] {});
     startconv = chrono::system_clock::now();
-    sum = 0.0;
-    for (size_t i = from; i <= to; i++) {
-      sum += (x1[i] - x2[i]) * (x1[i] - x2[i]);
-    }
-    sumR[id] = sum;
     bar.await([&] {
       swap(x2, x1);
-      sum = 0;
-      for (size_t k = 0; k < thread_num; k++) {
-        sum += sumR[k];
-      }
-      err = sqrt(sum);
-      // err = errorVEC(x2, x1, N);
+      err = errorVEC(x2, x1, N);
     });
     endconv = chrono::system_clock::now();
   }
@@ -134,13 +123,14 @@ int main(int argc, char const *argv[]) {
   size_t steps = atoi(argv[5]);
 
   size_t i, j, k, thread_num;
-  float temp, conv, sum;
+  float temp, conv;
   // INIT
-  vector<vector<float>> R(N, vector<float>(N));
-  vector<float> D(N);
+  //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
+  vector<float> x(N);
+  //__declspec(align(16, 0)) vector<float> b(N);
+  vector<float> c(N);
+  vector<vector<float>> A(N, vector<float>(N));
   vector<float> b(N);
-  vector<float> x1(N);
-  vector<float> x2(N);
 
   chrono::time_point<chrono::system_clock> startFor, endFor;
 
@@ -152,33 +142,28 @@ int main(int argc, char const *argv[]) {
       thread_num = 1;
     conv = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
-    for (size_t iavg = 0; iavg < 4; iavg++) {
+    for (size_t iavg = 0; iavg < 2; iavg++) {
       /* generate  matrix and vectors: */
       srand(123);
       for (i = 0; i < N; i++) {
         b[i] = rand() % 10;
-        x1[i] = 0;
-        x2[i] = 0;
+        x[i] = 0;
+        c[i] = 0;
       }
       for (i = 0; i < N; i++)
         for (j = 0; j < N; j++)
-          if (i != j)
-            R[i][j] = rand() % 10;
-          else {
-            R[i][j] = 0;
-            D[i] = rand() % 10;
-          }
+          A[i][j] = rand() % 10;
 
       /* enforce diagonal dominance */
-      sum = 0.0;
+      temp = 0.0;
       for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
           if (i != j) {
-            sum += ((R[i][j] >= 0.0) ? R[i][j] : -R[i][j]);
+            temp += ((A[i][j] >= 0.0) ? A[i][j] : -A[i][j]);
           }
         }
-        D[i] = sum + 100;
-        sum = 0.0;
+        A[i][i] = temp + 100;
+        temp = 0.0;
       }
 
       /* code */
@@ -192,9 +177,8 @@ int main(int argc, char const *argv[]) {
         const size_t end = (i != thread_num - 1 ? start + k : N) - 1;
         // printf("Thread %zu: (%zu,%zu) \t #Row %zu \n", i, start, end,
         // end - start + 1);
-        t.push_back(thread(iter, ref(R), ref(D), ref(b), ref(x1), ref(x2),
-                           start, end, ref(bar), maxiter, epsilon, N, i,
-                           thread_num));
+        t.push_back(thread(iter, ref(A), ref(b), ref(x), ref(c), start, end,
+                           ref(bar), maxiter, epsilon, N, i, thread_num));
       }
       for (thread &it : t)
         it.join();
@@ -212,7 +196,7 @@ int main(int argc, char const *argv[]) {
       conv += eTime(startconv, endconv).count();
     }
 
-    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10,
-           error(R, D, x1, b, N), err);
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
+           err);
   }
 }
