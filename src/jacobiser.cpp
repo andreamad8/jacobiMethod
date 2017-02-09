@@ -111,11 +111,11 @@ int main(int argc, char const *argv[]) {
     iter = 0;
     for (size_t k = 0; k <= maxiter; k++) {
       for (int i = 0; i < N; i++) {
-        x2[i] = b[i];
-        for (int j = 0; j < N; j++) {
-          x2[i] = x2[i] - R[i][j] * x1[j];
+        sum = 0.0;
+        for (size_t j = 0; j < N; j++) {
+          sum = sum - R[i][j] * x1[j];
         }
-        x2[i] = x2[i] / D[i];
+        x2[i] = (b[i] - sum) / D[i];
       }
       startconv = chrono::system_clock::now();
       swap(x2, x1);

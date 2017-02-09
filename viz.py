@@ -16,7 +16,7 @@ SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 60 mic
 label=[10000,1000,100,15000,5000,500,7000]
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
 selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):

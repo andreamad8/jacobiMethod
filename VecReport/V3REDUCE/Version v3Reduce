@@ -1,0 +1,208 @@
+/* We tried the following business logic
+*/
+for (size_t j = 0; j < N; j++) {
+  x2[i] = x2[i] - R[i][j] * x1[j];
+}
+x2[i] = x2[i] / D[i];
+/// SER
+/// PHI
+remark #15388: vectorization support: reference
+R.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has aligned
+access   [ src/jacobiser.cpp(116,13) ]
+remark #15388: vectorization support: reference
+x1.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [
+src/jacobiser.cpp(116,13) ]
+remark #15305: vectorization support: vector length 16
+remark #15399: vectorization support: unroll factor set to 8
+remark #15309: vectorization support: normalized vectorization overhead 0.857
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 0.430
+remark #15478: estimated potential speedup: 26.730
+remark #15488: --- end vector loop cost summary ---
+\\errorVEC
+remark #15305: vectorization support: vector length 16
+remark #15399: vectorization support: unroll factor set to 2
+remark #15309: vectorization support: normalized vectorization overhead 2.045
+remark #15300: LOOP WAS VECTORIZED
+remark #15475: --- begin vector loop cost summary ---
+remark #15476: scalar loop cost: 18
+remark #15477: vector loop cost: 0.680
+remark #15478: estimated potential speedup: 18.810
+remark #15488: --- end vector loop cost summary ---
+// XEON
+
+ LOOP BEGIN at src/jacobiser.cpp(115,9)
+    remark #15388: vectorization support: reference R.__b_St12_Vector_baseISt6vectorIfSaIfEESaIS2_EE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(116,13) ]
+    remark #15388: vectorization support: reference x1.__b_St12_Vector_baseIfSaIfEE._M_impl._M_start has aligned access   [ src/jacobiser.cpp(116,13) ]
+    remark #15305: vectorization support: vector length 4
+    remark #15399: vectorization support: unroll factor set to 2
+    remark #15309: vectorization support: normalized vectorization overhead 3.000
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15442: entire loop may be executed in remainder
+    remark #15448: unmasked aligned unit stride loads: 2
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar loop cost: 18
+    remark #15477: vector loop cost: 2.000
+    remark #15478: estimated potential speedup: 7.580
+    remark #15488: --- end vector loop cost summary ---
+/// FASTFLOW
+// PHI
+LOOP BEGIN at /home/spm1501/public/fastflow/ff/parallel_for.hpp(458,9) inlined into /opt/mpss/3.5/sysroots/k1om-mpss-linux/usr/include/c++/functional(1795,37)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 123 and  line 123
+   remark #15346: vector dependence: assumed OUTPUT dependence between  line 123 and  line 123
+   remark #25018: Total number of lines prefetched=6
+   remark #25023: Number of unconditional prefetches=2
+   remark #25035: Number of pointer data prefetches=4, dist=6
+   remark #25138: Using regular distance 6 for prefetching unconditional memory reference   [ src/jacobiFor.cpp(121,29) ]
+   remark #25140: Using second-level distance 2 for prefetching unconditional memory reference   [ src/jacobiFor.cpp(121,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiFor.cpp(121,36) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiFor.cpp(125,44) ]
+   remark #25015: Estimate of max trip count of loop=16
+
+   LOOP BEGIN at src/jacobiFor.cpp(122,27) inlined into /opt/mpss/3.5/sysroots/k1om-mpss-linux/usr/include/c++/functional(1795,37)
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed ANTI dependence between this_29261 line 123 and  line 123
+      remark #15346: vector dependence: assumed FLOW dependence between  line 123 and this_29261 line 123
+      remark #25439: unrolled with remainder by 2
+      remark #25018: Total number of lines prefetched=4
+      remark #25019: Number of spatial prefetches=2, dist=64
+      remark #25021: Number of initial-value prefetches=2
+      remark #25035: Number of pointer data prefetches=2, dist=64
+      remark #25139: Using second-level distance 4 for prefetching spatial memory reference   [ src/jacobiFor.cpp(123,49) ]
+      remark #25141: Using second-level distance 4 for prefetching pointer data reference   [ src/jacobiFor.cpp(123,57) ]
+   LOOP END
+
+
+
+   LOOP BEGIN at src/jacobiFor.cpp(134,47) inlined into /opt/mpss/3.5/sysroots/k1om-mpss-linux/usr/include/c++/functional(1795,37)
+      remark #15521: loop was not vectorized: loop control variable was not identified. Explicitly compute the iteration count before executing the loop or try using canonical loop form
+      remark #25478: While Loop Unrolled by 8
+   LOOP END
+// xeon
+LOOP BEGIN at src/jacobiFor.cpp(122,27) inlined into src/jacobiFor.cpp(119,12)
+   remark #15523: loop was not vectorized: loop control variable j was found, but loop iteration count cannot be computed before executing the loop
+   remark #25478: While Loop Unrolled by 8
+LOOP END
+
+/// THREAD
+// MIC
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Multiversioned v1>
+   remark #25228: Loop multiversioned for Data Dependence
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15305: vectorization support: vector length 16
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.857
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 16
+   remark #15477: vector loop cost: 0.430
+   remark #15478: estimated potential speedup: 23.760
+   remark #15488: --- end vector loop cost summary ---
+   remark #25018: Total number of lines prefetched=32
+   remark #25019: Number of spatial prefetches=16, dist=8
+   remark #25021: Number of initial-value prefetches=6
+   remark #25035: Number of pointer data prefetches=16, dist=8
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Alternate Alignment Vectorized Loop, Multiversioned v1>
+   remark #25018: Total number of lines prefetched=32
+   remark #25019: Number of spatial prefetches=16, dist=8
+   remark #25021: Number of initial-value prefetches=6
+   remark #25035: Number of pointer data prefetches=16, dist=8
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+   remark #25139: Using second-level distance 2 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 2 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Remainder loop for vectorization, Multiversioned v1>
+   remark #15389: vectorization support: reference (unknown) has unaligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15389: vectorization support: reference (unknown) has unaligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 16
+   remark #15309: vectorization support: normalized vectorization overhead 2.143
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Multiversioned v2>
+   remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+   remark #25439: unrolled with remainder by 2
+   remark #25018: Total number of lines prefetched=4
+   remark #25019: Number of spatial prefetches=2, dist=64
+   remark #25021: Number of initial-value prefetches=2
+   remark #25035: Number of pointer data prefetches=2, dist=64
+   remark #25139: Using second-level distance 8 for prefetching spatial memory reference   [ src/jacobiPar.cpp(105,29) ]
+   remark #25141: Using second-level distance 8 for prefetching pointer data reference   [ src/jacobiPar.cpp(105,37) ]
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Remainder, Multiversioned v2>
+LOOP END
+LOOP END
+
+// xeon
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Multiversioned v1>
+   remark #25228: Loop multiversioned for Data Dependence
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15388: vectorization support: reference (unknown) has aligned access   [ src/jacobiPar.cpp(105,11) ]
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 2
+   remark #15309: vectorization support: normalized vectorization overhead 3.000
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 2
+   remark #15475: --- begin vector loop cost summary ---
+   remark #15476: scalar loop cost: 16
+   remark #15477: vector loop cost: 2.000
+   remark #15478: estimated potential speedup: 6.810
+   remark #15488: --- end vector loop cost summary ---
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Multiversioned v2>
+   remark #15304: loop was not vectorized: non-vectorizable loop instance from multiversioning
+   remark #25439: unrolled with remainder by 2
+LOOP END
+
+LOOP BEGIN at src/jacobiPar.cpp(104,7)
+<Remainder, Multiversioned v2>

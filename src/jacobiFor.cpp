@@ -118,11 +118,11 @@ int main(int argc, char const *argv[]) {
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
         pf.parallel_for(0, N, 1, 0,
                         [&](const long i) {
-                          x2[i] = b[i];
+                          float sum = 0.0;
                           for (size_t j = 0; j < N; j++) {
-                            x2[i] = x2[i] - R[i][j] * x1[j];
+                            sum = sum - R[i][j] * x1[j];
                           }
-                          x2[i] = x2[i] / D[i];
+                          x2[i] = (b[i] - sum) / D[i];
                         },
                         thread_num);
 
