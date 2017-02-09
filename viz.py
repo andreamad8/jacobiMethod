@@ -13,7 +13,7 @@ sns.palplot(sns.color_palette("Set1", n_colors=8, desat=.5))
 PROC=255 ## 17 for xeon and 255 mic
 SUBPLOT_x=SUBPLOT_y=69 ## 5 for xeon and 60 mic
 #label=[100,1000,10000,15000,3000,500,5000,700,7000]
-label=[10000,1000,100,5000,500,7000]
+label=[10000,1000,100,15000,30000,40000,5000,500,7000]
 lw=1.2 #line weight
 ms=6.5 #markersize
 ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
@@ -65,11 +65,12 @@ i = 0
 for val in data_array:
     x=[]
     y=[]
-    del val[0]
+    #del val[0]
     for e in val:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y.append(avg)
+    print x
     #print str(label[i])
     ax1.plot(x,y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     inset1.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)

@@ -124,6 +124,7 @@ int main(int argc, char const *argv[]) {
 
   size_t i, j, k, thread_num;
   float temp, conv;
+  size_t avgTime = 3;
   // INIT
   //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
@@ -142,7 +143,7 @@ int main(int argc, char const *argv[]) {
       thread_num = 1;
     conv = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
-    for (size_t iavg = 0; iavg < 2; iavg++) {
+    for (size_t iavg = 0; iavg < avgTime; iavg++) {
       /* generate  matrix and vectors: */
       srand(123);
       for (i = 0; i < N; i++) {
@@ -186,7 +187,7 @@ int main(int argc, char const *argv[]) {
       endFor = chrono::system_clock::now();
 
       // print the time for the post analysis
-      if (iavg != 9) {
+      if (iavg != avgTime - 1) {
         printf("%f,", eTime(startFor, endFor).count());
       } else {
         printf("%f", eTime(startFor, endFor).count());
@@ -196,7 +197,7 @@ int main(int argc, char const *argv[]) {
       conv += eTime(startconv, endconv).count();
     }
 
-    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / 10, error(A, x, b, N),
-           err);
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / avgTime,
+           error(A, x, b, N), err);
   }
 }
