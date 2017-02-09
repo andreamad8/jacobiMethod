@@ -152,7 +152,7 @@ int main(int argc, char const *argv[]) {
       thread_num = 1;
     conv = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
-    for (size_t iavg = 0; iavg < 10; iavg++) {
+    for (size_t iavg = 0; iavg < 4; iavg++) {
       /* generate  matrix and vectors: */
       srand(123);
       for (i = 0; i < N; i++) {
