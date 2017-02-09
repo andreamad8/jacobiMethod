@@ -99,10 +99,9 @@ void iter(const vector<vector<float>> &R, const vector<float> &D,
   float sum;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
     for (size_t i = from; i <= to; i++) {
-      x2[i] = b[i];
       sum = 0.0;
       for (size_t j = 0; j < N; j++) {
-        sum = sum - R[i][j] * x1[j];
+        sum = sum + R[i][j] * x1[j];
       }
       x2[i] = (b[i] - sum) / D[i];
     }

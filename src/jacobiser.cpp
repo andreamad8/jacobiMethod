@@ -113,7 +113,7 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < N; i++) {
         sum = 0.0;
         for (size_t j = 0; j < N; j++) {
-          sum = sum - R[i][j] * x1[j];
+          sum = sum + R[i][j] * x1[j];
         }
         x2[i] = (b[i] - sum) / D[i];
       }
