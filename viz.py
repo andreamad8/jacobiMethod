@@ -9,11 +9,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid.inset_locator import inset_axes
 import ast
 
-sns.palplot(sns.color_palette("Set1", n_colors=8, desat=.5))
+#sns.palplot()
+sns.color_palette("Set1", n_colors=8, desat=.5)
 PROC=255 ## 17 for xeon and 255 mic
-SUBPLOT_x=SUBPLOT_y=69 ## 5 for xeon and 60 mic
-#label=[100,1000,10000,15000,3000,500,5000,700,7000]
-label=[10000,1000,100,15000,30000,40000,5000,500,7000]
+SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 60 mic
+#label=[10000,1000,15000,30000,5000]
+label=[10000,1000,15000,30000,35000,40000,5000]
 lw=1.2 #line weight
 ms=6.5 #markersize
 ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
@@ -39,14 +40,14 @@ for filename in os.listdir('ris/'):
 
 
 ser =[sum(e[0]['Tc'])/float(len(e[0]['Tc'])) for e in data_ser]
-print len(data_array),len(data_ser)
+#print len(data_array),len(data_ser)
 
 
 
 plt.rc('text', usetex=True)
 plt.rc('font', family='Times-Roman')
 sns.set_style(style='white')
-fig = plt.figure()
+fig = plt.figure(figsize=(13,10))
 
 marker = ['*','o', 'v', 's', 'D', '8', '^','*','o', 'v', 's', 'D', '8', '^']
 ax1 = fig.add_subplot(2, 2, 1)
@@ -70,7 +71,7 @@ for val in data_array:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y.append(avg)
-    print x
+    #print x
     #print str(label[i])
     ax1.plot(x,y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     inset1.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
@@ -124,7 +125,7 @@ for val in data_array:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         y1.append(avg)
-    print ser[i], y1[0]
+    #print ser[i], y1[0]
     y=[(float(ser[i])/e)for e in y1]
     #y = [y1[0] / float(e) for e in y1]
 
@@ -158,11 +159,9 @@ for val in data_array:
         y1.append(avg)
     y2=[(float(ser[i])/e)for e in y1]
     #y2=[y1[0] / float(e) for e in y1]
-
-    thnume=[e['thread_num'] for e in val]
     y=[]
-    for j in range(0,len(y2)):
-        y.append(y2[j]/float(thnume[j]))
+    for th,sp in zip(x,y2):
+        y.append(sp/th)
 
     ax4.plot(x, y, label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     x_new = np.linspace(0, PROC, 100)
@@ -180,5 +179,7 @@ if len(label) > 2:
     ax1.legend(loc='lower center', bbox_to_anchor=(0.52, 0.43), bbox_transform=plt.gcf().transFigure)
 else:
     ax1.legend(loc='lower center', bbox_to_anchor=(0.52, 0.459),
-               bbox_transform=plt.gcf().transFigure)
+           bbox_transform=plt.gcf().transFigure)
+
+#plt.savefig(ty+'.eps', format='eps', dpi=300)
 plt.show()

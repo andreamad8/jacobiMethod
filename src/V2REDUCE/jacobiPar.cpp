@@ -9,7 +9,7 @@
 using namespace std;
 
 float err;
-// vector<float> sumR(270);
+vector<float> sumR(270);
 
 chrono::time_point<chrono::system_clock> startconv, endconv;
 
@@ -105,10 +105,21 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
       }
       x2[i] = sum / A[i][i];
     }
+    bar.await([&] {});
     startconv = chrono::system_clock::now();
+    sum = 0.0;
+    for (size_t i = from; i <= to; i++) {
+      sum += (x1[i] - x2[i]) * (x1[i] - x2[i]);
+    }
+    sumR[id] = sum;
     bar.await([&] {
       swap(x2, x1);
-      err = errorVEC(x2, x1, N);
+      sum = 0;
+      for (size_t k = 0; k < thread_num; k++) {
+        sum += sumR[k];
+      }
+      err = sqrt(sum);
+      // err = errorVEC(x2, x1, N);
     });
     endconv = chrono::system_clock::now();
   }
