@@ -58,7 +58,7 @@ int main(int argc, char const *argv[]) {
   size_t iter;
   int i, j;
   float sum, err, conv;
-  size_t avgTime = 3;
+  size_t avgTime = 10;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);

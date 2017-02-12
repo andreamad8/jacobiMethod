@@ -123,7 +123,7 @@ int main(int argc, char const *argv[]) {
 
   size_t i, j, k, thread_num;
   float temp, conv;
-  size_t avgTime = 3;
+  size_t avgTime = 10;
   // INIT
   //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);

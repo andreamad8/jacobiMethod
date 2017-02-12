@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]) {
   size_t steps = atoi(argv[5]);
   size_t i, j, k, thread_num;
   float sum, err, conv;
-  size_t avgTime = 3;
+  size_t avgTime = 10;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x1(N);

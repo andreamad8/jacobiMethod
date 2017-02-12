@@ -47,12 +47,12 @@ for filename in os.listdir('ris/'):
 
 ser =[sum(e[0]['Tc'])/float(len(e[0]['Tc'])) for e in data_ser]
 serNorm =[e[0]['Tnorm'] for e in data_ser]
-
+print ser
 #print len(data_array),len(data_ser)
 
 seq_time=[]
 i = 0
-for val in data_For:
+for val in data_par:
     x=[]
     Tc=[]
     y=[]
@@ -60,7 +60,7 @@ for val in data_For:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         Tc.append(avg)
+    print Tc[np.argmin(Tc)],x[np.argmin(Tc)]
 
-
-    print ser[i],Tc[0],((ser[i]/50)-val[0]['Tnorm'])/val[0]['Tnorm']
+    #sprint ser[i],Tc[0],((ser[i]/50)-val[0]['Tnorm'])/val[0]['Tnorm']
     i += 1
