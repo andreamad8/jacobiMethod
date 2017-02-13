@@ -47,12 +47,12 @@ for filename in os.listdir('ris/'):
 
 ser =[sum(e[0]['Tc'])/float(len(e[0]['Tc'])) for e in data_ser]
 serNorm =[e[0]['Tnorm'] for e in data_ser]
-print ser
+#print ser
 #print len(data_array),len(data_ser)
 
-seq_time=[]
+final=[]
 i = 0
-for val in data_par:
+for val,valff in zip(data_par,data_For):
     x=[]
     Tc=[]
     y=[]
@@ -60,7 +60,19 @@ for val in data_par:
         x.append(e['thread_num'])
         avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
         Tc.append(avg)
-    print Tc[np.argmin(Tc)],x[np.argmin(Tc)]
+    ffx=[]
+    ffTc=[]
+    ffy=[]
+    for e in valff:
+        ffx.append(e['thread_num'])
+        avg= reduce(lambda x, y: float(x) + float(y),e['Tc']) / float(len(e['Tc']))
+        ffTc.append(avg)
 
-    #sprint ser[i],Tc[0],((ser[i]/50)-val[0]['Tnorm'])/val[0]['Tnorm']
+    final.append([label[i],ser[i],Tc[0],x[np.argmin(Tc)],Tc[np.argmin(Tc)],ffTc[0],ffx[np.argmin(ffTc)],ffTc[np.argmin(ffTc)]])
+    #print 'optThread '+str(((((ser[i]/51)-serNorm[i])/label[i])/serNorm[i])*100)
+    #print str(label[i])+' optThread '+str(((Tc[0]/51-val[0]['Tnorm'])/label[i])/val[0]['Tnorm'])
+
     i += 1
+for e in sorted(final):
+    print '%d\t%.4f\t%.4f\t%d\t%.4f\t%.2f\t%.4f\t%d\t%.4f\t%.2f'%(e[0],e[1],e[2],e[3],e[4],e[1]/e[4],e[5],e[6],e[7],e[1]/e[7])
+    #print e[0],'\t',e[1],'\t',e[2],'\t',e[3],'\t',e[4],'\t',e[1]/e[4],'\t',e[5],'\t',e[6],'\t',e[7],'\t',e[1]/e[7]

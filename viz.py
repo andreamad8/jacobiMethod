@@ -13,8 +13,8 @@ import ast
 sns.color_palette("Set1", n_colors=8, desat=.5)
 PROC=255 ## 17 for xeon and 255 mic
 SUBPLOT_x=SUBPLOT_y=60 ## 5 for xeon and 60 mic
-#label=[10000,1000,15000,30000,5000]
-label=[10000,1000,15000,30000,35000,40000,5000]
+label=[10000,1000,15000,30000,5000]
+#label=[10000,1000,15000,30000,35000,40000,5000]
 lw=1.2 #line weight
 ms=6.5 #markersize
 ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
@@ -181,5 +181,5 @@ else:
     ax1.legend(loc='lower center', bbox_to_anchor=(0.52, 0.459),
            bbox_transform=plt.gcf().transFigure)
 
-#plt.savefig(ty+'.eps', format='eps', dpi=300)
+plt.savefig(ty+'.eps', format='eps', dpi=300)
 plt.show()

@@ -17,7 +17,7 @@ label=[10000,1000,15000,30000,5000]
 #label=[10000,1000,15000,30000,35000,40000,5000]
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
 selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):
@@ -64,9 +64,9 @@ for val in data_array:
     ax1.set_xlabel(r'$\textit{Threads}$')
     ax1.set_ylabel(r'$\frac{T_{jac}}{p}-(T_{norm}+T_{swap})$')
     i+=1
-ax1.set_title(r'Threads version')
-#ax1.set_title(r'FastFlow version')
+#ax1.set_title(r'Threads version')
+ax1.set_title(r'FastFlow version')
 ax1.legend(loc='lower center', bbox_to_anchor=(0.2, 0.6),
                bbox_transform=plt.gcf().transFigure)
-plt.savefig(ty+'Corr.eps', format='eps', dpi=300)
+#plt.savefig(ty+'Corr.eps', format='eps', dpi=300)
 plt.show()
