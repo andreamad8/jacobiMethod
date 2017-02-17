@@ -7,7 +7,7 @@
 #include <vector>
 
 using namespace std;
-mutex sync;
+mutex mutexSyncBar;
 float barSync;
 
 float err;
@@ -115,9 +115,9 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
       endconv = chrono::system_clock::now();
     });
     endSync = chrono::system_clock::now();
-    sync.lock();
+    mutexSyncBar.lock();
     barSync += eTime(startSync, endSync).count();
-    sync.unlock();
+    mutexSyncBar.unlock();
   }
 }
 
@@ -131,7 +131,7 @@ int main(int argc, char const *argv[]) {
 
   size_t i, j, k, thread_num;
   float temp, conv;
-  size_t avgTime = 10;
+  size_t avgTime = 3;
   // INIT
   //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
