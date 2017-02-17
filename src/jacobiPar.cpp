@@ -127,7 +127,7 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
       x2[i] = sum / A[i][i];
     }
     startSync = chrono::system_clock::now();
-    bar.await([&] {
+    bar.busywait([&] {
       startconv = chrono::system_clock::now();
       swap(x2, x1);
       err = errorVEC(x2, x1, N);
