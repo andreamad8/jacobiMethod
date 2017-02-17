@@ -1,3 +1,4 @@
+#include <atomic>
 #include <chrono>
 #include <cmath>
 #include <condition_variable> // std::condition_variable
@@ -66,11 +67,15 @@ private:
 
 public:
   barrier(int n);
+  atomic<int> count;
+  atomic<int> generation;
   bool await(function<void()> f);
+  bool busywait(function<void()> f);
 };
 
 barrier::barrier(int n)
-    : N_THREADS(n), counts{0, 0}, current(0), lock(), condition() {}
+    : N_THREADS(n), counts{0, 0}, current(0), lock(), condition(), count(0),
+      generation(0) {}
 
 bool barrier::await(function<void()> f) {
   unique_lock<mutex> _lock(lock);
@@ -86,6 +91,20 @@ bool barrier::await(function<void()> f) {
     f();
     condition.notify_all();
     return true;
+  }
+}
+
+bool barrier::busywait(function<void()> f) {
+  int my_gen = generation.load();
+  if (count.fetch_add(1) == N_THREADS - 1) {
+    f();
+    count.store(0);
+    generation.fetch_add(1);
+    return true;
+  } else {
+    do {
+    } while (my_gen == generation.load());
+    return false;
   }
 }
 
@@ -133,9 +152,7 @@ int main(int argc, char const *argv[]) {
   float temp, conv;
   size_t avgTime = 3;
   // INIT
-  //__declspec(align(16, 0)) vector<vector<float>> A(N, vector<float>(N));
   vector<float> x(N);
-  //__declspec(align(16, 0)) vector<float> b(N);
   vector<float> c(N);
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> b(N);
@@ -149,9 +166,9 @@ int main(int argc, char const *argv[]) {
     if (Worker == 0)
       thread_num = 1;
     conv = 0;
+    barSync = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
     for (size_t iavg = 0; iavg < avgTime; iavg++) {
-      barSync = 0;
       /* generate  matrix and vectors: */
       srand(123);
       for (i = 0; i < N; i++) {
@@ -205,8 +222,8 @@ int main(int argc, char const *argv[]) {
       conv += eTime(startconv, endconv).count();
     }
 
-    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f,'BarrierTime:%f'}\n",
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f,'BarrierTime':%f}\n",
            conv / avgTime, error(A, x, b, N), err,
-           (barSync - (maxiter * (conv / avgTime))) / thread_num);
+           ((barSync / avgTime) - (maxiter * (conv / avgTime))) / thread_num);
   }
 }
