@@ -7,6 +7,8 @@
 #include <vector>
 
 using namespace std;
+mutex sync;
+float barSync;
 
 float err;
 
@@ -92,6 +94,7 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
           barrier &bar, const int maxiter, const float epsilon, const size_t N,
           const size_t id, const size_t thread_num) {
   float sum;
+  chrono::time_point<chrono::system_clock> startSync, endSync;
   for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
 
     for (size_t i = from; i <= to; i++) {
@@ -104,12 +107,17 @@ void iter(const vector<vector<float>> &A, const vector<float> &b,
       }
       x2[i] = sum / A[i][i];
     }
+    startSync = chrono::system_clock::now();
     bar.await([&] {
       startconv = chrono::system_clock::now();
       swap(x2, x1);
       err = errorVEC(x2, x1, N);
       endconv = chrono::system_clock::now();
     });
+    endSync = chrono::system_clock::now();
+    sync.lock();
+    barSync += eTime(startSync, endSync).count();
+    sync.unlock();
   }
 }
 
@@ -143,6 +151,7 @@ int main(int argc, char const *argv[]) {
     conv = 0;
     printf("{'thread_num':%zu,'Tc':[", thread_num);
     for (size_t iavg = 0; iavg < avgTime; iavg++) {
+      barSync = 0;
       /* generate  matrix and vectors: */
       srand(123);
       for (i = 0; i < N; i++) {
@@ -196,7 +205,8 @@ int main(int argc, char const *argv[]) {
       conv += eTime(startconv, endconv).count();
     }
 
-    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f}\n", conv / avgTime,
-           error(A, x, b, N), err);
+    printf("],'Tnorm':%f,'Ax-b':%f,'Conv':%f,'BarrierTime:%f'}\n",
+           conv / avgTime, error(A, x, b, N), err,
+           (barSync - (maxiter * (conv / avgTime))) / thread_num);
   }
 }
