@@ -109,7 +109,7 @@ int main(int argc, char const *argv[]) {
       err = 1;
       startFor = chrono::system_clock::now();
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
-        pf.parallel_for(0, N, 1, 10,
+        pf.parallel_for(0, N, 1, 50,
                         [&](const long i) {
                           float sum;
                           sum = b[i];
