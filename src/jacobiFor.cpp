@@ -60,7 +60,7 @@ int main(int argc, char const *argv[]) {
   size_t steps = atoi(argv[5]);
   size_t i, j, k, thread_num;
   float sum, err, conv;
-  size_t avgTime = 10;
+  size_t avgTime = 3;
   // INIT
   vector<vector<float>> A(N, vector<float>(N));
   vector<float> x1(N);
@@ -100,7 +100,7 @@ int main(int argc, char const *argv[]) {
       /* code */
       // SPIN, no barrier
       // ParallelForReduce<float> pf(thread_num, true, true);
-      ParallelFor pf(thread_num);
+      ParallelFor pf(thread_num, true, true);
 
       // printMAT(A, N);
       // printVEC(b, N);
@@ -109,7 +109,7 @@ int main(int argc, char const *argv[]) {
       err = 1;
       startFor = chrono::system_clock::now();
       for (size_t k = 0; k <= maxiter and err >= epsilon; k++) {
-        pf.parallel_for(0, N,
+        pf.parallel_for(0, N, 1, 20,
                         [&](const long i) {
                           float sum;
                           sum = b[i];

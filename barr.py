@@ -58,8 +58,8 @@ for val in data_array:
         y.append(avg/e['BarrierTime'])
     ax1.plot(x,y,label=str(label[i]), linewidth=lw, alpha=0.8, marker=marker[i], markersize=ms)
     inset1.plot(x, y, marker=marker[i],linewidth=lw, alpha=0.8, markersize=ms)
-    inset1.set_ylim([1, 15])
-    inset1.set_xlim([0, 60])
+    inset1.set_ylim([1, 20])
+    inset1.set_xlim([0, 70])
     ax1.set_xlabel(r'$\textit{Threads}$')
     ax1.set_ylabel(r'$\frac{T_c}{T_barrier}$')
     i+=1
