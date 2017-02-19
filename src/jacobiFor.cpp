@@ -101,7 +101,7 @@ int main(int argc, char const *argv[]) {
       /* code */
       // SPIN, no barrier
       // ParallelForReduce<float> pf(thread_num, true, true);
-      ParallelFor pf(thread_num, true, false);
+      ParallelFor pf(thread_num, true, true);
 
       // printMAT(A, N);
       // printVEC(b, N);
