@@ -8,19 +8,19 @@ all: serPHI parPHI ffPHI
 
 serPHI: src/jacobiser.cpp
 	$(CXX) src/jacobiser.cpp -o bin/jacobiserPHI $(REPORT) $(CXXFLAGS) $(MIC)
-	scp bin/jacobiserPHI mic1:bin/
-	scp testPHI.sh mic1:
+	scp bin/jacobiserPHI mic0:bin/
+	scp testPHI.sh mic0:
 
 parPHI: src/jacobiPar.cpp
 	$(CXX) src/jacobiPar.cpp -o bin/jacobiParPHI $(REPORT) $(CXXFLAGS) $(MIC)
-	scp bin/jacobiParPHI mic1:bin/
-	scp testPHI.sh mic1:
+	scp bin/jacobiParPHI mic0:bin/
+	scp testPHI.sh mic0:
 
 
 ffPHI: src/jacobiFor.cpp
 	$(CXX) src/jacobiFor.cpp -o bin/jacobiForPHI $(REPORT) $(FF_SERVER) $(MIC) -DNO_DEFAULT_MAPPING $(CXXFLAGS)
-	scp bin/jacobiForPHI mic1:bin/
-	scp testPHI.sh mic1:
+	scp bin/jacobiForPHI mic0:bin/
+	scp testPHI.sh mic0:
 
 
 clean:
