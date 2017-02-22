@@ -11,7 +11,6 @@ have been run using a Xeon Phi coprocessor, which has 60 cores with 4 contexts e
 There are there 3 makefile one for each architecture used for experiment and the testing. 
 Each make generates the output file for the three version of the code (e.g., sequential, ParFor, and Thread). 
 Then, we have the following:
-
 - `make all`, to compile using g++, used in the local machine.
 - `make -f makefile.XEON all`, used to compile in the Host machine
 - `make -f makefile.PHI all`, used to compile in the PHI.
@@ -34,5 +33,5 @@ of the tasks. Instead the most efficent one is the FastFlow implementation, sinc
 and it minimize the sync time.
 
 The following Figures shows the obtained results using the two version of the code.
-![FOR](ForPHI_.eps)
-![PAR](ParPHI_.eps)
+![FOR](ForPHI_.png)
+![PAR](ParPHI_.png)
