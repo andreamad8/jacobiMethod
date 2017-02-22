@@ -17,7 +17,7 @@ label=[10000,1000,15000,30000,5000]
 #label=[10000,1000,15000,30000,35000,40000,5000]
 lw=1.2 #line weight
 ms=6.5 #markersize
-ty='ForPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
+ty='ParPHI_' ### ParXEON,ForXEON,ParPHI_,ForPHI_
 selector_s='serPHI_' ### serXEON,serPHI_
 
 def import_data(filename):
